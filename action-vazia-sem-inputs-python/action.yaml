@@ -1,0 +1,24 @@
+schema-version: v1
+kind: action
+metadata:
+  name: action-vazia-sem-inputs-python
+  display-name: action-vazia-sem-inputs-python
+  description: Describe your action explaining its purpose
+  version: 0.0.1
+spec:
+  type: python
+  about: docs/about.md
+  usage: docs/usage.md
+  release-notes: docs/release-notes.md
+  requirements: docs/requirements.md
+  implementation: docs/implementation.md
+  inputs:
+    - label: Who are you?
+      name: user_name
+      type: text
+      required: false
+      pattern: '([A-Z][a-z]+)+'
+      help: 'Inform your name'
+  python:
+    workdir: .
+    script: script.py
