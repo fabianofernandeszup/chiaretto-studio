@@ -19,7 +19,7 @@ def run(metadata):
 
     if visibility == "internal":
         private = True
-        visibility = "public"
+        visibility = "internal"
     elif visibility == "public":
         private = False
         visibility = "public"
