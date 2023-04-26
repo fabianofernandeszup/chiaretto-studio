@@ -19,7 +19,7 @@ spec:
     - Api
   requires:
     connection-interface:
-      - aws-vpc-conn
+      - aws-eks-conn
   generates:
     connection-interface:
       - aws-rds-conn
