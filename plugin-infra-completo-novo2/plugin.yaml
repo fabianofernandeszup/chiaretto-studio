@@ -1,8 +1,8 @@
 schema-version: v1
 kind: plugin
 metadata:
-  name: plugin-infra-completo-novo
-  display-name: plugin-infra-completo-novo
+  name: plugin-infra-completo-novo2
+  display-name: plugin-infra-completo-novo2
   description: Esse plugin utiliza o máximo de recursos possíveis de plugins para gerar um exemplo completo na publicação, exibição e utilização.
   version: 1.0.1
   picture: plugin.png
@@ -180,17 +180,6 @@ spec:
         variable: language
         operator: "=="
         value: Kotlin
-
-    - label: (Input select) Qual VM deseja usar ?
-      type: select
-      name: vm
-      items:
-        - "JVM"
-        - "GraalVM"
-      condition:
-        variable: language
-        operator: "containsAny"
-        value: [Java,Kotlin]
 
     - label: (Input multiselect required true sem valor default) Qual porta deseja expor ?
       type: multiselect
