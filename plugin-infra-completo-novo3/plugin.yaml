@@ -181,6 +181,17 @@ spec:
         operator: "=="
         value: Kotlin
 
+    - label: (Input select) Qual VM deseja usar ?
+      type: select
+      name: vm
+      items:
+        - "JVM"
+        - "GraalVM"
+      condition:
+        variable: language
+        operator: "containsAny"
+        value: [Java,Kotlin]
+
     - label: (Input multiselect required true sem valor default) Qual porta deseja expor ?
       type: multiselect
       name: port1
