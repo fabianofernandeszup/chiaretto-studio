@@ -1,10 +1,10 @@
 schema-version: v1
 kind: plugin
 metadata:
-  name: plugin-infra-example
-  display-name: plugin-infra-example
+  name: plugin-infra-completo
+  display-name: plugin-infra-completo
   description: Esse plugin utiliza o máximo de recursos possíveis de plugins para gerar um exemplo completo na publicação, exibição e utilização.
-  version: 1.0.2
+  version: 1.0.0
   picture: plugin.png
 spec:
   type: infra
