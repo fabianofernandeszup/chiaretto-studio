@@ -12,13 +12,6 @@ spec:
   release-notes: docs/release-notes.md
   requirements: docs/requirements.md
   implementation: docs/implementation.md
-  inputs:
-    - label: Who are you?
-      name: user_name
-      type: text
-      required: false
-      pattern: '([A-Z][a-z]+)+'
-      help: 'Inform your name'
   python:
     workdir: .
     script: script.py
