@@ -1,0 +1,121 @@
+schema-version: v1
+kind: plugin
+metadata:
+  name: plugin-infra-inputs-contexto
+  display-name: plugin-infra-inputs-contexto
+  description: Describe your plugin explaining its purpose
+  version: 0.0.1
+  picture: plugin.png
+spec:
+  type: infra
+  compatibility:
+    - python
+  about: docs/about.md
+  implementation: docs/implementation.md
+  release-notes: docs/release-notes-0.0.1.md
+  requirements: docs/requirements.md
+  technologies: # Ref: https://docs.stackspot.com/docs/create-stacks/yaml-files/yaml/#technologies
+    - Api
+  generates:
+    connection-interface:
+      - aws-secret-manager-conn
+  inputs:
+    - label: Type name of your resource1
+      name: resource1
+      type: text
+      required: true 
+      default: Client
+      pattern: '([A-Z][a-z]+)+'
+      help: 'Inform your resource name (e.g.: Client)'
+    - label: Type name of your resource2
+      name: resource2
+      type: text
+      required: true
+      default: Client2
+      pattern: '([A-Z][a-z]+)+'
+      help: 'Inform your resource name (e.g.: Client)'
+    - label: Type name of your resource3
+      name: resource3
+      type: text
+      required: true
+      default: Client3
+      pattern: '([A-Z][a-z]+)+'
+      help: 'Inform your resource name (e.g.: Client)'
+    - label: Type name of your resource4
+      name: resource4
+      type: text
+      help: 'Sem valor default e sem pattern'
+    - label: Type name of your resource5
+      name: resource5
+      type: text
+      help: 'Sem valor default e sem pattern'
+    - label: Type name of your resource6
+      name: resource6
+      type: text
+      help: 'Sem valor default e sem pattern'
+    - label: Choose http method1 of new endpoint
+      name: method1
+      type: text
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: GET
+      required: true
+      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+    - label: Choose http method2 of new endpoint
+      name: method2
+      type: text
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: GET
+      required: true
+      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+    - label: Choose http method3 of new endpoint
+      name: method3
+      type: text
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: GET
+      required: true
+      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+    - label: Choose http method4 of new endpoint
+      name: method4
+      type: text
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      help: 'Sem valor default'
+    - label: Choose http method5 of new endpoint
+      name: method5
+      type: text
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      help: 'Sem valor default'
+    - label: Choose http method6 of new endpoint
+      name: method6
+      type: text
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      help: 'Sem valor default'
