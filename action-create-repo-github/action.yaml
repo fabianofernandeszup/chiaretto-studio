@@ -16,10 +16,11 @@ spec:
       name: visibility
       type: text
       required: true
-      items: 
+      items:
         - public
         - internal
         - private
+      help: "Internal repo can only be created by enterprise accounts."
   python:
     workdir: .
     script: script.py

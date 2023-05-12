@@ -16,22 +16,39 @@ spec:
       name: visibility
       type: text
       required: true
-      items: 
+      items:
         - public
         - internal
         - private
+      help: "Internal repo can only be created by enterprise accounts."
+    - label: Do you want to set stackspot credentials to secret on that repository?
+      name: secret
+      type: bool
+      help: "Private repos can only have secrets on enterprise accounts."
     - label: Client Id
       name: client_id
       type: text
+      condition:
+        variable: secret
+        operator: ==
+        value: true
       help: This value will be set as repository secret
     - label: Client Key
       name: client_key
       type: password
+      condition:
+        variable: secret
+        operator: ==
+        value: true
       help: This value will be set as repository secret
     - label: Client Realm
       name: client_realm
       type: text
       help: This value will be set as repository secret
+      condition:
+        variable: secret
+        operator: ==
+        value: true
   python:
     workdir: .
     script: script.py
