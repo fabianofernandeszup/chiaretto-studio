@@ -4,7 +4,7 @@ metadata:
   name: plugin-infra-gen-rds-req-eks
   display-name: plugin-infra-gen-rds-req-eks
   description: Describe your plugin explaining its purpose
-  version: 0.0.1
+  version: 1.0.0
   picture: plugin.png
 spec:
   type: infra
@@ -23,22 +23,7 @@ spec:
     connection-interface:
       - aws-eks-conn
   inputs:
-    - label: Type name of your resource
+    - label: Type name of RDS
       name: resource
       type: text
-      required: true 
-      default: Client
-      pattern: '([A-Z][a-z]+)+'
-      help: 'Inform your resource name (e.g.: Client)'
-    - label: Choose http method of new endpoint
-      name: method
-      type: text
-      items:
-        - GET
-        - POST
-        - PUT
-        - DELETE
-        - PATCH
-      default: GET
       required: true
-      help: 'Inform the method of the endpoint (e.g.: post or delete)'

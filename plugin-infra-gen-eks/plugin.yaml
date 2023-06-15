@@ -1,8 +1,8 @@
 schema-version: v1
 kind: plugin
 metadata:
-  name: plugin-infra-gen-sm-req-eks
-  display-name: plugin-infra-gen-sm-req-eks
+  name: plugin-infra-gen-eks
+  display-name: plugin-infra-gen-eks
   description: Describe your plugin explaining its purpose
   version: 1.0.0
   picture: plugin.png
@@ -18,12 +18,9 @@ spec:
     - Api
   generates:
     connection-interface:
-      - aws-secret-manager-conn
-  requires:
-    connection-interface:
       - aws-eks-conn
   inputs:
-    - label: Name of secret
+    - label: Type name of EKS
       name: resource
       type: text
-      required: true
+      required: true 
