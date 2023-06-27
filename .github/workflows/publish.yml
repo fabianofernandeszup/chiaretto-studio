@@ -37,7 +37,10 @@ jobs:
               - '.github/workflows/**'
 
       - name: Install STK CLI
-        run: curl -fsSL https://stk-dev.stackspot.com/install-alpha.sh | bash
+        run: |
+          curl -fsSL https://stk.stackspot.com/install-alpha.sh | bash
+          wget https://stk-dev.stackspot.com/env/alpha-qa.env
+          mv alpha-qa.env ~/.stk-alpha/.env
 
       - name: Publish Plugins
         run: |
