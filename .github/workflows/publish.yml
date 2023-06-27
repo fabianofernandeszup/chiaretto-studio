@@ -44,7 +44,8 @@ jobs:
 
       - name: Publish Plugins
         run: |
-          stk-alpha login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
+          ~/.stk-alpha/bin/stk-alpha upgrade
+#          stk-alpha login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
           echo "##########################################"
           echo ${{ steps.filter_shell.outputs.content }}
           echo "##########################################"
