@@ -49,7 +49,7 @@ jobs:
           echo "##########################################"
           echo ${{ steps.filter_shell.outputs.content }}
           echo "##########################################"
-          echo ${{ steps.filter.filter_json.content }}
+          echo ${{ steps.filter_json.outputs.content }}
         env:
           STK_REALM: ${{ vars.stk_realm }}
           STK_CLIENT_ID: ${{ secrets.stk_client_id }}
