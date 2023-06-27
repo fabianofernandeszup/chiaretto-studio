@@ -37,7 +37,6 @@ jobs:
               - '.github/workflows/**'
 
       - name: Publish Plugins
-        if: ${{ steps.filter.outputs.markdown == 'true' }}
         run: |
           stk-alpha login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
           echo "##########################################"
