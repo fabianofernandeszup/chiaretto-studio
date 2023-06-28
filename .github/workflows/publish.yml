@@ -55,6 +55,7 @@ jobs:
           arrAllDirs=()
           # Check dir
           for counter in ${!arrAllFilesChanged[*]}; do
+            echo "Check file ${{ github.workspace }}/${arrAllFilesChanged[counter]}"
             if [[ -d "${{ github.workspace }}/${arrAllFilesChanged[counter]}" ]]; then
                 arrAllDirs=(${arrAllDirs[@]} "${{ github.workspace }}/${arrAllFilesChanged[counter]}")
             else
