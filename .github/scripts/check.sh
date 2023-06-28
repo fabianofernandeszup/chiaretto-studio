@@ -2,7 +2,7 @@ arrAllFilesChanged=(/home/fabiano.fernandes/www/stackspot/chiaretto-studio/plugi
 arrAllDirs=()
 # Check dir
 for counter in ${!arrAllFilesChanged[*]}; do
-  if [ -d "${arrAllFilesChanged[counter]}" ]; then
+  if [[ -d "${arrAllFilesChanged[counter]}" ]]; then
       arrAllDirs=(${arrAllDirs[@]} "${arrAllFilesChanged[counter]}")
   else
   	arrAllDirs=(${arrAllDirs[@]} "${arrAllFilesChanged[counter]%/*}")

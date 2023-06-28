@@ -55,10 +55,10 @@ jobs:
           arrAllDirs=()
           # Check dir
           for counter in ${!arrAllFilesChanged[*]}; do
-            if [ -d "${arrAllFilesChanged[counter]}" ]; then
-                arrAllDirs=(${arrAllDirs[@]} "${arrAllFilesChanged[counter]}")
+            if [[ -d "${{ github.workspace }}/${arrAllFilesChanged[counter]}" ]]; then
+                arrAllDirs=(${arrAllDirs[@]} "${{ github.workspace }}/${arrAllFilesChanged[counter]}")
             else
-            	arrAllDirs=(${arrAllDirs[@]} "${arrAllFilesChanged[counter]%/*}")
+            	arrAllDirs=(${arrAllDirs[@]} "${{ github.workspace }}/${arrAllFilesChanged[counter]%/*}")
             fi
           done
 
