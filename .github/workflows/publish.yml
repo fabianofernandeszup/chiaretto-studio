@@ -57,27 +57,27 @@ jobs:
           echo "################# Check File or dir #########################"
           for counter in ${!arrAllFilesChanged[*]}; do
             echo "Check file ${{ github.workspace }}/${arrAllFilesChanged[counter]}"
-            #            if [[ -d "${{ github.workspace }}/${arrAllFilesChanged[counter]}" ]]; then
-            #                arrAllDirs=(${arrAllDirs[@]} "${{ github.workspace }}/${arrAllFilesChanged[counter]}")
-            #            else
-            #            	arrAllDirs=(${arrAllDirs[@]} "${{ github.workspace }}/${arrAllFilesChanged[counter]%/*}")
-            #            fi
+            if [[ -d "${{ github.workspace }}/${arrAllFilesChanged[counter]}" ]]; then
+                arrAllDirs=(${arrAllDirs[@]} "${{ github.workspace }}/${arrAllFilesChanged[counter]}")
+            else
+                arrAllDirs=(${arrAllDirs[@]} "${{ github.workspace }}/${arrAllFilesChanged[counter]%/*}")
+            fi
           done
 
-          #          echo "###### Filter Uniq Dir #########"
-          #          readarray -t arrAllDirs < <(printf '%s\n' "${arrAllDirs[@]}" | sort -u)
-          #
-          #          echo "###### Publish #########"
-          #          for i in ${arrAllDirs[@]}; do
-          #            if [[ -f "${i}/plugin.yaml" ]]; then
-          #              echo "cd $i"
-          #              echo "stk publish plugin"
-          #            fi
-          #            if [[ -f "${i}/action.yaml" ]]; then
-          #              echo "cd $i"
-          #              echo "stk publish action"
-          #            fi
-          #          done
+          echo "###### Filter Uniq Dir #########"
+          readarray -t arrAllDirs < <(printf '%s\n' "${arrAllDirs[@]}" | sort -u)
+
+          echo "###### Publish #########"
+          for i in ${arrAllDirs[@]}; do
+            if [[ -f "${i}/plugin.yaml" ]]; then
+              echo "cd $i"
+              echo "stk publish plugin"
+            fi
+            if [[ -f "${i}/action.yaml" ]]; then
+              echo "cd $i"
+              echo "stk publish action"
+            fi
+          done
 
         env:
           STK_REALM: ${{ vars.stk_realm }}

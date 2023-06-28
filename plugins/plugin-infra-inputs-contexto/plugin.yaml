@@ -3,7 +3,7 @@ kind: plugin
 metadata:
   name: plugin-infra-inputs-contexto
   display-name: plugin-infra-inputs-contexto
-  description: Describe your plugin explaining its purpose 12
+  description: Describe your plugin explaining its purpose 13
   version: 0.0.1
   picture: plugin.png
 spec:
