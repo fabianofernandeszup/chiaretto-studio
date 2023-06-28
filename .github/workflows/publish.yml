@@ -50,6 +50,33 @@ jobs:
           echo ${{ steps.filter_shell.outputs.content_files }}
           echo "##########################################"
           echo ${{ steps.filter_json.outputs.content_files }}
+
+          arrAllFilesChanged=${{ steps.filter_shell.outputs.content_files }}
+          arrAllDirs=()
+          # Check dir
+          for counter in ${!arrAllFilesChanged[*]}; do
+            if [ -d "${arrAllFilesChanged[counter]}" ]; then
+                arrAllDirs=(${arrAllDirs[@]} "${arrAllFilesChanged[counter]}")
+            else
+            	arrAllDirs=(${arrAllDirs[@]} "${arrAllFilesChanged[counter]%/*}")
+            fi
+          done
+
+          echo "###### Filter Uniq Dir #########"
+          readarray -t arrAllDirs < <(printf '%s\n' "${arrAllDirs[@]}" | sort -u)
+
+          echo "###### Publish #########"
+          for i in ${arrAllDirs[@]}; do
+            if [[ -f "${i}/plugin.yaml" ]]; then
+              echo "cd $i"
+              echo "stk publish plugin"
+            fi
+            if [[ -f "${i}/action.yaml" ]]; then
+              echo "cd $i"
+              echo "stk publish action"
+            fi
+          done
+
         env:
           STK_REALM: ${{ vars.stk_realm }}
           STK_CLIENT_ID: ${{ secrets.stk_client_id }}
