@@ -52,7 +52,7 @@ jobs:
           echo "################# PWD #########################"
           pwd
           echo "################# Init Filter #########################"
-          arrAllFilesChanged=${{ steps.filter_shell.outputs.content_files }}
+          arrAllFilesChanged=(${{ steps.filter_shell.outputs.content_files }})
           arrAllDirs=()
           echo "################# Check File or dir #########################"
           for counter in ${!arrAllFilesChanged[*]}; do
