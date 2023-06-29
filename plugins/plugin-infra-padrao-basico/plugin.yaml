@@ -4,7 +4,7 @@ metadata:
   name: plugin-padrao-basico
   display-name: plugin-padrao-basico
   description: Describe your plugin explaining its purpose 1
-  version: 0.0.3
+  version: 0.0.4
   picture: plugin.png
 spec:
   type: infra
