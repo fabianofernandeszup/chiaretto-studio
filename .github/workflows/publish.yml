@@ -19,42 +19,24 @@ jobs:
         id: filter_shell
         with:
           list-files: shell
-          filters: | # set ${{ steps.filter.outputs.workflows }} == 'true'
+          filters: |
             content:
               - './actions/**'
               - './plugins/**'
+              - '.github/workflows/**'
 
-      - name: Check changes
-        uses: dorny/paths-filter@v2
-        id: filter_json
-        with:
-          list-files: json
-          filters: | # set ${{ steps.filter.outputs.workflows }} == 'true'
-            content:
-              - './actions/**'
-              - './plugins/**'
-
-#      - name: Install STK CLI
-#        run: |
-#          curl -fsSL https://stk.stackspot.com/install-alpha.sh | bash
-#          wget https://stk-dev.stackspot.com/env/alpha-qa.env
-#          mv alpha-qa.env ~/.stk-alpha/.env
+      - name: Install STK CLI
+        run: |
+          curl -fsSL https://stk.stackspot.com/install.sh | bash
 
       - name: Publish Plugins
         run: |
-          #~/.stk-alpha/bin/stk-alpha upgrade
+          ~/.stk/bin/stk upgrade
           #stk-alpha login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
 
-          echo "################# SHELL #########################"
-          echo ${{ steps.filter_shell.outputs.content_files }}
-          echo "################# JSON #########################"
-          echo ${{ steps.filter_json.outputs.content_files }}
-          echo "################# PWD #########################"
-          pwd
-          echo "################# Init Filter #########################"
           arrAllFilesChanged=(${{ steps.filter_shell.outputs.content_files }})
           arrAllDirs=()
-          echo "################# Check File or dir #########################"
+          ################# Check File or dir #########################
           for counter in ${!arrAllFilesChanged[*]}; do
             echo "Check file ${{ github.workspace }}/${arrAllFilesChanged[counter]}"
             if [[ -d "${{ github.workspace }}/${arrAllFilesChanged[counter]}" ]]; then
@@ -64,10 +46,10 @@ jobs:
             fi
           done
 
-          echo "###### Filter Uniq Dir #########"
+          ###### Filter Uniq Dir #########
           readarray -t arrAllDirs < <(printf '%s\n' "${arrAllDirs[@]}" | sort -u)
 
-          echo "###### Publish #########"
+          ###### Publish #########
           for i in ${arrAllDirs[@]}; do
             if [[ -f "${i}/plugin.yaml" ]]; then
               echo "cd $i"
