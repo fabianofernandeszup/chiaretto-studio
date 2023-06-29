@@ -10,6 +10,7 @@ concurrency:
 
 jobs:
   PUBLISH:
+    environment: 'prd-eng'
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2.3.4
@@ -32,11 +33,12 @@ jobs:
 
       - name: Version STK CLI
         run: |
+          alias stk=~/.stk/bin/stk
           stk --version
 
       - name: Publish Plugins
         run: |
-          #stk-alpha login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
+          #stk login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
 
           arrAllFilesChanged=(${{ steps.filter_shell.outputs.content_files }})
           arrAllDirs=()
