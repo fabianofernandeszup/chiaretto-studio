@@ -68,5 +68,6 @@ jobs:
 
         env:
           STK_REALM: ${{ vars.stk_realm }}
+          STK_STUDIO: ${{ vars.stk_studio }}
           STK_CLIENT_ID: ${{ secrets.stk_client_id }}
           STK_CLIENT_KEY: ${{ secrets.stk_client_key }}
