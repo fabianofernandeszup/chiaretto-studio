@@ -52,12 +52,14 @@ jobs:
           for i in ${arrAllDirs[@]}; do
             if [[ -f "${{ github.workspace }}/${i}/plugin.yaml" ]]; then
               arrPluginsDir=(${arrPluginsDir[@]} "${i}")
+              echo "has-plugins=true" >> "$GITHUB_OUTPUT"
           #              cd $i
           #              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
           #              echo "###########################################"
             fi
             if [[ -f "${{ github.workspace }}/${i}/action.yaml" ]]; then
               arrActionsDir=(${arrActionsDir[@]} "${i}")
+              echo "has-actions=true" >> "$GITHUB_OUTPUT"
           #              cd $i
           #              ~/.stk/bin/stk publish action --studio $STK_STUDIO || true
           #              echo "###########################################"
@@ -97,7 +99,7 @@ jobs:
           key: ${{ runner.os }}-stk
 
   PUBLISH_PLUGINS:
-    if: needs.CHECK_CONTENT.outputs.dirs-plugins
+    if: needs.CHECK_CONTENT.outputs.has-plugins == 'true'
     runs-on: ubuntu-latest
     environment: 'prd-eng'
     needs:
@@ -123,7 +125,7 @@ jobs:
           STK_STUDIO: ${{ vars.stk_studio }}
 
   PUBLISH_ACTIONS:
-    if: needs.CHECK_CONTENT.outputs.dirs-actions
+    if: needs.CHECK_CONTENT.outputs.has-actions == 'true'
     runs-on: ubuntu-latest
     environment: 'prd-eng'
     needs:
