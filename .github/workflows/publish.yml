@@ -56,6 +56,10 @@ jobs:
           ###### Filter Uniq Dir #########
           readarray -t arrAllDirs < <(printf '%s\n' "${arrAllDirs[@]}" | sort -u)
 
+          for i in ${arrAllDirs[@]}; do
+            echo "Dir $i"
+          done
+
           echo "dirs=arrAllDirs" >> "$GITHUB_OUTPUT"
 
           #          ###### Publish #########
