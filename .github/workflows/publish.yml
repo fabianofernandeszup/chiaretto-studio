@@ -33,12 +33,11 @@ jobs:
 
       - name: Version STK CLI
         run: |
-          alias stk=~/.stk/bin/stk
-          stk --version
+          ~/.stk/bin/stk --version
 
       - name: Publish Plugins
         run: |
-          #stk login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
+          ~/.stk/bin/stk login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
 
           arrAllFilesChanged=(${{ steps.filter_shell.outputs.content_files }})
           arrAllDirs=()
