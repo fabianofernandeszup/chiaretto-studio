@@ -62,14 +62,16 @@ jobs:
           ###### Publish #########
           for i in ${arrAllDirs[@]}; do
             if [[ -f "${{ github.workspace }}/${i}/plugin.yaml" ]]; then
-              echo "Plugin ${{ github.workspace }}/${i}"
+              echo "###### Plugin ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
-              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO
+              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
+              echo "##################################################"
             fi
             if [[ -f "${{ github.workspace }}/${i}/action.yaml" ]]; then
-              echo "Action ${{ github.workspace }}/${i}"
+              echo "###### Action ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
-              ~/.stk/bin/stk publish action --studio $STK_STUDIO
+              ~/.stk/bin/stk publish action --studio $STK_STUDIO || true
+              echo "##################################################"
             fi
           done
         env:
