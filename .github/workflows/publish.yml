@@ -60,7 +60,7 @@ jobs:
             echo "Dir $i"
           done
 
-          echo "dirs=arrAllDirs" >> "$GITHUB_OUTPUT"
+          echo "dirs=$arrAllDirs" >> "$GITHUB_OUTPUT"
 
           #          ###### Publish #########
           #          for i in ${arrAllDirs[@]}; do
