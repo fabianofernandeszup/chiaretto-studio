@@ -48,9 +48,9 @@ jobs:
           ################# Check File or dir #########################
           for counter in ${!arrAllFilesChanged[*]}; do
             if [[ -d "${{ github.workspace }}/${arrAllFilesChanged[counter]}" ]]; then
-                arrAllDirs=(${arrAllDirs[@]} "${{ github.workspace }}/${arrAllFilesChanged[counter]}")
+                arrAllDirs=(${arrAllDirs[@]} "${arrAllFilesChanged[counter]}")
             else
-                arrAllDirs=(${arrAllDirs[@]} "${{ github.workspace }}/${arrAllFilesChanged[counter]%/*}")
+                arrAllDirs=(${arrAllDirs[@]} "${arrAllFilesChanged[counter]%/*}")
             fi
           done
 
@@ -61,13 +61,13 @@ jobs:
           arrPluginsDir=()
           arrActionsDir=()
           for i in ${arrAllDirs[@]}; do
-            if [[ -f "${i}/plugin.yaml" ]]; then
+            if [[ -f "${{ github.workspace }}/${i}/plugin.yaml" ]]; then
               arrPluginsDir=(${arrPluginsDir[@]} "${i}")
           #              cd $i
           #              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
           #              echo "###########################################"
             fi
-            if [[ -f "${i}/action.yaml" ]]; then
+            if [[ -f "${{ github.workspace }}/${i}/action.yaml" ]]; then
               arrActionsDir=(${arrActionsDir[@]} "${i}")
           #              cd $i
           #              ~/.stk/bin/stk publish action --studio $STK_STUDIO || true
