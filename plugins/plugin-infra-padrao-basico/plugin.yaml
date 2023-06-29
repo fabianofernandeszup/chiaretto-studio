@@ -3,7 +3,7 @@ kind: plugin
 metadata:
   name: plugin-padrao-basico
   display-name: plugin-padrao-basico
-  description: Describe your plugin explaining its purpose 13
+  description: Describe your plugin explaining its purpose 14
   version: 0.0.3
   picture: plugin.png
 spec:

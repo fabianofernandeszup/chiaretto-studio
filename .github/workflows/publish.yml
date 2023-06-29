@@ -57,12 +57,12 @@ jobs:
           ###### Publish #########
           for i in ${arrAllDirs[@]}; do
             if [[ -f "${i}/plugin.yaml" ]]; then
-              echo "cd $i"
-              echo "stk publish plugin"
+              cd $i
+              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO
             fi
             if [[ -f "${i}/action.yaml" ]]; then
-              echo "cd $i"
-              echo "stk publish action"
+              cd $i
+              ~/.stk/bin/stk publish action  --studio $STK_STUDIO
             fi
           done
 
