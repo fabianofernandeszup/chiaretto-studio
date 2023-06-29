@@ -99,7 +99,9 @@ jobs:
   PUBLISH_PLUGINS:
     runs-on: ubuntu-latest
     environment: 'prd-eng'
-    needs: INSTALL_STK
+    needs:
+      INSTALL_STK
+      CHECK_CONTENT
     strategy:
       matrix:
         dir: ${{ fromJson(needs.CHECK_CONTENT.outputs.dirs-plugins) }}
@@ -121,7 +123,9 @@ jobs:
   PUBLISH_ACTIONS:
     runs-on: ubuntu-latest
     environment: 'prd-eng'
-    needs: CHECK_CONTENT
+    needs:
+      INSTALL_STK
+      CHECK_CONTENT
     strategy:
       matrix:
         dir: ${{ fromJson(needs.CHECK_CONTENT.outputs.dirs-actions) }}
