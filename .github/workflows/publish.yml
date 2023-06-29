@@ -18,7 +18,7 @@ jobs:
       has-actions: ${{ steps.files.outputs.has-actions }}
       dirs-actions: ${{ steps.files.outputs.dirs-actions }}
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3.5.3
 
       - name: Check changes
         uses: dorny/paths-filter@v2
@@ -55,22 +55,15 @@ jobs:
             if [[ -f "${{ github.workspace }}/${i}/plugin.yaml" ]]; then
               arrPluginsDir=(${arrPluginsDir[@]} "${i}")
               echo "has-plugins=true" >> "$GITHUB_OUTPUT"
-          #              cd $i
-          #              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
-          #              echo "###########################################"
             fi
             if [[ -f "${{ github.workspace }}/${i}/action.yaml" ]]; then
               arrActionsDir=(${arrActionsDir[@]} "${i}")
               echo "has-actions=true" >> "$GITHUB_OUTPUT"
-          #              cd $i
-          #              ~/.stk/bin/stk publish action --studio $STK_STUDIO || true
-          #              echo "###########################################"
             fi
           done
 
           echo "dirs-plugins=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${arrPluginsDir[@]}")" >> "$GITHUB_OUTPUT"
           echo "dirs-actions=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${arrActionsDir[@]}")" >> "$GITHUB_OUTPUT"
-
 
   INSTALL_STK:
     runs-on: ubuntu-latest
@@ -111,7 +104,7 @@ jobs:
       matrix:
         dir: ${{ fromJson(needs.CHECK_CONTENT.outputs.dirs-plugins) }}
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3.5.3
 
       - name: Restore Stk CLI
         uses: actions/cache/restore@v3
@@ -137,7 +130,7 @@ jobs:
       matrix:
         dir: ${{ fromJson(needs.CHECK_CONTENT.outputs.dirs-actions) }}
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3.5.3
 
       - name: Restore Stk CLI
         uses: actions/cache/restore@v3

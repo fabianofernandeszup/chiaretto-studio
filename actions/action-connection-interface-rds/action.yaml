@@ -3,8 +3,8 @@ kind: action
 metadata:
   name: action-rci-rds
   display-name: action-require-connection-interface-rds
-  description: Describe your action explaining its purpose 9
-  version: 1.0.0
+  description: Describe your action explaining its purpose
+  version: 1.0.1
 spec:
   type: python
   about: docs/about.md
