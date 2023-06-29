@@ -31,7 +31,7 @@ jobs:
               - './plugins/**'
               - '.github/workflows/**'
 
-      - name: Publish Plugins
+      - name: Check Plugins and Actions
         id: files
         run: |
           arrAllFilesChanged=(${{ steps.filter_shell.outputs.content_files }})
