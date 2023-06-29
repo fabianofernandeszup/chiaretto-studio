@@ -97,6 +97,7 @@ jobs:
           key: ${{ runner.os }}-stk
 
   PUBLISH_PLUGINS:
+    if: needs.CHECK_CONTENT.outputs.dirs-plugins
     runs-on: ubuntu-latest
     environment: 'prd-eng'
     needs:
@@ -115,12 +116,14 @@ jobs:
           key: ${{ runner.os }}-stk
 
       - run: |
-          ~/.stk/bin/stk --version
           echo "Plugin ${{ github.workspace }}/${{ matrix.dir }}"
+          cd ${{ github.workspace }}/${{ matrix.dir }}
+          ~/.stk/bin/stk publish plugin --studio $STK_STUDIO
         env:
           STK_STUDIO: ${{ vars.stk_studio }}
 
   PUBLISH_ACTIONS:
+    if: needs.CHECK_CONTENT.outputs.dirs-actions
     runs-on: ubuntu-latest
     environment: 'prd-eng'
     needs:
@@ -139,7 +142,8 @@ jobs:
           key: ${{ runner.os }}-stk
 
       - run: |
-          ~/.stk/bin/stk --version
           echo "Plugin ${{ github.workspace }}/${{ matrix.dir }}"
+          cd ${{ github.workspace }}/${{ matrix.dir }}
+          ~/.stk/bin/stk publish action --studio $STK_STUDIO
         env:
           STK_STUDIO: ${{ vars.stk_studio }}
