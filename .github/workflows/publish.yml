@@ -87,7 +87,7 @@ jobs:
           STK_CLIENT_ID: ${{ secrets.stk_client_id }}
           STK_CLIENT_KEY: ${{ secrets.stk_client_key }}
 
-      - name: Cache Stk Cli
+      - name: Cache STK Cli
         uses: actions/cache/save@v3
         with:
           path: ~/.stk
@@ -106,7 +106,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3.5.3
 
-      - name: Restore Stk CLI
+      - name: Restore STK CLI
         uses: actions/cache/restore@v3
         with:
           path: ~/.stk
@@ -132,7 +132,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3.5.3
 
-      - name: Restore Stk CLI
+      - name: Restore STK CLI
         uses: actions/cache/restore@v3
         with:
           path: ~/.stk
