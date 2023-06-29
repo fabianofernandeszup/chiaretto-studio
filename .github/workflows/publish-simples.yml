@@ -1,0 +1,76 @@
+name: Publish Simples
+
+on:
+  push:
+    branches: [main2]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check_changes:
+    environment: 'prd-eng'
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3.5.3
+
+      - name: Check changes
+        uses: dorny/paths-filter@v2
+        id: filter_shell
+        with:
+          list-files: shell
+          filters: |
+            content:
+              - './actions/**'
+              - './plugins/**'
+              - '.github/workflows/**'
+
+      - name: Install STK CLI
+        run: |
+          curl -fsSL https://stk.stackspot.com/install.sh | bash
+          ~/.stk/bin/stk upgrade
+
+      - name: Version STK CLI
+        run: |
+          ~/.stk/bin/stk --version
+
+      - name: Login
+        run: ~/.stk/bin/stk login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
+        env:
+          STK_REALM: ${{ vars.stk_realm }}
+          STK_CLIENT_ID: ${{ secrets.stk_client_id }}
+          STK_CLIENT_KEY: ${{ secrets.stk_client_key }}
+
+      - name: Check Plugins and Actions
+        id: files
+        run: |
+          arrAllFilesChanged=(${{ steps.filter_shell.outputs.content_files }})
+          arrAllDirs=()
+          ################# Check File or dir #########################
+          for counter in ${!arrAllFilesChanged[*]}; do
+            if [[ -d "${{ github.workspace }}/${arrAllFilesChanged[counter]}" ]]; then
+                arrAllDirs=(${arrAllDirs[@]} "${arrAllFilesChanged[counter]}")
+            else
+                arrAllDirs=(${arrAllDirs[@]} "${arrAllFilesChanged[counter]%/*}")
+            fi
+          done
+
+          ###### Filter Uniq Dir #########
+          readarray -t arrAllDirs < <(printf '%s\n' "${arrAllDirs[@]}" | sort -u)
+
+          ###### Publish #########
+          for i in ${arrAllDirs[@]}; do
+            if [[ -f "${{ github.workspace }}/${i}/plugin.yaml" ]]; then
+              echo "Plugin ${{ github.workspace }}/${i}"
+              cd ${{ github.workspace }}/${i}
+              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO
+            fi
+            if [[ -f "${{ github.workspace }}/${i}/action.yaml" ]]; then
+              echo "Action ${{ github.workspace }}/${i}"
+              cd ${{ github.workspace }}/${i}
+              ~/.stk/bin/stk publish action --studio $STK_STUDIO
+            fi
+          done
+        env:
+          STK_STUDIO: ${{ vars.stk_studio }}
