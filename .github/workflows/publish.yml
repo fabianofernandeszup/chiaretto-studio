@@ -29,20 +29,9 @@ jobs:
               - './plugins/**'
               - '.github/workflows/**'
 
-#      - name: Install STK CLI
-#        run: |
-#          curl -fsSL https://stk.stackspot.com/install.sh | bash
-#          ~/.stk/bin/stk upgrade
-#
-#      - name: Version STK CLI
-#        run: |
-#          ~/.stk/bin/stk --version
-
       - name: Publish Plugins
         id: files
         run: |
-          #          ~/.stk/bin/stk login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
-
           arrAllFilesChanged=(${{ steps.filter_shell.outputs.content_files }})
           arrAllDirs=()
           ################# Check File or dir #########################
@@ -77,22 +66,55 @@ jobs:
 
           echo "dirs-plugins=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${arrPluginsDir[@]}")" >> "$GITHUB_OUTPUT"
           echo "dirs-actions=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${arrActionsDir[@]}")" >> "$GITHUB_OUTPUT"
+
+
+  INSTALL_STK:
+    runs-on: ubuntu-latest
+    needs: CHECK_CONTENT
+    steps:
+      - name: Install STK CLI
+        run: |
+          curl -fsSL https://stk.stackspot.com/install.sh | bash
+          ~/.stk/bin/stk upgrade
+
+      - name: Version STK CLI
+        run: |
+          ~/.stk/bin/stk --version
+
+      - name: Login
+        run: ~/.stk/bin/stk login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
         env:
           STK_REALM: ${{ vars.stk_realm }}
           STK_STUDIO: ${{ vars.stk_studio }}
           STK_CLIENT_ID: ${{ secrets.stk_client_id }}
           STK_CLIENT_KEY: ${{ secrets.stk_client_key }}
 
+      - name: Cache Stk Cli
+        uses: actions/cache/save@v3
+          with:
+            path: ~/.stk
+            key: ${{ runner.os }}-stk
+
   PUBLISH_PLUGINS:
     runs-on: ubuntu-latest
-    needs: CHECK_CONTENT
+    needs: INSTALL_STK
     strategy:
       matrix:
         dir: ${{ fromJson(needs.CHECK_CONTENT.outputs.dirs-plugins) }}
     steps:
       - uses: actions/checkout@v2.3.4
+
+      - name: Restore Stk CLI
+        uses: actions/cache/restore@v3
+        with:
+          path: ~/.stk
+          key: ${{ runner.os }}-stk
+
       - run: |
+          ~/.stk --version
           echo "Plugin ${{ github.workspace }}/${{ matrix.dir }}"
+        env:
+          STK_STUDIO: ${{ vars.stk_studio }}
 
   PUBLISH_ACTIONS:
     runs-on: ubuntu-latest
