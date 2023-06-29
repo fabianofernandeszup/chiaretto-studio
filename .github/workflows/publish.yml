@@ -58,11 +58,11 @@ jobs:
           for i in ${arrAllDirs[@]}; do
             if [[ -f "${i}/plugin.yaml" ]]; then
               cd $i
-              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO
+              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
             fi
             if [[ -f "${i}/action.yaml" ]]; then
               cd $i
-              ~/.stk/bin/stk publish action  --studio $STK_STUDIO
+              ~/.stk/bin/stk publish action  --studio $STK_STUDIO || true
             fi
           done
 
