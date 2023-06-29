@@ -115,7 +115,7 @@ jobs:
           key: ${{ runner.os }}-stk
 
       - run: |
-          ~/.stk --version
+          ~/.stk/bin/stk --version
           echo "Plugin ${{ github.workspace }}/${{ matrix.dir }}"
         env:
           STK_STUDIO: ${{ vars.stk_studio }}
@@ -131,5 +131,15 @@ jobs:
         dir: ${{ fromJson(needs.CHECK_CONTENT.outputs.dirs-actions) }}
     steps:
       - uses: actions/checkout@v2.3.4
+
+      - name: Restore Stk CLI
+        uses: actions/cache/restore@v3
+        with:
+          path: ~/.stk
+          key: ${{ runner.os }}-stk
+
       - run: |
-          echo "Action ${{ github.workspace }}/${{ matrix.dir }}"
+          ~/.stk/bin/stk --version
+          echo "Plugin ${{ github.workspace }}/${{ matrix.dir }}"
+        env:
+          STK_STUDIO: ${{ vars.stk_studio }}
