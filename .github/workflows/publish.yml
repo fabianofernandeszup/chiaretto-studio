@@ -60,7 +60,7 @@ jobs:
             echo "Dir $i"
           done
 
-          echo "dirs=$arrAllDirs" >> "$GITHUB_OUTPUT"
+          echo "dirs=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${arrAllDirs[@]}")" >> "$GITHUB_OUTPUT"
 
           #          ###### Publish #########
           #          for i in ${arrAllDirs[@]}; do
@@ -87,7 +87,7 @@ jobs:
     needs: CHECK_CONTENT
     strategy:
       matrix:
-        dir: ${{needs.CHECK_CONTENT.outputs.dirs}}
+        dir: ${{ fromJson(needs.CHECK_CONTENT.outputs.dirs) }}
     steps:
       - uses: actions/checkout@v2.3.4
 
