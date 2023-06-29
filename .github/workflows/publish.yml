@@ -63,15 +63,15 @@ jobs:
           for i in ${arrAllDirs[@]}; do
             if [[ -f "${i}/plugin.yaml" ]]; then
               arrPluginsDir=(${arrPluginsDir[@]} "${i}")
-#              cd $i
-#              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
-#              echo "###########################################"
+          #              cd $i
+          #              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
+          #              echo "###########################################"
             fi
             if [[ -f "${i}/action.yaml" ]]; then
               arrActionsDir=(${arrActionsDir[@]} "${i}")
-#              cd $i
-#              ~/.stk/bin/stk publish action --studio $STK_STUDIO || true
-#              echo "###########################################"
+          #              cd $i
+          #              ~/.stk/bin/stk publish action --studio $STK_STUDIO || true
+          #              echo "###########################################"
             fi
           done
 
