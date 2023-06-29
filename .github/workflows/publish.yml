@@ -66,6 +66,7 @@ jobs:
           echo "dirs-actions=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${arrActionsDir[@]}")" >> "$GITHUB_OUTPUT"
 
   INSTALL_STK:
+    if: needs.CHECK_CONTENT.outputs.has-plugins == 'true' || needs.CHECK_CONTENT.outputs.has-actions == 'true'
     runs-on: ubuntu-latest
     environment: 'prd-eng'
     needs: CHECK_CONTENT
