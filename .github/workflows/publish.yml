@@ -28,10 +28,14 @@ jobs:
       - name: Install STK CLI
         run: |
           curl -fsSL https://stk.stackspot.com/install.sh | bash
+          ~/.stk/bin/stk upgrade
+
+      - name: Version STK CLI
+        run: |
+          stk --version
 
       - name: Publish Plugins
         run: |
-          ~/.stk/bin/stk upgrade
           #stk-alpha login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
 
           arrAllFilesChanged=(${{ steps.filter_shell.outputs.content_files }})
