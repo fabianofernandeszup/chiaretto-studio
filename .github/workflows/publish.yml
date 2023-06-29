@@ -91,9 +91,9 @@ jobs:
 
       - name: Cache Stk Cli
         uses: actions/cache/save@v3
-          with:
-            path: ~/.stk
-            key: ${{ runner.os }}-stk
+        with:
+          path: ~/.stk
+          key: ${{ runner.os }}-stk
 
   PUBLISH_PLUGINS:
     runs-on: ubuntu-latest
