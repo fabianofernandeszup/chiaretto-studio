@@ -13,7 +13,7 @@ jobs:
     environment: 'prd-eng'
     runs-on: ubuntu-20.04
     outputs:
-      output1: ${{ steps.files.outputs.dirs }}
+      dirs: ${{ steps.files.outputs.dirs }}
     steps:
       - uses: actions/checkout@v2.3.4
 
