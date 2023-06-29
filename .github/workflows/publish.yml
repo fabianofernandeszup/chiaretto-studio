@@ -13,7 +13,8 @@ jobs:
     environment: 'prd-eng'
     runs-on: ubuntu-20.04
     outputs:
-      dirs: ${{ steps.files.outputs.dirs }}
+      dirs-plugins: ${{ steps.files.outputs.dirs-plugins }}
+      dirs-actions: ${{ steps.files.outputs.dirs-actions }}
     steps:
       - uses: actions/checkout@v2.3.4
 
@@ -56,40 +57,50 @@ jobs:
           ###### Filter Uniq Dir #########
           readarray -t arrAllDirs < <(printf '%s\n' "${arrAllDirs[@]}" | sort -u)
 
+          ###### Publish #########
+          arrPluginsDir=()
+          arrActionsDir=()
           for i in ${arrAllDirs[@]}; do
-            echo "Dir $i"
+            if [[ -f "${i}/plugin.yaml" ]]; then
+              arrPluginsDir=(${arrPluginsDir[@]} "${i}")
+#              cd $i
+#              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
+#              echo "###########################################"
+            fi
+            if [[ -f "${i}/action.yaml" ]]; then
+              arrActionsDir=(${arrActionsDir[@]} "${i}")
+#              cd $i
+#              ~/.stk/bin/stk publish action --studio $STK_STUDIO || true
+#              echo "###########################################"
+            fi
           done
 
-          echo "dirs=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${arrAllDirs[@]}")" >> "$GITHUB_OUTPUT"
-
-          #          ###### Publish #########
-          #          for i in ${arrAllDirs[@]}; do
-          #            if [[ -f "${i}/plugin.yaml" ]]; then
-          #              cd $i
-          #              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
-          #              echo "###########################################"
-          #            fi
-          #            if [[ -f "${i}/action.yaml" ]]; then
-          #              cd $i
-          #              ~/.stk/bin/stk publish action  --studio $STK_STUDIO || true
-          #              echo "###########################################"
-          #            fi
-          #          done
-
+          echo "dirs-plugins=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${arrPluginsDir[@]}")" >> "$GITHUB_OUTPUT"
+          echo "dirs-actions=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${arrActionsDir[@]}")" >> "$GITHUB_OUTPUT"
         env:
           STK_REALM: ${{ vars.stk_realm }}
           STK_STUDIO: ${{ vars.stk_studio }}
           STK_CLIENT_ID: ${{ secrets.stk_client_id }}
           STK_CLIENT_KEY: ${{ secrets.stk_client_key }}
 
-  PUBLISH:
+  PUBLISH_PLUGINS:
     runs-on: ubuntu-latest
     needs: CHECK_CONTENT
     strategy:
       matrix:
-        dir: ${{ fromJson(needs.CHECK_CONTENT.outputs.dirs) }}
+        dir: ${{ fromJson(needs.CHECK_CONTENT.outputs.dirs-plugins) }}
     steps:
       - uses: actions/checkout@v2.3.4
-
       - run: |
-          echo ${{ matrix.dir }}
+          echo "Plugin ${{ github.workspace }}/${{ matrix.dir }}"
+
+  PUBLISH_ACTIONS:
+    runs-on: ubuntu-latest
+    needs: CHECK_CONTENT
+    strategy:
+      matrix:
+        dir: ${{ fromJson(needs.CHECK_CONTENT.outputs.dirs-actions) }}
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - run: |
+          echo "Action ${{ github.workspace }}/${{ matrix.dir }}"
