@@ -98,7 +98,7 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: ~/.stk
-          key: ${{ runner.os }}-stk
+          key: ${{ github.run_id }}-stk
 
   PUBLISH_PLUGINS:
     if: needs.CHECK_CONTENT.outputs.has-plugins == 'true'
@@ -117,7 +117,7 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: ~/.stk
-          key: ${{ runner.os }}-stk
+          key: ${{ github.run_id }}-stk
 
       - run: |
           echo "Plugin ${{ github.workspace }}/${{ matrix.dir }}"
@@ -143,7 +143,7 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: ~/.stk
-          key: ${{ runner.os }}-stk
+          key: ${{ github.run_id }}-stk
 
       - run: |
           echo "Plugin ${{ github.workspace }}/${{ matrix.dir }}"
