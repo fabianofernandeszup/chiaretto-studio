@@ -70,6 +70,7 @@ jobs:
 
   INSTALL_STK:
     runs-on: ubuntu-latest
+    environment: 'prd-eng'
     needs: CHECK_CONTENT
     steps:
       - name: Install STK CLI
@@ -97,6 +98,7 @@ jobs:
 
   PUBLISH_PLUGINS:
     runs-on: ubuntu-latest
+    environment: 'prd-eng'
     needs: INSTALL_STK
     strategy:
       matrix:
@@ -118,6 +120,7 @@ jobs:
 
   PUBLISH_ACTIONS:
     runs-on: ubuntu-latest
+    environment: 'prd-eng'
     needs: CHECK_CONTENT
     strategy:
       matrix:
