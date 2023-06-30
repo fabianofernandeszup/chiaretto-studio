@@ -66,6 +66,7 @@ jobs:
               echo "###### Plugin ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
               ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
+              echo $?
               if [[ "$?" -ne "0" ]]; then
                   errors=(${errors[@]} "Error on publish: ${i}")
               fi
@@ -75,6 +76,7 @@ jobs:
               echo "###### Action ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
               ~/.stk/bin/stk publish action --studio $STK_STUDIO || true
+              echo $?
               if [[ "$?" -ne "0" ]]; then
                   errors=(${errors[@]} "Error on publish: ${i}")
               fi
