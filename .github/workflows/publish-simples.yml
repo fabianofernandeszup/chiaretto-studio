@@ -60,19 +60,37 @@ jobs:
           readarray -t arrAllDirs < <(printf '%s\n' "${arrAllDirs[@]}" | sort -u)
 
           ###### Publish #########
+          errors=()
           for i in ${arrAllDirs[@]}; do
             if [[ -f "${{ github.workspace }}/${i}/plugin.yaml" ]]; then
               echo "###### Plugin ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
-              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
+              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO
+              if [[ "$?" -ne "0" ]]; then
+                  errors=(${errors[@]} "Error on publish: ${i}")
+              fi
               echo "##################################################"
             fi
             if [[ -f "${{ github.workspace }}/${i}/action.yaml" ]]; then
               echo "###### Action ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
-              ~/.stk/bin/stk publish action --studio $STK_STUDIO || true
+              ~/.stk/bin/stk publish action --studio $STK_STUDIO
+              if [[ "$?" -ne "0" ]]; then
+                  errors=(${errors[@]} "Error on publish: ${i}")
+              fi
               echo "##################################################"
             fi
           done
+          echo "error-publish=$(errors)" >> "$GITHUB_OUTPUT"
         env:
           STK_STUDIO: ${{ vars.stk_studio }}
+
+      - name: Errors
+        if: ${{ failure() }}
+        run: |
+          echo "################## Errors on publish ################"
+          for i in ${ERRORS[@]}; do
+            echo $i
+          done
+        env:
+          ERRORS: ${{ steps.files.outputs.errors }}
