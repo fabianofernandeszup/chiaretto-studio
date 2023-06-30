@@ -4,7 +4,7 @@ metadata:
   name: plugin-infra-inputs-contexto
   display-name: plugin-infra-inputs-contexto
   description: Describe your plugin explaining its purpose 6
-  version: 0.0.4
+  version: 0.0.5
   picture: plugin.png
 spec:
   type: infra

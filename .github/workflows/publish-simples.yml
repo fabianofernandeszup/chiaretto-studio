@@ -69,12 +69,12 @@ jobs:
               publish=""
               publish=$(~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true)
               exitcode=$?
-              if [[ "$exitcode" -ne "0" ]]; then
+              if [[ "$publish" == *"Published successfully."* ]]; then
                   echo "has-errors=true" >> "$GITHUB_OUTPUT"
                   errors=(${errors[@]} "Error on publish: ${i}")
-                echo "x Error on publish!"
-              else
                 echo "Publish successfully!"
+              else
+                echo "x Error on publish!"
               fi
               echo "##################################################"
             fi
