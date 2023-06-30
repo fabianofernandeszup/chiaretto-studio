@@ -42,8 +42,9 @@ jobs:
           STK_CLIENT_ID: ${{ secrets.stk_client_id }}
           STK_CLIENT_KEY: ${{ secrets.stk_client_key }}
 
-      - name: Check Plugins and Actions
+      - name: Publish Plugins and Actions
         id: files
+        continue-on-error: true
         run: |
           arrAllFilesChanged=(${{ steps.filter_shell.outputs.content_files }})
           arrAllDirs=()
