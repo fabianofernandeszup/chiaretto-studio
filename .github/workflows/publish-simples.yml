@@ -65,9 +65,10 @@ jobs:
             if [[ -f "${{ github.workspace }}/${i}/plugin.yaml" ]]; then
               echo "###### Plugin ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
-              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
-              echo $?
-              if [[ "$?" -ne "0" ]]; then
+              exitcode=0
+              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || exitcode=$?
+              echo $exitcode
+              if [[ "$exitcode" -ne "0" ]]; then
                   errors=(${errors[@]} "Error on publish: ${i}")
               fi
               echo "##################################################"
@@ -75,9 +76,10 @@ jobs:
             if [[ -f "${{ github.workspace }}/${i}/action.yaml" ]]; then
               echo "###### Action ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
-              ~/.stk/bin/stk publish action --studio $STK_STUDIO || true
-              echo $?
-              if [[ "$?" -ne "0" ]]; then
+              exitcode=0
+              ~/.stk/bin/stk publish action --studio $STK_STUDIO || exitcode=$?
+              echo $exitcode
+              if [[ "$exitcode" -ne "0" ]]; then
                   errors=(${errors[@]} "Error on publish: ${i}")
               fi
               echo "##################################################"
