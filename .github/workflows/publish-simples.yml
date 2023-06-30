@@ -85,7 +85,7 @@ jobs:
               echo "##################################################"
             fi
           done
-          echo "errors-publish=$(errors)" >> "$GITHUB_OUTPUT"
+          echo "errors-publish=$errors" >> "$GITHUB_OUTPUT"
         env:
           STK_STUDIO: ${{ vars.stk_studio }}
 
