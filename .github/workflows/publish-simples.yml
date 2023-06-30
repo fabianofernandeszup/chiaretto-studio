@@ -67,8 +67,8 @@ jobs:
               cd ${{ github.workspace }}/${i}
               exitcode=0
               ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || exitcode=$?
-              echo $exitcode
               if [[ "$exitcode" -ne "0" ]]; then
+                  echo "has-errors=true" >> "$GITHUB_OUTPUT"
                   errors=(${errors[@]} "Error on publish: ${i}")
               fi
               echo "##################################################"
@@ -78,23 +78,24 @@ jobs:
               cd ${{ github.workspace }}/${i}
               exitcode=0
               ~/.stk/bin/stk publish action --studio $STK_STUDIO || exitcode=$?
-              echo $exitcode
               if [[ "$exitcode" -ne "0" ]]; then
+                  echo "has-errors=true" >> "$GITHUB_OUTPUT"
                   errors=(${errors[@]} "Error on publish: ${i}")
               fi
               echo "##################################################"
             fi
           done
-          echo "error-publish=$(errors)" >> "$GITHUB_OUTPUT"
+          echo "errors-publish=$(errors)" >> "$GITHUB_OUTPUT"
         env:
           STK_STUDIO: ${{ vars.stk_studio }}
 
       - name: Errors
-        if: ${{ failure() }}
+        if: steps.files.outputs.has-errors == 'true'
         run: |
           echo "################## Errors on publish ################"
+          echo $ERRORS
           for i in ${ERRORS[@]}; do
             echo $i
           done
         env:
-          ERRORS: ${{ steps.files.outputs.errors }}
+          ERRORS: ${{ steps.files.outputs.errors-publish }}
