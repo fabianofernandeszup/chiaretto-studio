@@ -66,10 +66,15 @@ jobs:
               echo "###### Plugin ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
               exitcode=0
-              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || exitcode=$?
+              publish=""
+              publish=$(~/.stk/bin/stk publish action --studio $STK_STUDIO)
+              exitcode=$?
               if [[ "$exitcode" -ne "0" ]]; then
                   echo "has-errors=true" >> "$GITHUB_OUTPUT"
                   errors=(${errors[@]} "Error on publish: ${i}")
+                echo "x Error on publish!"
+              else
+                echo "Publish successfully!"
               fi
               echo "##################################################"
             fi
@@ -77,10 +82,15 @@ jobs:
               echo "###### Action ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
               exitcode=0
-              ~/.stk/bin/stk publish action --studio $STK_STUDIO || exitcode=$?
+              publish=""
+              publish=$(~/.stk/bin/stk publish action --studio $STK_STUDIO)
+              exitcode=$?
               if [[ "$exitcode" -ne "0" ]]; then
                   echo "has-errors=true" >> "$GITHUB_OUTPUT"
                   errors=(${errors[@]} "Error on publish: ${i}")
+                echo "x Error on publish!"
+              else
+                echo "Publish successfully!"
               fi
               echo "##################################################"
             fi
