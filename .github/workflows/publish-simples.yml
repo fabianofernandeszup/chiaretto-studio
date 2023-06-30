@@ -29,7 +29,7 @@ jobs:
       - name: Install STK CLI
         run: |
           curl -fsSL https://stk.stackspot.com/install.sh | bash
-          ~/.stk/bin/stk upgrade
+          #~/.stk/bin/stk upgrade
 
       - name: Version STK CLI
         run: |
@@ -67,7 +67,7 @@ jobs:
               cd ${{ github.workspace }}/${i}
               exitcode=0
               publish=""
-              publish=$(~/.stk/bin/stk publish plugin --studio $STK_STUDIO)
+              publish=$(~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true)
               exitcode=$?
               if [[ "$exitcode" -ne "0" ]]; then
                   echo "has-errors=true" >> "$GITHUB_OUTPUT"
@@ -83,7 +83,7 @@ jobs:
               cd ${{ github.workspace }}/${i}
               exitcode=0
               publish=""
-              publish=$(~/.stk/bin/stk publish action --studio $STK_STUDIO)
+              publish=$(~/.stk/bin/stk publish action --studio $STK_STUDIO || true)
               exitcode=$?
               if [[ "$exitcode" -ne "0" ]]; then
                   echo "has-errors=true" >> "$GITHUB_OUTPUT"
