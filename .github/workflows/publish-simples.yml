@@ -67,7 +67,7 @@ jobs:
               cd ${{ github.workspace }}/${i}
               exitcode=0
               publish=""
-              publish=$(~/.stk/bin/stk publish action --studio $STK_STUDIO)
+              publish=$(~/.stk/bin/stk publish plugin --studio $STK_STUDIO)
               exitcode=$?
               if [[ "$exitcode" -ne "0" ]]; then
                   echo "has-errors=true" >> "$GITHUB_OUTPUT"
