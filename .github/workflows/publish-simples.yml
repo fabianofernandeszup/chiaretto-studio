@@ -44,7 +44,6 @@ jobs:
 
       - name: Publish Plugins and Actions
         id: files
-        continue-on-error: true
         run: |
           arrAllFilesChanged=(${{ steps.filter_shell.outputs.content_files }})
           arrAllDirs=()
@@ -66,7 +65,7 @@ jobs:
             if [[ -f "${{ github.workspace }}/${i}/plugin.yaml" ]]; then
               echo "###### Plugin ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
-              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO
+              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
               if [[ "$?" -ne "0" ]]; then
                   errors=(${errors[@]} "Error on publish: ${i}")
               fi
@@ -75,7 +74,7 @@ jobs:
             if [[ -f "${{ github.workspace }}/${i}/action.yaml" ]]; then
               echo "###### Action ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
-              ~/.stk/bin/stk publish action --studio $STK_STUDIO
+              ~/.stk/bin/stk publish action --studio $STK_STUDIO || true
               if [[ "$?" -ne "0" ]]; then
                   errors=(${errors[@]} "Error on publish: ${i}")
               fi
