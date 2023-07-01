@@ -65,23 +65,13 @@ jobs:
             if [[ -f "${{ github.workspace }}/${i}/plugin.yaml" ]]; then
               echo "###### Plugin ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
-              publish=$(~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true)
-              if [[ "$publish" == *"Published successfully."* ]]; then
-                echo "Publish successfully!"
-              else
-                echo $publish
-              fi
+              ~/.stk/bin/stk publish plugin --studio $STK_STUDIO || true
               echo "##################################################"
             fi
             if [[ -f "${{ github.workspace }}/${i}/action.yaml" ]]; then
               echo "###### Action ${{ github.workspace }}/${i} ######"
               cd ${{ github.workspace }}/${i}
-              publish=$(~/.stk/bin/stk publish action --studio $STK_STUDIO || true)
-              if [[ "$publish" == *"Published successfully."* ]]; then
-                echo "Publish successfully!"
-              else
-                echo $publish
-              fi
+              ~/.stk/bin/stk publish action --studio $STK_STUDIO || true
               echo "##################################################"
             fi
           done
