@@ -14,12 +14,15 @@ spec:
   implementation: docs/implementation.md
   repository: git@github.com:fabianofernandeszup/chiaretto-studio.git
   inputs:
-    - label: Who are you?
-      name: user_name
+    - label: Visibility
+      name: visibility
       type: text
-      required: false
-      pattern: '([A-Z][a-z]+)+'
-      help: 'Inform your name'
+      required: true
+      items:
+        - public
+        - internal
+        - private
+      help: "Internal repo can only be created by enterprise accounts."
   python:
     workdir: .
     script: script.py
