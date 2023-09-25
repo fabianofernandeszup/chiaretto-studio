@@ -2,7 +2,7 @@ name: Publish Simples
 
 on:
   push:
-    branches: [main]
+    branches: [main2]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
