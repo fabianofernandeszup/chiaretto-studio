@@ -17,6 +17,8 @@ jobs:
       - name: Version STK CLI
         run: |
           pwd
+          cd ~
+          pwd
           cd /home/stk/.stk/bin
           ls -lha
-          /home/stk/.stk/bin/stk -v
+          ./home/stk/.stk/bin/stk -v
