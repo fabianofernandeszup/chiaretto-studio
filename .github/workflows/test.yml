@@ -15,4 +15,7 @@ jobs:
       image: stackspot/stk-cli-ubuntu:5.7.2
     steps:
       - name: Version STK CLI
-        run: whereis stk
+        run: |
+          pwd
+          cd /home/stk
+          ls -lha
