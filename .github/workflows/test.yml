@@ -16,10 +16,6 @@ jobs:
     steps:
       - name: Version STK CLI
         run: |
-          pwd
-          cd ~
-          pwd
           cd /home/stk/.stk/bin
+          chmod +x stk
           ls -lha
-          chmod +x /home/stk/.stk/bin/stk
-          /home/stk/.stk/bin/stk -v
