@@ -19,4 +19,4 @@ jobs:
           pwd
           cd /home/stk/.stk/bin
           ls -lha
-          /home/stk/.stk/bin -v
+          /home/stk/.stk/bin/stk -v
