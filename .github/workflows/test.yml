@@ -12,7 +12,7 @@ jobs:
   version_stk:
     runs-on: ubuntu-latest
       container:
-        image: docker://stackspot/stk-cli-ubuntu:5.7.2
+        image: stackspot/stk-cli-ubuntu:5.7.2
     steps:
       - name: Version STK CLI
         run: |
