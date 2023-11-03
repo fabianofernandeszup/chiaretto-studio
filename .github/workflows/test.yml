@@ -1,0 +1,17 @@
+name: Publish
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  version_stk:
+    runs-on: stackspot/stk-cli-ubuntu
+    steps:
+      - name: Version STK CLI
+        run: |
+          ~/.stk/bin/stk --version
