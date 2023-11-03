@@ -22,4 +22,4 @@ jobs:
           cd /home/stk/.stk/bin
           ls -lha
           chmod +x /home/stk/.stk/bin/stk
-          ./home/stk/.stk/bin/stk -v
+          /home/stk/.stk/bin/stk -v
