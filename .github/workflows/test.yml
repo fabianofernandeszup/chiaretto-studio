@@ -10,7 +10,9 @@ concurrency:
 
 jobs:
   version_stk:
-    runs-on: stackspot/stk-cli-ubuntu
+    runs-on: ubuntu-latest
+      container:
+        image: docker://stackspot/stk-cli-ubuntu:5.7.2
     steps:
       - name: Version STK CLI
         run: |
