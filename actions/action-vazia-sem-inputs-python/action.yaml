@@ -7,11 +7,9 @@ metadata:
   version: 0.0.1
 spec:
   type: python
-  about: docs/about.md
-  usage: docs/usage.md
-  release-notes: docs/release-notes.md
-  requirements: docs/requirements.md
-  implementation: docs/implementation.md
+  docs:
+    pt_br: docs/pt_br/doc.md
+    en_us: docs/en_us/doc.md
   python:
     workdir: .
     script: script.py

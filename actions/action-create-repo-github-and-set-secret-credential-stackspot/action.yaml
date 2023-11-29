@@ -7,10 +7,9 @@ metadata:
   version: 1.0.0
 spec:
   type: python
-  about: docs/about.md
-  usage: docs/usage.md
-  release-notes: docs/release-notes.md
-  implementation: docs/implementation.md
+  docs:
+    pt_br: docs/pt_br/doc.md
+    en_us: docs/en_us/doc.md
   inputs:
     - label: Visibility
       name: visibility
@@ -20,11 +19,11 @@ spec:
         - public
         - internal
         - private
-      help: "Internal repo can only be created by enterprise accounts."
+      help: Internal repo can only be created by enterprise accounts.
     - label: Do you want to set stackspot credentials to secret on that repository?
       name: secret
       type: bool
-      help: "Private repos can only have secrets on enterprise accounts."
+      help: Private repos can only have secrets on enterprise accounts.
     - label: Client Id
       name: client_id
       type: text

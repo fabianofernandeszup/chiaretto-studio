@@ -7,11 +7,9 @@ metadata:
   version: 1.0.0
 spec:
   type: python
-  about: docs/about.md
-  usage: docs/usage.md
-  release-notes: docs/release-notes.md
-  requirements: docs/requirements.md
-  implementation: docs/implementation.md
+  docs:
+    pt_br: docs/pt_br/doc.md
+    en_us: docs/en_us/doc.md
   requires:
     connection-interface:
       - aws-secret-manager-conn
@@ -20,7 +18,7 @@ spec:
       name: user_name
       type: text
       required: true
-      help: 'Inform your name'
+      help: Inform your name
   python:
     workdir: .
     script: script.py

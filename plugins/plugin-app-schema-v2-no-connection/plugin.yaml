@@ -8,14 +8,13 @@ metadata:
   picture: plugin.png
 spec:
   type: app
+  docs:
+    pt_br: docs/pt_br/doc.md
+    en_us: docs/en_us/doc.md
   compatibility:
     - python
-  about: docs/about.md
-  implementation: docs/implementation.md
-  release-notes: docs/release-notes-0.0.1.md
-  requirements: docs/requirements.md
   repository: git@github.com:fabianofernandeszup/chiaretto-studio.git
-  technologies: # Ref: https://docs.stackspot.com/content-creator/studio/yaml-files/plugin-yaml/#technologies
+  technologies:
     - Api
   inputs:
     - label: Type name of your resource
@@ -23,7 +22,7 @@ spec:
       type: text
       required: true
       default: Client
-      pattern: '([A-Z][a-z]+)+'
+      pattern: ([A-Z][a-z]+)+
       help: 'Inform your resource name (e.g.: Client)'
     - label: Choose http method of new endpoint
       name: method
