@@ -8,13 +8,12 @@ metadata:
   picture: plugin.png
 spec:
   type: infra
+  docs:
+    pt_br: docs/pt_br/doc.md
+    en_us: docs/en_us/doc.md
   compatibility:
     - python
-  about: docs/about.md
-  implementation: docs/implementation.md
-  release-notes: docs/release-notes-0.0.1.md
-  requirements: docs/requirements.md
-  technologies: # Ref: https://docs.stackspot.com/docs/create-stacks/yaml-files/yaml/#technologies
+  technologies:
     - Api
   generates:
     connection-interface:

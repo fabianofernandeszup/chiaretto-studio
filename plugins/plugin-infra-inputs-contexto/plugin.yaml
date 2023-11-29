@@ -8,13 +8,12 @@ metadata:
   picture: plugin.png
 spec:
   type: infra
+  docs:
+    pt_br: docs/pt_br/doc.md
+    en_us: docs/en_us/doc.md
   compatibility:
     - python
-  about: docs/about.md
-  implementation: docs/implementation.md
-  release-notes: docs/release-notes-0.0.1.md
-  requirements: docs/requirements.md
-  technologies: # Ref: https://docs.stackspot.com/docs/create-stacks/yaml-files/yaml/#technologies
+  technologies:
     - Api
   generates:
     connection-interface:
@@ -23,36 +22,36 @@ spec:
     - label: Type name of your resource1
       name: resource1
       type: text
-      required: true 
+      required: true
       default: Client
-      pattern: '([A-Z][a-z]+)+'
+      pattern: ([A-Z][a-z]+)+
       help: 'Inform your resource name (e.g.: Client)'
     - label: Type name of your resource2
       name: resource2
       type: text
       required: true
       default: Client2
-      pattern: '([A-Z][a-z]+)+'
+      pattern: ([A-Z][a-z]+)+
       help: 'Inform your resource name (e.g.: Client)'
     - label: Type name of your resource3
       name: resource3
       type: text
       required: true
       default: Client3
-      pattern: '([A-Z][a-z]+)+'
+      pattern: ([A-Z][a-z]+)+
       help: 'Inform your resource name (e.g.: Client)'
     - label: Type name of your resource4
       name: resource4
       type: text
-      help: 'Sem valor default e sem pattern'
+      help: Sem valor default e sem pattern
     - label: Type name of your resource5
       name: resource5
       type: text
-      help: 'Sem valor default e sem pattern'
+      help: Sem valor default e sem pattern
     - label: Type name of your resource6
       name: resource6
       type: text
-      help: 'Sem valor default e sem pattern'
+      help: Sem valor default e sem pattern
     - label: Choose http method1 of new endpoint
       name: method1
       type: text
@@ -98,7 +97,7 @@ spec:
         - PUT
         - DELETE
         - PATCH
-      help: 'Sem valor default'
+      help: Sem valor default
     - label: Choose http method5 of new endpoint
       name: method5
       type: text
@@ -108,7 +107,7 @@ spec:
         - PUT
         - DELETE
         - PATCH
-      help: 'Sem valor default'
+      help: Sem valor default
     - label: Choose http method6 of new endpoint
       name: method6
       type: text
@@ -118,4 +117,4 @@ spec:
         - PUT
         - DELETE
         - PATCH
-      help: 'Sem valor default'
+      help: Sem valor default
