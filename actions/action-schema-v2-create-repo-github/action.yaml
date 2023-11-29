@@ -7,11 +7,9 @@ metadata:
   version: 0.0.2
 spec:
   type: python
-  about: docs/about.md
-  usage: docs/usage.md
-  release-notes: docs/release-notes.md
-  requirements: docs/requirements.md
-  implementation: docs/implementation.md
+  docs:
+    pt_br: docs/pt_br/doc.md
+    en_us: docs/en_us/doc.md
   repository: git@github.com:fabianofernandeszup/chiaretto-studio.git
   inputs:
     - label: Visibility
@@ -23,7 +21,7 @@ spec:
         - public
         - internal
         - private
-      help: "Internal repo can only be created by enterprise accounts."
+      help: Internal repo can only be created by enterprise accounts.
   python:
     workdir: .
     script: script.py
