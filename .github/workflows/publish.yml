@@ -82,7 +82,9 @@ jobs:
           ~/.stk/bin/stk --version
 
       - name: Login
-        run: ~/.stk/bin/stk login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
+        run: |
+          export HTTP_ENABLE_DEBUG=true
+          ~/.stk/bin/stk login --client-id $STK_CLIENT_ID --client-key $STK_CLIENT_KEY --realm $STK_REALM
         env:
           STK_REALM: ${{ vars.stk_realm }}
           STK_STUDIO: ${{ vars.stk_studio }}
