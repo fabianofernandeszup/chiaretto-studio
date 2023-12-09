@@ -73,7 +73,7 @@ jobs:
     steps:
       - name: Install STK CLI
         run: |
-          ecport HTTP_ENABLE_DEBUG=true
+          export HTTP_ENABLE_DEBUG=true
           curl -fsSL https://stk.stackspot.com/install.sh | bash
           ~/.stk/bin/stk upgrade
 
