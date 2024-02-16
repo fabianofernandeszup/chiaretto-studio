@@ -34,12 +34,12 @@ spec:
             to: gateway_id
   stk-projects-only: false
   inputs:
-    - label: Type name of your resource
-      name: resource
+    - label: Name
+      name: name
       type: text
       required: true
-      default: Client
-      pattern: '([A-Z][a-z]+)+'
+      default: api-gw
+      pattern: '([a-z-]+)+'
       help: 'Inform your resource name (e.g.: Client)'
     - label: Choose http method of new endpoint
       name: method
