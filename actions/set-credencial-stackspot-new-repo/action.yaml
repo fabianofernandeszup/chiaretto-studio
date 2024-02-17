@@ -3,7 +3,7 @@ kind: action
 metadata:
   name: set-credencial-stackspot-new-repo
   display-name: set-credencial-stackspot-new-repo
-  description: Descreva sua action explicando o propósito
+  description: Set credential stackspot as secret on repository
   version: 0.0.1
 spec:
   type: python
@@ -12,12 +12,24 @@ spec:
     en-us: docs/en-us/docs.md
   repository: git@github.com:fabianofernandeszup/chiaretto-studio.git
   inputs:
-    - label: Who are you?
-      name: user_name
+    - label: Token
+      name: token
       type: text
-      required: false
-      pattern: '([A-Z][a-z]+)+'
-      help: 'Inform your name'
+    - label: Org
+      name: org
+      type: text
+    - label: Repo
+      name: repo
+      type: text
+    - label: Client Id
+      name: client_id
+      type: text
+    - label: Client Key
+      name: client_key
+      type: password
+    - label: Client Realm
+      name: client_realm
+      type: text
   python:
     workdir: .
     script: script.py
