@@ -1,8 +1,8 @@
 schema-version: v2
 kind: plugin
 metadata:
-  name: aws-api-gateway
-  display-name: aws-api-gateway
+  name: aws-api-gateway-rest
+  display-name: aws-api-gateway-rest
   description: Plugin para criar um API Gateway na AWS
   version: 0.0.1
   picture: plugin.png
@@ -38,18 +38,20 @@ spec:
       name: name
       type: text
       required: true
-      default: api-gw
+      default: api-gw-rest
       pattern: '([a-z-]+)+'
-      help: 'Inform your resource name (e.g.: Client)'
-    - label: Choose http method of new endpoint
-      name: method
+      help: 'Inform your API name (e.g.: service-xyx)'
+    - label: Description
+      name: description
       type: text
-      items:
-        - GET
-        - POST
-        - PUT
-        - DELETE
-        - PATCH
-      default: GET
       required: true
-      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+      help: 'Describe your API'
+    - label: API endpoint type
+      name: api_endpoint_type
+      type: select
+      items:
+        - Regional
+        - Edge-optimized
+        - Private
+      default: Regional
+      required: true
