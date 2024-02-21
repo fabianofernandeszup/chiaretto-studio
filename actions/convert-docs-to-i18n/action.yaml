@@ -1,0 +1,16 @@
+schema-version: v2
+kind: action
+metadata:
+  name: convert-docs-to-i18n
+  display-name: convert-docs-to-i18n
+  description: Action para conveter plugins e actions para o novo padrão de Docs com
+    suporte a i18n
+  version: 0.0.1
+spec:
+  type: python
+  docs:
+    pt_br: docs/pt_br/doc.md
+    en_us: docs/en_us/doc.md
+  python:
+    workdir: .
+    script: script.py
