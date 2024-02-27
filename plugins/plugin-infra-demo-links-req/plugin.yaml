@@ -1,10 +1,10 @@
 schema-version: v2
 kind: plugin
 metadata:
-  name: plugin-infra-demo-links
-  display-name: plugin-infra-demo-links
+  name: plugin-infra-demo-links-req
+  display-name: plugin-infra-demo-links-req
   description: Descreva seu plugin explicando o propósito
-  version: 0.0.1
+  version: 0.0.2
   picture: plugin.png
 spec:
   type: infra
