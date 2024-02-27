@@ -39,7 +39,7 @@ def verificar_e_modificar_yaml(nome_diretorio):
         return
 
     for nome_arquivo in arquivos_encontrados:
-        print("Conteudo encontrado: ", os.path.join(nome_diretorio, nome_arquivo))
+        print("Conteúdo encontrado: ", os.path.join(nome_diretorio, nome_arquivo))
         verificar_e_unificar_docs(nome_diretorio)
 
         caminho_arquivo = os.path.join(nome_diretorio, nome_arquivo)
@@ -59,13 +59,16 @@ def verificar_e_modificar_yaml(nome_diretorio):
 
             # Adicionar novos itens
             novo_elemento = {
-                    'pt_br': 'docs/pt_br/doc.md',
-                    'en_us': 'docs/en_us/doc.md'
+                    'pt-br': 'docs/pt-br/doc.md',
+                    'en-us': 'docs/en-us/doc.md'
                 }
 
             specList.insert(1, ('docs', novo_elemento))
 
             conteudo['spec'] = dict(specList)
+
+            if conteudo['schema-version'] == "V1":
+                conteudo['schema-version'] = "v2"
 
         editar_arquivo_yaml(caminho_arquivo, conteudo)
 
@@ -74,8 +77,8 @@ def verificar_e_unificar_docs(caminho):
     os.makedirs(os.path.join(caminho, 'docs'), exist_ok=True)
 
     # Criar as pastas pt_br e en_us dentro da pasta docs
-    os.makedirs(os.path.join(caminho, 'docs', 'pt_br'), exist_ok=True)
-    os.makedirs(os.path.join(caminho, 'docs', 'en_us'), exist_ok=True)
+    os.makedirs(os.path.join(caminho, 'docs', 'pt-br'), exist_ok=True)
+    os.makedirs(os.path.join(caminho, 'docs', 'en-us'), exist_ok=True)
 
     # Criar o conteúdo dos arquivos doc.md nas pastas pt_br e en_us
     file_content = {}
@@ -112,7 +115,7 @@ def verificar_e_unificar_docs(caminho):
             print(f"O arquivo {filename} não foi encontrado. Pulando para o próximo.")
 
     # Escrever o conteúdo nos arquivos doc.md nas pastas pt_br e en_us dentro da pasta docs
-    for lang in ['pt_br', 'en_us']:
+    for lang in ['pt-br', 'en-us']:
         path = os.path.join(caminho, 'docs', lang, 'doc.md')
         with open(path, 'w', encoding='utf-8') as file:
             for idx, (filename, content) in enumerate(file_content.items()):
@@ -127,14 +130,14 @@ def verificar_e_unificar_docs(caminho):
 
     # Copiar os demais arquivos e pastas para os diretórios docs/en_us/ e docs/pt_br/
     for item in os.listdir(os.path.join(caminho, 'docs')):
-        if item not in ['en_us', 'pt_br']:
+        if item not in ['en-us', 'pt-br']:
             source_path = os.path.join(caminho, 'docs', item)
-            dest_path_en_us = os.path.join(caminho, 'docs', 'en_us', item)
-            dest_path_pt_br = os.path.join(caminho, 'docs', 'pt_br', item)
+            dest_path_en_us = os.path.join(caminho, 'docs', 'en-us', item)
+            dest_path_pt_br = os.path.join(caminho, 'docs', 'pt-br', item)
 
             if os.path.isdir(source_path):
-                shutil.copytree(source_path, dest_path_en_us, ignore=shutil.ignore_patterns('en_us', 'pt_br'))
-                shutil.copytree(source_path, dest_path_pt_br, ignore=shutil.ignore_patterns('en_us', 'pt_br'))
+                shutil.copytree(source_path, dest_path_en_us, ignore=shutil.ignore_patterns('en-us', 'pt-br'))
+                shutil.copytree(source_path, dest_path_pt_br, ignore=shutil.ignore_patterns('en-us', 'pt-br'))
             else:
                 shutil.copy2(source_path, dest_path_en_us)
                 shutil.copy2(source_path, dest_path_pt_br)
@@ -142,7 +145,7 @@ def verificar_e_unificar_docs(caminho):
     # Remover todos os arquivos e diretórios restantes no diretório docs, exceto os diretórios en_us e pt_br
     for item in os.listdir(os.path.join(caminho, 'docs')):
         item_path = os.path.join(caminho, 'docs', item)
-        if item not in ['en_us', 'pt_br']:
+        if item not in ['en-us', 'pt-br']:
             if os.path.isfile(item_path):
                 os.remove(item_path)
             elif os.path.isdir(item_path):

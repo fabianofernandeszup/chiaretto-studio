@@ -37,12 +37,12 @@ spec:
        type: static
        picture: https://itamchannel.com/wp-content/uploads/2015/03/servicenow-icon.png
 
-     - name: Internal System
+     - name: Internal Required Connection
        url: "https://site.com/?env={{stk_env}}&arn={{connections.alias-req-one-sns.arn}}"
        type: dynamic
-       picture: https://cdn-icons-png.flaticon.com/256/174/174857.png
+       picture: imgs/google_png.png
 
-     - name: Internal System 2
+     - name: Internal Genenated Connection
        url: "https://site.com/?env={{stk_env}}&arn={{connections.alias-gen-one-sns.arn}}"
        type: dynamic
        picture: https://cdn-icons-png.flaticon.com/256/174/174857.png

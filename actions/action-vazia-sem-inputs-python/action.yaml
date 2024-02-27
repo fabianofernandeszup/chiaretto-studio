@@ -1,4 +1,4 @@
-schema-version: v1
+schema-version: v2
 kind: action
 metadata:
   name: action-vazia-sem-inputs-python
@@ -7,11 +7,9 @@ metadata:
   version: 0.0.1
 spec:
   type: python
-  about: docs/about.md
-  usage: docs/usage.md
-  release-notes: docs/release-notes.md
-  requirements: docs/requirements.md
-  implementation: docs/implementation.md
+  docs:
+    pt-br: docs/pt-br/doc.md
+    en-us: docs/en-us/doc.md
   python:
     workdir: .
     script: script.py

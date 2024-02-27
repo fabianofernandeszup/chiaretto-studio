@@ -1,4 +1,4 @@
-schema-version: v1
+schema-version: v2
 kind: action
 metadata:
   name: stakspot-github-create-repository
@@ -7,10 +7,9 @@ metadata:
   version: 1.0.0
 spec:
   type: python
-  about: docs/about.md
-  usage: docs/usage.md
-  release-notes: docs/release-notes.md
-  implementation: docs/implementation.md
+  docs:
+    pt-br: docs/pt_br/doc.md
+    en-us: docs/en_us/doc.md
   inputs:
     - label: Visibility
       name: visibility
@@ -20,7 +19,7 @@ spec:
         - public
         - internal
         - private
-      help: "Internal repo can only be created by enterprise accounts."
+      help: Internal repo can only be created by enterprise accounts.
   python:
     workdir: .
     script: script.py
