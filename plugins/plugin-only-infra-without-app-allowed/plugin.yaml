@@ -4,7 +4,7 @@ metadata:
   name: plugin-only-infra-without-app-allowed
   display-name: plugin-only-infra-without-app-allowed
   description: Descreva seu plugin explicando o propósito
-  version: 0.0.1
+  version: 0.0.2
   picture: plugin.png
 spec:
   type: infra
@@ -23,7 +23,6 @@ spec:
   technologies: # Ref: https://docs.stackspot.com/create-use/create-content/yaml-files/plugin-yaml/#technologies-1
     - Api
   stk-projects-only: false
-  app-allowed: false
   inputs:
     - label: Type name of your resource
       name: resource

@@ -5,6 +5,15 @@ Fill out this template to help users use your content. The following information
 
 Write concisely describing your Plugin content.
 
+Exemplo  de conteúdo  no .md
+
+Teste xml
+```
+root>
+    element value="teste"/>
+/root>
+```
+
 Example:
 > This Plugin shows you how to fill out information to use Plugins on the StackSpot platform. 
 

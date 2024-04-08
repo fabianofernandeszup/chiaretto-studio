@@ -4,6 +4,15 @@ Preencha corretamente este template para que os usuários consigam utilizar o se
 
 Escreva uma descrição clara e breve do conteúdo Plugin. 
 
+Exemplo  de conteúdo  no .md
+
+Teste xml
+```
+root>
+    element value="teste"/>
+/root>
+```
+
 Exemplo:
 > Este Plugin contém instruções de como preencher as informações para usar os Plugins na plataforma StackSpot.
 

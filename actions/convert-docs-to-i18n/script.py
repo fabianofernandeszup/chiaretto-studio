@@ -76,11 +76,11 @@ def verificar_e_unificar_docs(caminho):
     # Criar a pasta docs, se não existir
     os.makedirs(os.path.join(caminho, 'docs'), exist_ok=True)
 
-    # Criar as pastas pt_br e en_us dentro da pasta docs
+    # Criar as pastas pt-br e en-us dentro da pasta docs
     os.makedirs(os.path.join(caminho, 'docs', 'pt-br'), exist_ok=True)
     os.makedirs(os.path.join(caminho, 'docs', 'en-us'), exist_ok=True)
 
-    # Criar o conteúdo dos arquivos doc.md nas pastas pt_br e en_us
+    # Criar o conteúdo dos arquivos doc.md nas pastas pt-br e en-us
     file_content = {}
 
     # Docs Antigos
@@ -114,7 +114,7 @@ def verificar_e_unificar_docs(caminho):
         except FileNotFoundError:
             print(f"O arquivo {filename} não foi encontrado. Pulando para o próximo.")
 
-    # Escrever o conteúdo nos arquivos doc.md nas pastas pt_br e en_us dentro da pasta docs
+    # Escrever o conteúdo nos arquivos doc.md nas pastas pt-br e en-us dentro da pasta docs
     for lang in ['pt-br', 'en-us']:
         path = os.path.join(caminho, 'docs', lang, 'doc.md')
         with open(path, 'w', encoding='utf-8') as file:
@@ -128,7 +128,7 @@ def verificar_e_unificar_docs(caminho):
     for md_file in md_files:
         os.remove(os.path.join(caminho, 'docs', md_file))
 
-    # Copiar os demais arquivos e pastas para os diretórios docs/en_us/ e docs/pt_br/
+    # Copiar os demais arquivos e pastas para os diretórios docs/en-us/ e docs/pt-br/
     for item in os.listdir(os.path.join(caminho, 'docs')):
         if item not in ['en-us', 'pt-br']:
             source_path = os.path.join(caminho, 'docs', item)
@@ -142,7 +142,7 @@ def verificar_e_unificar_docs(caminho):
                 shutil.copy2(source_path, dest_path_en_us)
                 shutil.copy2(source_path, dest_path_pt_br)
 
-    # Remover todos os arquivos e diretórios restantes no diretório docs, exceto os diretórios en_us e pt_br
+    # Remover todos os arquivos e diretórios restantes no diretório docs, exceto os diretórios en-us e pt-br
     for item in os.listdir(os.path.join(caminho, 'docs')):
         item_path = os.path.join(caminho, 'docs', item)
         if item not in ['en-us', 'pt-br']:

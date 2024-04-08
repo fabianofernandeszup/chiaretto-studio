@@ -23,7 +23,7 @@ spec:
   technologies: # Ref: https://docs.stackspot.com/create-use/create-content/yaml-files/plugin-yaml/#technologies-1
     - Api
   stk-projects-only: false
-  app-allowed: false
+  app-allowed: true
   inputs:
     - label: Type name of your resource
       name: resource
