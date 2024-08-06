@@ -4,7 +4,7 @@ metadata:
   name: plugin-infra-v3-novos-inputs
   display-name: plugin-infra-v3-novos-inputs
   description: Descreva seu plugin explicando o propósito.
-  version: 1.0.0
+  version: 2.0.0
 spec:
   type: infra
   compatibility:
@@ -53,7 +53,7 @@ spec:
       help: 'Inform the method of the endpoint (e.g.: post or delete)'
     - label: Select the connection for bucket-requerido-raiz
       type: required-connection
-      name: bucket-requerido-raiz
+      name: bucket_requerido_raiz
       connection-interface-type: aws-s3-conn
     - type: list
       label: Lista de IPs
@@ -110,5 +110,5 @@ spec:
             label: Bucket Region Backup
           - label: Select the connection for bucket-requerido-object
             type: required-connection
-            name: bucket-requerido-object
+            name: bucket_requerido_object
             connection-interface-type: aws-s3-conn

@@ -57,29 +57,34 @@ complete documentation of jinja: https://jinja.palletsprojects.com/en/3.0.x/temp
 - bucket.encrypted: {{ bucket.encrypted }} 
 - bucket.region: {{ bucket.region }} 
 - bucket.region_bkp: {{ bucket.region_bkp }} 
-- bucket.bucket-requerido-raiz.selected: {{ bucket.bucket-requerido-raiz.selected }} 
-- bucket.bucket-requerido-raiz.type: {{ bucket.bucket-requerido-raiz.type }} 
+- bucket.bucket_requerido_object.selected: {{ bucket.bucket_requerido_object.selected }} 
+- bucket.bucket_requerido_object.type: {{ bucket.bucket_requerido_object.type }} 
 -----
 {% endfor %}
 ```
 
 ## Required Connection
-- bucket-requerido-raiz.selected
+- bucket_requerido_raiz.selected
 ```
-{{ bucket-requerido-raiz.selected }}
+{{ bucket_requerido_raiz.selected }}
 ```
 
-- bucket-requerido-raiz.type
+- bucket_requerido_raiz.type
 ```
-{{ bucket-requerido-raiz.type }}
+{{ bucket_requerido_raiz.type }}
 ```
 
 # Required Connection (deploy only)
-- bucket-requerido-raiz.connection.arn
+- bucket_requerido_raiz.connection
 ```
-{{ bucket-requerido-raiz.connection.arn }}
+{{ bucket_requerido_raiz.connection }}
 ```
-- bucket-requerido-raiz.connection.name
+
+- bucket_requerido_raiz.connection.arn
 ```
-{{ bucket-requerido-raiz.connection.name }}
+{{ bucket_requerido_raiz.connection.arn }}
+```
+- bucket_requerido_raiz.connection.name
+```
+{{ bucket_requerido_raiz.connection.name }}
 ```

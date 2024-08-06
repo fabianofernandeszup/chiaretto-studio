@@ -4,7 +4,7 @@ metadata:
   name: stack-infra
   display-name: stack-infra
   description: Descreva a stack explicando o seu propósito
-  version: 0.0.1
+  version: 1.0.1
 spec:
   docs:
     en-us: docs/en_us/docs.md
@@ -22,7 +22,7 @@ spec:
       - name: chiaretto-studio/plugin-infra-v2-no-req-gen-s3@0.0.1
       - name: chiaretto-studio/plugin-infra-v2-req-sm-gen-s3@0.0.1
       - name: chiaretto-studio/plugin-infra-v2-without-app-allowed@0.0.2
-      - name: chiaretto-studio/plugin-infra-v3-novos-inputs@1.0.0
+      - name: chiaretto-studio/plugin-infra-v3-novos-inputs@2.0.0
   actions:
     - name: chiaretto-studio/action-v2-convert-content-v1-to-v2@0.0.1
     - name: chiaretto-studio/action-v2-create-repo-github-and-set-secret-cred-stackspot@1.0.0
@@ -31,5 +31,6 @@ spec:
     - name: chiaretto-studio/action-v2-set-credencial-stackspot-new-repo@0.0.1
     - name: chiaretto-studio/action-v2-vazia-sem-inputs-python@0.0.1
     - name: chiaretto-studio/action-python-v3-novos-inputs@0.0.1
+    - name: chiaretto-studio/action-v3-python-novos-inputs-no-rec-conn@0.0.1
   starters:
     - path: starters/starter-novos-inputs
