@@ -11,9 +11,9 @@ spec:
     en-us: docs/en_us/docs.md
     pt-br: docs/pt_br/docs.md
   actions:
-    - name: cli-studio-eng/action-vazia-sem-inputs-python@0.0.1
+    - name: cli-studio-eng/action-v2-vazia-sem-inputs-python@0.0.1
     - name: cli-studio-eng/stakspot-github-create-repository@1.0.0
   plugins:
     infra:
-      - name: cli-studio-eng/plugin-infra-demo-links-req@0.0.2
-      - name: cli-studio-eng/plugin-infra-demo-links-gen-req@0.0.2
+      - name: cli-studio-eng/plugin-infra-v2-links-req@0.0.2
+      - name: cli-studio-eng/plugin-infra-v2-links-gen-req@0.0.2

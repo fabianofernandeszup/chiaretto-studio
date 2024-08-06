@@ -1,0 +1,25 @@
+schema-version: v2
+kind: action
+metadata:
+  name: action-v1-req-conn-sm
+  display-name: action-require-connection-interface-secret-manager
+  description: Describe your action explaining its purpose
+  version: 1.0.0
+spec:
+  type: python
+  docs:
+    pt-br: docs/pt-br/doc.md
+    en-us: docs/en-us/doc.md
+  requires:
+    connections:
+      - type: aws-secret-manager-conn
+        alias: alias-default-aws-secret-manager-conn
+  inputs:
+    - label: Who are you?
+      name: user_name
+      type: text
+      required: true
+      help: Inform your name
+  python:
+    workdir: .
+    script: script.py

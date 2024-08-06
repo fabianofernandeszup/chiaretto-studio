@@ -1,0 +1,115 @@
+schema-version: v3
+kind: plugin
+metadata:
+  name: plugin-infra-v3-novos-inputs
+  display-name: plugin-infra-v3-novos-inputs
+  description: Descreva seu plugin explicando o propósito.
+  version: 1.0.0
+spec:
+  type: infra
+  compatibility:
+    - python
+  docs:
+    pt-br: docs/pt-br/docs.md
+    en-us: docs/en-us/docs.md
+  single-use: False
+  runtime:
+    environment:
+      - terraform-1-4
+      - aws-cli-2
+      - git-2
+  technologies: # Ref: https://docs.stackspot.com/create-use/create-content/yaml-files/plugin-yaml/#technologies-1
+    - Api
+  generates:
+    connections:
+      - type: aws-sns-conn
+        alias: topico-gerado
+        outputs:
+          - from: topico-gerado-arn
+            to: arn
+          - from: topico-gerado-topic_name
+            to: topic_name
+  stk-projects-only: false
+  app-allowed: false
+  inputs:
+    - label: Type the name of your resource
+      name: resource
+      type: text
+      required: true
+      default: Client
+      pattern: '([A-Z][a-z]+)+'
+      help: 'Inform your resource name (e.g.: Client)'
+    - label: Choose the http method of the new endpoint
+      name: method
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: GET
+      required: true
+      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+    - label: Select the connection for bucket-requerido-raiz
+      type: required-connection
+      name: bucket-requerido-raiz
+      connection-interface-type: aws-s3-conn
+    - type: list
+      label: Lista de IPs
+      add-question: Deseja adicionar ips na lista?
+      name: ips
+      input:
+        type: text
+        label: IP
+        pattern: '^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$'
+        default: '127.0.0.1'
+    - type: object
+      name: firewall_rule
+      label: Informe o CIDR/Porta da regra de firewall
+      inputs:
+        - type: text
+          name: cidr
+          label: CIDR
+          pattern: '^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}/\d{2}$'
+          default: '0.0.0.0/24'
+        - type: int
+          name: port
+          label: Porta
+          default: 8080
+    - type: list
+      label: Lista de buckets
+      add-question: Deseja adicionar buckets
+      name: buckets
+      input:
+        type: object
+        name: bucket
+        label: Informe o bucket
+        inputs:
+          - type: text
+            name: description
+            label: Bucket Description
+          - type: int
+            name: number
+            label: Bucket number
+          - type: bool
+            name: encrypted
+            label: Bucket Encrypted
+          - type: select
+            items:
+              - us-east-1
+              - us-east-2
+              - sa-east-3
+            name: region
+            label: Bucket Region
+          - type: multiselect
+            items:
+              - us-east-1
+              - us-east-2
+              - sa-east-3
+            name: region_bkp
+            label: Bucket Region Backup
+          - label: Select the connection for bucket-requerido-object
+            type: required-connection
+            name: bucket-requerido-object
+            connection-interface-type: aws-s3-conn

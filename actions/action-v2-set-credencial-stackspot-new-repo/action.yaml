@@ -1,0 +1,35 @@
+schema-version: v2
+kind: action
+metadata:
+  name: action-v2-set-credencial-stackspot-new-repo
+  display-name: action-v2-set-credencial-stackspot-new-repo
+  description: Set credential stackspot as secret on repository
+  version: 0.0.1
+spec:
+  type: python
+  docs:
+    pt-br: docs/pt-br/docs.md
+    en-us: docs/en-us/docs.md
+  repository: git@github.com:fabianofernandeszup/chiaretto-studio.git
+  inputs:
+    - label: Token
+      name: token
+      type: text
+    - label: Org
+      name: org
+      type: text
+    - label: Repo
+      name: repo
+      type: text
+    - label: Client Id
+      name: client_id
+      type: text
+    - label: Client Key
+      name: client_key
+      type: password
+    - label: Client Realm
+      name: client_realm
+      type: text
+  python:
+    workdir: .
+    script: script.py

@@ -1,0 +1,131 @@
+schema-version: v2
+kind: plugin
+metadata:
+  name: plugin-infra-v2-inputs-contexto
+  display-name: plugin-infra-v2-inputs-contexto
+  description: Describe your plugin explaining its purpose 7
+  version: 0.0.6
+  picture: plugin.png
+spec:
+  type: infra
+  docs:
+    pt-br: docs/pt-br/doc.md
+    en-us: docs/en-us/doc.md
+  compatibility:
+    - python
+  technologies:
+    - Api
+  runtime:
+    environment:
+      - terraform-1-4
+      - aws-cli-2
+      - git-2
+  generates:
+    connections:
+      - type: aws-s3-conn
+        alias: bucket-source
+        outputs:
+          - from: bucket-source-arn
+            to: arn
+          - from: bucket-source-bucket_name
+            to: bucket_name
+  inputs:
+    - label: Type name of your resource1
+      name: resource1
+      type: text
+      required: true
+      default: Client
+      pattern: ([A-Z][a-z]+)+
+      help: 'Inform your resource name (e.g.: Client)'
+    - label: Type name of your resource2
+      name: resource2
+      type: text
+      required: true
+      default: ClientDois
+      pattern: ([A-Z][a-z]+)+
+      help: 'Inform your resource name (e.g.: Client)'
+    - label: Type name of your resource3
+      name: resource3
+      type: text
+      required: true
+      default: ClientTrez
+      pattern: ([A-Z][a-z]+)+
+      help: 'Inform your resource name (e.g.: Client)'
+    - label: Type name of your resource4
+      name: resource4
+      type: text
+      help: Sem valor default e sem pattern
+    - label: Type name of your resource5
+      name: resource5
+      type: text
+      help: Sem valor default e sem pattern
+    - label: Type name of your resource6
+      name: resource6
+      type: text
+      help: Sem valor default e sem pattern
+    - label: Choose http method1 of new endpoint
+      name: method1
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: GET
+      required: true
+      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+    - label: Choose http method2 of new endpoint
+      name: method2
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: GET
+      required: true
+      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+    - label: Choose http method3 of new endpoint
+      name: method3
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: GET
+      required: true
+      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+    - label: Choose http method4 of new endpoint
+      name: method4
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      help: Sem valor default
+    - label: Choose http method5 of new endpoint
+      name: method5
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      help: Sem valor default
+    - label: Choose http method6 of new endpoint
+      name: method6
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      help: Sem valor default

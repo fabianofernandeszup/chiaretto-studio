@@ -1,0 +1,19 @@
+schema-version: v2
+kind: plugin
+metadata:
+  name: plugin-variables
+  display-name: plugin-variables
+  description: Descreva seu plugin explicando o propósito.
+  version: 1.0.0
+  picture: plugin.png
+spec:
+  type: app
+  compatibility:
+    - python
+  docs:
+    pt-br: docs/pt-br/docs.md
+    en-us: docs/en-us/docs.md
+  single-use: False
+  technologies: # Ref: https://docs.stackspot.com/create-use/create-content/yaml-files/plugin-yaml/#technologies-1
+    - Api
+  stk-projects-only: false

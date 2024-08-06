@@ -1,0 +1,85 @@
+schema-version: v3
+kind: action
+metadata:
+  name: action-python-v3-novos-inputs
+  display-name: action-python-v3-novos-inputs
+  description: Descreva sua action explicando o propósito.
+  version: 0.0.1
+spec:
+  type: python
+  docs:
+    pt-br: docs/pt-br/docs.md
+    en-us: docs/en-us/docs.md
+  inputs:
+    - label: What is your name?
+      name: user_name
+      type: text
+      required: false
+      pattern: '^[A-Za-z]+(?:\s[A-Za-z]+)*$'
+      help: 'Inform your name'
+    - label: Select the connection for bucket-requerido-raiz
+      type: required-connection
+      name: bucket-requerido-raiz
+      connection-interface-type: aws-s3-conn
+    - type: list
+      label: Lista de IPs
+      add-question: Deseja adicionar ips na lista?
+      name: ips
+      input:
+        type: text
+        label: IP
+        pattern: '^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$'
+        default: '127.0.0.1'
+    - type: object
+      name: firewall_rule
+      label: Informe o CIDR/Porta da regra de firewall
+      inputs:
+        - type: text
+          name: cidr
+          label: CIDR
+          pattern: '^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}/\d{2}$'
+          default: '0.0.0.0/24'
+        - type: int
+          name: port
+          label: Porta
+          default: 8080
+    - type: list
+      label: Lista de buckets
+      add-question: Deseja adicionar buckets
+      name: buckets
+      input:
+        type: object
+        name: bucket
+        label: Informe o bucket
+        inputs:
+          - type: text
+            name: description
+            label: Bucket Description
+          - type: int
+            name: number
+            label: Bucket number
+          - type: bool
+            name: encrypted
+            label: Bucket Encrypted
+          - type: select
+            items:
+              - us-east-1
+              - us-east-2
+              - sa-east-3
+            name: region
+            label: Bucket Region
+          - type: multiselect
+            items:
+              - us-east-1
+              - us-east-2
+              - sa-east-3
+            name: region_bkp
+            label: Bucket Region Backup
+          - label: Select the connection for bucket-requerido-object
+            type: required-connection
+            name: bucket-requerido-object
+            connection-interface-type: aws-s3-conn
+
+  python:
+    workdir: .
+    script: script.py

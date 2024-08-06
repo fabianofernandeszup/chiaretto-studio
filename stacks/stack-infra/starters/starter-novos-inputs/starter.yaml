@@ -1,0 +1,10 @@
+schema-version: v1
+kind: starter
+metadata:
+  name: starter-novos-inputs
+  description: Descreva o starter explicando o seu propósito.
+spec:
+  type: infra
+  docs:
+    en-us: docs/en_us/docs.md
+    pt-br: docs/pt_br/docs.md
