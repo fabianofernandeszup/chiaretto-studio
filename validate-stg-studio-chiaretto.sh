@@ -8,7 +8,7 @@ validate_plugin() {
     local dir=$1
     if [ -f "$dir/plugin.yaml" ]; then
         echo "Publicando plugin na pasta: $dir"
-        (cd "$dir" && stk-stg validate plugin )
+        (cd "$dir" && stk validate plugin )
     fi
 }
 
@@ -17,7 +17,7 @@ validate_action() {
     local dir=$1
     if [ -f "$dir/action.yaml" ]; then
         echo "Publicando action na pasta: $dir"
-        (cd "$dir" && stk-stg validate action )
+        (cd "$dir" && stk validate action )
     fi
 }
 
@@ -26,7 +26,7 @@ validate_stack() {
     local dir=$1
     if [ -f "$dir/stack.yaml" ]; then
         echo "Publicando stack na pasta: $dir"
-        (cd "$dir" && stk-stg validate stack )
+        (cd "$dir" && stk validate stack )
     fi
 }
 

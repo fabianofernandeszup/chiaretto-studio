@@ -83,7 +83,6 @@ spec:
       name: buckets
       input:
         type: object
-        name: bucket
         label: Informe o bucket
         inputs:
           - type: text

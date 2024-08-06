@@ -9,8 +9,8 @@ metadata:
 spec:
   type: python
   docs:
-    pt_br: docs/pt_br/doc.md
-    en_us: docs/en_us/doc.md
+    pt-br: docs/pt_br/doc.md
+    en-us: docs/en_us/doc.md
   python:
     workdir: .
     script: script.py

@@ -44,5 +44,5 @@ process_directory() {
 
 # Processa os diretórios actions, plugins e stacks
 process_directory "$BASE_DIR/actions"
-process_directory "$BASE_DIR/plugins"
-process_directory "$BASE_DIR/stacks"
+#process_directory "$BASE_DIR/plugins"
+#process_directory "$BASE_DIR/stacks"

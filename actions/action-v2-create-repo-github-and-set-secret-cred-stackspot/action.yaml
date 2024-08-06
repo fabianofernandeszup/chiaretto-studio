@@ -2,7 +2,7 @@ schema-version: v2
 kind: action
 metadata:
   name: action-v2-create-repo-github-and-set-secret-cred-stackspot
-  display-name: Stackspot Create GitHub Repo With Secrets
+  display-name: action-v2-create-repo-github-and-set-secret-cred-stackspot
   description: Action to create github repository With Secrets
   version: 1.0.0
 spec:

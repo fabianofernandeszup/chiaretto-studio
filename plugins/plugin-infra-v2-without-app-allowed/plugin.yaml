@@ -1,8 +1,8 @@
 schema-version: v2
 kind: plugin
 metadata:
-  name: plugin-infra-v2-app-allowed-false-without-app-allowed
-  display-name: plugin-infra-v2-app-allowed-false-without-app-allowed
+  name: plugin-infra-v2-without-app-allowed
+  display-name: plugin-infra-v2-without-app-allowed
   description: Descreva seu plugin explicando o propósito
   version: 0.0.2
   picture: plugin.png

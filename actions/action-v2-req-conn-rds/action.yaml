@@ -2,7 +2,7 @@ schema-version: v2
 kind: action
 metadata:
   name: action-v2-req-conn-rds
-  display-name: action-require-connection-interface-rds
+  display-name: action-v2-req-conn-rds
   description: Describe your action explaining its purpose 4
   version: 1.0.5
 spec:

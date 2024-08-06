@@ -1,8 +1,8 @@
 schema-version: v2
 kind: action
 metadata:
-  name: action-v1-req-conn-sm
-  display-name: action-require-connection-interface-secret-manager
+  name: action-v2-req-conn-sm
+  display-name: action-v2-req-conn-sm
   description: Describe your action explaining its purpose
   version: 1.0.0
 spec:
