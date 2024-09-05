@@ -23,6 +23,8 @@ spec:
       - name: chiaretto-studio/plugin-infra-v2-req-sm-gen-s3@0.0.1
       - name: chiaretto-studio/plugin-infra-v2-without-app-allowed@0.0.2
       - name: chiaretto-studio/plugin-infra-v3-novos-inputs@2.0.0
+      - name: chiaretto-studio/plugin-infra-v3-req-sns@2.0.0
+      - name: chiaretto-studio/plugin-infra-v3-gen-sns@2.0.0
   actions:
     - name: chiaretto-studio/action-v2-convert-content-v1-to-v2@0.0.1
     - name: chiaretto-studio/action-v2-create-repo-github-and-set-secret-cred-stackspot@1.0.0
@@ -34,3 +36,4 @@ spec:
     - name: chiaretto-studio/action-v3-python-novos-inputs-no-rec-conn@0.0.1
   starters:
     - path: starters/starter-novos-inputs
+    - path: starters/starter-infra-v3-gen-req-sns

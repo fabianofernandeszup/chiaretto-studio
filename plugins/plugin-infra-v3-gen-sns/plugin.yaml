@@ -1,0 +1,33 @@
+schema-version: v3
+kind: plugin
+metadata:
+  name: plugin-infra-v3-gen-sns
+  display-name: plugin-infra-v3-gen-sns
+  description: Descreva seu plugin explicando o propósito.
+  version: 2.0.0
+spec:
+  type: infra
+  compatibility:
+    - python
+  docs:
+    pt-br: docs/pt-br/docs.md
+    en-us: docs/en-us/docs.md
+  single-use: False
+  runtime:
+    environment:
+      - terraform-1-4
+      - aws-cli-2
+      - git-2
+  technologies: # Ref: https://docs.stackspot.com/create-use/create-content/yaml-files/plugin-yaml/#technologies-1
+    - Api
+  generates:
+    connections:
+      - type: aws-sns-conn
+        alias: topico-gerado
+        outputs:
+          - from: topico-gerado-arn
+            to: arn
+          - from: topico-gerado-topic_name
+            to: topic_name
+  stk-projects-only: false
+  app-allowed: false

@@ -39,44 +39,10 @@ spec:
       default: Client
       pattern: '([A-Z][a-z]+)+'
       help: 'Inform your resource name (e.g.: Client)'
-    - label: Choose the http method of the new endpoint
-      name: method
-      type: select
-      items:
-        - GET
-        - POST
-        - PUT
-        - DELETE
-        - PATCH
-      default: GET
-      required: true
-      help: 'Inform the method of the endpoint (e.g.: post or delete)'
     - label: Select the connection for bucket-requerido-raiz
       type: required-connection
       name: bucket_requerido_raiz
       connection-interface-type: aws-s3-conn
-    - type: list
-      label: Lista de IPs
-      add-question: Deseja adicionar ips na lista?
-      name: ips
-      input:
-        type: text
-        label: IP
-        pattern: '^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$'
-        default: '127.0.0.1'
-    - type: object
-      name: firewall_rule
-      label: Informe o CIDR/Porta da regra de firewall
-      inputs:
-        - type: text
-          name: cidr
-          label: CIDR
-          pattern: '^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}/\d{2}$'
-          default: '0.0.0.0/24'
-        - type: int
-          name: port
-          label: Porta
-          default: 8080
     - type: list
       label: Lista de buckets
       add-question: Deseja adicionar buckets
