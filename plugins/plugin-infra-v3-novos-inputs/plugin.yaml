@@ -4,7 +4,7 @@ metadata:
   name: plugin-infra-v3-novos-inputs
   display-name: plugin-infra-v3-novos-inputs
   description: Descreva seu plugin explicando o propósito.
-  version: 2.0.0
+  version: 3.0.0
 spec:
   type: infra
   compatibility:
@@ -39,6 +39,37 @@ spec:
       default: Client
       pattern: '([A-Z][a-z]+)+'
       help: 'Inform your resource name (e.g.: Client)'
+    - type: object
+      label: Informe o bucket
+      name: bucket
+      inputs:
+        - type: text
+          name: description
+          label: Bucket Description
+        - type: int
+          name: number
+          label: Bucket number
+        - type: bool
+          name: encrypted
+          label: Bucket Encrypted
+        - type: select
+          items:
+            - us-east-1
+            - us-east-2
+            - sa-east-3
+          name: region
+          label: Bucket Region
+        - type: multiselect
+          items:
+            - us-east-1
+            - us-east-2
+            - sa-east-3
+          name: region_bkp
+          label: Bucket Region Backup
+        - label: Select the connection for bucket-requerido-object
+          type: required-connection
+          name: bucket_requerido_object
+          connection-interface-type: aws-s3-conn
     - label: Select the connection for bucket-requerido-raiz
       type: required-connection
       name: bucket_requerido_raiz
