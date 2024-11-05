@@ -1,0 +1,23 @@
+schema-version: v3
+kind: action
+metadata:
+  name: action-v3-create-mock-connection
+  display-name: action-v3-create-mock-connection
+  description: Action que gera um arquivo de mock de connections interface.
+  version: 0.0.1
+spec:
+  type: python
+  docs:
+    pt-br: docs/pt-br/docs.md
+    en-us: docs/en-us/docs.md
+  repository: git@github.com:fabianofernandeszup/chiaretto-studio.git
+  inputs:
+    - label: What is your name?
+      name: user_name
+      type: text
+      required: false
+      pattern: '^[A-Za-z]+(?:\s[A-Za-z]+)*$'
+      help: 'Inform your name'
+  python:
+    workdir: .
+    script: script.py
