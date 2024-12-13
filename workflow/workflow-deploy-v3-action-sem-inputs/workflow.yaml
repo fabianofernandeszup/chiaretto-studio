@@ -1,0 +1,43 @@
+schema-version: v1
+kind: workflow
+metadata:
+  name: workflow-deploy-v3-action-sem-inputs
+  display-name: workflow-deploy-v3-action-sem-inputs
+  description: Workflow Deploy Schema V3 com aciton sem inputs
+  version: 0.0.1
+spec:
+  type: deploy
+  label: Workflow Title
+  targets:
+    - "app"
+    - "infra"
+  docs:
+    en-us: docs/en_us/docs.md
+    pt-br: docs/pt_br/docs.md
+  jobs:
+    - id: job_id_1
+      label: Job que executa uma ação e aplica um plugin
+      steps:
+        - id: step_id_1
+          label: Passo que executa a ação
+          name: stackspot/hello-world@1.0.0
+          type: action
+          inputs:
+            const_input: "Este é um exemplo de entrada fixa"
+        - id: step_id_2
+          label: Passo que aplica o plugin
+          name: stackspot/plugin-basic@1.0.0
+          type: plugin
+          inputs:
+            const_input: "Este é um exemplo de entrada fixa"
+
+    - id: job_id_2
+      label: Job que executa outro workflow
+      depends-on:
+        - job_id_1
+      steps:
+        - id: step_id_1
+          name: stackspot/workflow@1.0.0
+          type: workflow
+          inputs:
+            const_input: "Este é um exemplo de entrada fixa"

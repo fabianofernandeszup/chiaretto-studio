@@ -1,0 +1,346 @@
+schema-version: v3
+kind: plugin
+metadata:
+  name: plugin-infra-v3-novos-inputs
+  display-name: plugin-infra-v3-novos-inputs
+  description: Descreva seu plugin explicando o propósito.
+  version: 3.0.0
+spec:
+  type: infra
+  compatibility:
+    - python
+  docs:
+    pt-br: docs/pt-br/docs.md
+    en-us: docs/en-us/docs.md
+  single-use: False
+  runtime:
+    environment:
+      - terraform-1-4
+      - aws-cli-2
+      - git-2
+  technologies: # Ref: https://docs.stackspot.com/create-use/create-content/yaml-files/plugin-yaml/#technologies-1
+    - Api
+  generates:
+    connections:
+      - type: aws-sns-conn
+        alias: topico-gerado
+        outputs:
+          - from: topico-gerado-arn
+            to: arn
+          - from: topico-gerado-topic_name
+            to: topic_name
+  stk-projects-only: false
+  app-allowed: false
+  inputs:
+    - label: Type the name of your resource
+      name: resource
+      type: text
+      required: true
+      default: Client
+      pattern: '([A-Z][a-z]+)+'
+      help: 'Inform your resource name (e.g.: Client)'
+    - type: object
+      label: Informe o bucket
+      name: bucket
+      inputs:
+        - type: text
+          name: description
+          label: Bucket Description
+        - type: int
+          name: number
+          label: Bucket number
+        - type: bool
+          name: encrypted
+          label: Bucket Encrypted
+        - type: select
+          items:
+            - us-east-1
+            - us-east-2
+            - sa-east-3
+          name: region
+          label: Bucket Region
+        - type: multiselect
+          items:
+            - us-east-1
+            - us-east-2
+            - sa-east-3
+          name: region_bkp
+          label: Bucket Region Backup
+        - label: Select the connection for bucket-requerido-object
+          type: required-connection
+          name: bucket_requerido_object
+          connection-interface-type: aws-s3-conn
+    - label: Select the connection for bucket-requerido-raiz
+      type: required-connection
+      name: bucket_requerido_raiz
+      connection-interface-type: aws-s3-conn
+    - type: list
+      label: Lista de buckets
+      add-question: Deseja adicionar buckets
+      name: buckets
+      input:
+        type: object
+        label: Informe o bucket
+        inputs:
+          - type: text
+            name: description
+            label: Bucket Description
+          - type: int
+            name: number
+            label: Bucket number
+          - type: bool
+            name: encrypted
+            label: Bucket Encrypted
+          - type: select
+            items:
+              - us-east-1
+              - us-east-2
+              - sa-east-3
+            name: region
+            label: Bucket Region
+          - type: multiselect
+            items:
+              - us-east-1
+              - us-east-2
+              - sa-east-3
+            name: region_bkp
+            label: Bucket Region Backup
+          - label: Select the connection for bucket-requerido-object
+            type: required-connection
+            name: bucket_requerido_object
+            connection-interface-type: aws-s3-conn
+    - label: Input text com pattern regex, required true e Help
+      name: resource1
+      type: text
+      required: true
+      default: Client
+      pattern: ([A-Z][a-z]+)+
+      help: 'Inform your resource name (e.g.: Client)'
+    - label: Input text com required true sem valor default
+      name: resource2
+      type: text
+      required: true
+    - label: Input text com required false sem valor default
+      name: resource3
+      type: text
+      required: false
+    - label: Input text sem tag required (Deve ser obrigatório) sem valor default
+      name: resource4
+      type: text
+    - label: Input text sem tag required com valor default (Client)
+      name: resource6
+      type: text
+      default: Client
+    - label: Input text com tag required true e com valor default (Client)
+      name: resource5
+      type: text
+      default: Client
+      required: false
+    - label: Input text com itens sem valor default required true
+      name: method1
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      required: true
+    - label: Input text com itens com 1 valor default (POST) required true
+      name: method2
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: POST
+      required: true
+    - label: Input text com itens sem valor default required false
+      name: method4
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: GET
+      required: false
+    - label: Input text com itens com 1 valor default (POST) required false
+      name: method5
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: POST
+      required: false
+    - label: Input text com 1 item e sem valor default e required true
+      name: method7
+      type: select
+      items:
+        - GET
+      default: GET
+      required: true
+    - label: Input text com 1 item e sem valor default e required false
+      name: method9
+      type: select
+      items:
+        - GET
+      default: GET
+      required: false
+    - label: Input password required true
+      name: password1
+      type: password
+      required: true
+    - label: Input password required false
+      name: password2
+      type: password
+      required: false
+    - label: (Input text com itens) Qual linguagem deseja usar?
+      type: select
+      name: language
+      items:
+        - Java
+        - Kotlin
+        - Node
+    - label: (Condicional do input language==Java) Qual versão do Java deseja usar?
+      type: select
+      name: java_version
+      items:
+        - '11'
+        - '17'
+      condition:
+        variable: language
+        operator: ==
+        value: Java
+    - label: (Condicional do input language==Kotlin) Qual versão do Kotlin deseja
+        usar?
+      type: select
+      name: kotlin_version
+      items:
+        - '1.6'
+        - '1.7'
+      condition:
+        variable: language
+        operator: ==
+        value: Kotlin
+    - label: (Input select) Qual VM deseja usar ?
+      type: select
+      name: vm
+      items:
+        - JVM
+        - GraalVM
+      condition:
+        variable: language
+        operator: containsAny
+        value:
+          - Java
+          - Kotlin
+    - label: (Input multiselect required true sem valor default) Qual porta deseja
+        expor ?
+      type: multiselect
+      name: port1
+      items:
+        - '8080'
+        - '8888'
+      required: true
+    - label: (Input multiselect required false sem valor default) Qual porta deseja
+        expor ?
+      type: multiselect
+      name: port2
+      items:
+        - '8080'
+        - '8888'
+      required: false
+    - label: (Input multiselect required true com 1 valor default) Qual porta deseja
+        expor ?
+      type: multiselect
+      name: port3
+      items:
+        - '8080'
+        - '8888'
+      default:
+        - '8888'
+      required: true
+    - label: (Input multiselect required false com 1 valor default) Qual porta deseja
+        expor ?
+      type: multiselect
+      name: port4
+      items:
+        - '8080'
+        - '8888'
+      default:
+        - '8888'
+      required: false
+    - label: (Input multiselect required true com 2 valores default) Qual porta deseja
+        expor ?
+      type: multiselect
+      name: port5
+      items:
+        - '8080'
+        - '8888'
+      default:
+        - '8080'
+        - '8888'
+      required: true
+    - label: (Input multiselect required false com 2 valores default) Qual porta deseja
+        expor ?
+      type: multiselect
+      name: port6
+      items:
+        - '8080'
+        - '8888'
+      default:
+        - '8080'
+        - '8888'
+      required: false
+    - label: (Input Select) Selecione um dominio
+      type: select
+      name: domain1
+      items:
+        - '*.com'
+        - '*.com.br'
+    - label: (Input Select com 1 item) Selecione um dominio
+      type: select
+      name: domain2
+      items:
+        - '*.com'
+  inputs-envs:
+    - label: Input Env text com required true sem valor default
+      name: resourceenv1
+      type: text
+      required: true
+    - label: Input Env text com required false sem valor default
+      name: resourceenv2
+      type: text
+      required: false
+    - label: Input Env text com required true sem valor default
+      name: resourceEnv3
+      type: text
+      required: true
+    - label: Input Env text com required false sem valor default
+      name: resourceenv3
+      type: text
+      required: false
+  global-computed-inputs:
+    name_formatted_global: '{{ resource1 | upper }}'
+  computed-inputs:
+    name_formatted: '{{ resource1 | upper }}'
+  hooks:
+    - type: run
+      trigger: before-input
+      commands:
+        - echo plugin before-input!
+    - type: run
+      trigger: before-render
+      commands:
+        - echo plugin before-render
+    - type: run
+      trigger: after-render
+      commands:
+        - echo plugin after-render!

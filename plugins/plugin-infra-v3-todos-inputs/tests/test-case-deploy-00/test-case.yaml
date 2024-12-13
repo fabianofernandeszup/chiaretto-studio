@@ -1,0 +1,13 @@
+schema-version: v1
+kind: test
+spec:
+  type: plugin
+  mode: deploy
+  inputs:
+    resource: "User"
+    method: "DELETE"
+  inputs-envs: {}
+  requires:
+    connections: []
+  generates:
+    connections: []

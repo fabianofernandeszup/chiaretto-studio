@@ -1,8 +1,8 @@
 schema-version: v3
 kind: plugin
 metadata:
-  name: plugin-infra-v3-gen-sns
-  display-name: plugin-infra-v3-gen-sns
+  name: plugin-infra-v3-gen-sns-v2
+  display-name: plugin-infra-v3-gen-sns-v2
   description: Descreva seu plugin explicando o propósito.
   version: 3.0.0
 spec:
