@@ -1,0 +1,56 @@
+schema-version: v1
+kind: workflow
+metadata:
+  name: workflow-create-infra-only-plugins
+  display-name: workflow-create-infra-only-plugins
+  description: my workflow
+  version: 0.0.1
+spec:
+  type: create
+  label: Título do Workflow
+  targets:
+    - infra
+  docs:
+    en-us: docs/en_us/docs.md
+    pt-br: docs/pt_br/docs.md
+  jobs:
+    - id: job_id_1
+      label: Job que diz olá
+      steps:
+        - id: step_id_1
+          label: Passo que diz olá
+          type: run
+          script: |
+            echo "Olá Mundo"
+
+#    - id: exemplo_1
+#      label: Exemplos de passos
+#      steps:
+#        - id: exemplo_1
+#          label: Exemplo de passo que executa uma ação
+#          name: stackspot/hello-world@1.0.0
+#          type: action
+#          inputs:
+#            input_1: "Este é um exemplo de input fixo"
+#
+#        - id: exemplo_2
+#          label: Exemplo de passo que aplica um plugin
+#          name: stackspot/plugin-basic@1.0.0
+#          type: plugin
+#          inputs:
+#            input_1: "Este é um exemplo de input fixo"
+#
+#        - id: exemplo_3
+#          label: Exemplo de passo suspenso
+#          type: suspend
+#
+#    - id: exemplo_2
+#      label: Exemplo de passo workflow
+#      depends-on:
+#        - job_id_1
+#      steps:
+#        - id: step_id_1
+#          name: stackspot/workflow@1.0.0
+#          type: workflow
+#          inputs:
+#            input_1: "Este é um exemplo de input fixo"

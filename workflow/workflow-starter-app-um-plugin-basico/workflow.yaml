@@ -1,0 +1,46 @@
+schema-version: v1
+kind: workflow
+metadata:
+  name: workflow-starter-app-um-plugin-basico
+  display-name: workflow-starter-app-um-plugin-basico
+  description: Workflow Starter com um plugin de app basico
+  version: 0.0.1
+spec:
+  type: starter
+  label: Workflow Starter com um plugin de app basico
+  targets:
+    - app
+  docs:
+    en-us: docs/en_us/docs.md
+    pt-br: docs/pt_br/docs.md
+  inputs:
+    - label: Type the name of your resource
+      name: resource
+      type: text
+      required: true
+      default: Client
+      pattern: '([A-Z][a-z]+)+'
+      help: 'Inform your resource name (e.g.: Client)'
+    - label: Choose the http method of the new endpoint
+      name: method
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: GET
+      required: true
+      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+  jobs:
+    - id: job_1
+      label: Job Plugin
+      steps:
+        - id: plugin_basico
+          label: Exemplo de passo que aplica um plugin basico
+          name: cli-studio-eng/plugin-app-v3-basico@0.0.1
+          type: plugin
+          inputs:
+            resource: "{{ inputs.resource }}"
+            method: "{{ inputs.method }}"

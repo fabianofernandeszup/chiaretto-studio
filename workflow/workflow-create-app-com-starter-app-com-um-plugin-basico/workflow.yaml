@@ -1,0 +1,51 @@
+schema-version: v1
+kind: workflow
+metadata:
+  name: workflow-create-app-com-starter-app-com-um-plugin-basico
+  display-name: workflow-create-app-com-starter-app-com-um-plugin-basico
+  description: Workflow de create app com starter de app com um plugin de app basico
+  version: 0.0.1
+spec:
+  type: create
+  label: Título do Workflow
+  targets:
+    - app
+#    - infra
+  docs:
+    en-us: docs/en_us/docs.md
+    pt-br: docs/pt_br/docs.md
+  inputs:
+    - type: text
+      name: domain
+      scope: hidden
+      label: "Domain"
+      default: "chiaretto.io"
+    - label: Type the name of your resource
+      name: resource
+      type: text
+      required: true
+      default: Client
+      pattern: '([A-Z][a-z]+)+'
+      help: 'Inform your resource name (e.g.: Client)'
+    - label: Choose the http method of the new endpoint
+      name: method
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: GET
+      required: true
+      help: 'Inform the method of the endpoint (e.g.: post or delete)'
+  jobs:
+    - id: job_id_1
+      label: Job Workflow
+      steps:
+        - id: step_id_1
+          name: cli-studio-eng/workflow-starter-app-um-plugin-basico@0.0.1
+          type: workflow
+          inputs:
+            resource: "{{ inputs.resource }}"
+            method: "{{ inputs.method }}"

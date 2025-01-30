@@ -7,31 +7,20 @@
 
 ******************************************
 -->
-## Plugin Name
-
-<!-- Write concisely describing your Plugin. -->
+## Workflow Name
+<!-- Write concisely describing your Workflow. -->
 
 ## Requirements
-
-<!-- 
-[This is a guideline; delete this content and write your information outside this markup. <!-- ]
-
-- Describe the requirements that the user needs to know before using the Plugin.
--->
+<!--[This is a guideline; delete this content and write your information outside this markup. <!-- ]
+- Describe in a list all the items and necessary action before run your workflow -->
 
 ## Usage
-
-<!-- 
-[This is a guideline; delete this content and write your information outside this markup. <!-- ]
-
-Provide instructions on how to use your Plugin, including: 
-
-- What are the input parameters/inputs?   
-- Which methods to use?
+<!--[This is a guideline; delete this content and write your information outside this markup. <!-- ]
+Add the steps for the user to use your Workflow:
+- What are the inputs?
+- Which methods should we know?
 - What are the resources?
-- What is the file structure of the Plugin directory?
-- And if necessary, add the dependencies of your Plugin.
--->
+- Add the Workflow dependencies, if necessary. -->
 
 ## Inputs:                                                                                                   
 ┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
@@ -43,11 +32,3 @@ Provide instructions on how to use your Plugin, including:
 │                       │                │        │        │ 'PUT', 'DELETE',     │ the endpoint (e.g.:  │
 │                       │                │        │        │ 'PATCH']             │ post or delete)      │
 └───────────────────────┴────────────────┴────────┴────────┴──────────────────────┴──────────────────────┘
-
-## Release Notes
-
-<!-- 
-[This is a guideline; delete this content and write your information outside this markup. <!-- ]
-
-This section is only necessary if you publish a new Plugin version. Add what you modified, resolved issues, or latest enhancements.
--->

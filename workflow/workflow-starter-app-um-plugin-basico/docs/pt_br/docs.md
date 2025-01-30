@@ -7,31 +7,20 @@
 
 ******************************************
 -->
-## Nome Plugin
+## Nome do Workflow
+<!-- Escreva de forma concisa descrevendo seu Workflow. -->
 
-<!-- Escreva uma descrição clara e breve sobre o seu Plugin. -->
-
-## Pré-requisitos
-
-<!-- 
-[Isto é uma orientação, apague essa o conteúdo e escreva suas informações fora desta marcação <!-- ]
-
-- Descreva quais os requisitos que o usuário precisa saber antes de usar o Plugin.
--->
+## Requisitos
+<!-- [Este é um guia; apague este conteúdo e escreva suas informações fora desta marcação. <!-- ]
+- Descreva em uma lista todos os itens e ações necessárias antes de executar seu workflow -->
 
 ## Uso
-
-<!-- 
-[Isto é uma orientação, apague essa o conteúdo e escreva suas informações fora desta marcação <!-- ]
-
-Forneça as etapas de uso do seu Plugin, incluindo:
-
-- Quais os parâmetros de entradas/inputs
-- Quais os métodos usar
-- Quais os recursos
-- Qual a estrutura de arquivos do diretório do Plugin.
-- E se necessário, adicione as dependências do seu Plugin.
--->
+<!-- [Este é um guia; apague este conteúdo e escreva suas informações fora desta marcação. <!-- ]
+Adicione os passos para o usuário utilizar seu Workflow:
+- Quais são as entradas?
+- Quais métodos devemos conhecer?
+- Quais são os recursos?
+- Adicione as dependências do Workflow, se necessário. -->
 
 ## Inputs:                                                                                                   
 ┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
@@ -43,11 +32,3 @@ Forneça as etapas de uso do seu Plugin, incluindo:
 │                       │                │        │        │ 'PUT', 'DELETE',     │ the endpoint (e.g.:  │
 │                       │                │        │        │ 'PATCH']             │ post or delete)      │
 └───────────────────────┴────────────────┴────────┴────────┴──────────────────────┴──────────────────────┘
-
-## Release Notes
-
-<!-- 
-[Isto é uma orientação, apague essa o conteúdo e escreva suas informações fora desta marcação <!-- ]
-
-Esta seção só é necessária se você publicar uma nova versão do Plugin. Apenas adicione o que você modificou, problemas que foram resolvidos ou novos incrementos. 
--->
