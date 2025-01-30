@@ -4,7 +4,7 @@ metadata:
   name: plugin-app-v3-basico
   display-name: plugin-app-v3-basico
   description: Plugin basico
-  version: 0.0.1
+  version: 1.0.0
 spec:
   type: app
   compatibility:

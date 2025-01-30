@@ -4,7 +4,7 @@ metadata:
   name: plugin-infra-v3-novos-inputs
   display-name: plugin-infra-v3-novos-inputs
   description: Descreva seu plugin explicando o propósito.
-  version: 3.0.0
+  version: 4.0.0
 spec:
   type: infra
   compatibility:
