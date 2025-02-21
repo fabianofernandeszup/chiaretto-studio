@@ -6,7 +6,7 @@ metadata:
   description: Descreva sua action explicando o propósito.
   version: 0.0.1
 spec:
-  type: shell
+  type: python
   docs:
     pt-br: docs/pt-br/docs.md
     en-us: docs/en-us/docs.md
@@ -18,21 +18,6 @@ spec:
       required: false
       pattern: '^[A-Za-z]+(?:\s[A-Za-z]+)*$'
       help: 'Inform your name'
-  shell:
+  python:
     workdir: .
-    requirements-check:
-      - check-command:
-          linux: |
-            git --version
-          mac: |
-            git --version
-          windows: |
-            git --version
-        info: "Git is not installed!"
-    script:
-      linux: |
-        echo "Hello {{inputs.user_name}}!"
-      mac: |
-        echo "Hello {{inputs.user_name}}!"
-      windows: |
-        echo "Hello {{inputs.user_name}}!"
+    script: script.py

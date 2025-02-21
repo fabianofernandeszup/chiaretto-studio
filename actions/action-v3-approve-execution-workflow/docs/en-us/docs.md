@@ -1,23 +1,28 @@
-Fill out this template to help users use your content. The following information will appear on the Action sections of the StackSpot Portal.
+<!-- 
+******************************************
 
+- THIS IS AN EXAMPLE OF HOW TO FILL OUT YOUR DOCUMENTATION OF CONTENT.
 
+- FILL OUT THE TEMPLATE BELOW WITH YOUR INFORMATION SO OTHER PEOPLE CAN USE IT. THIS DOCUMENTATION WILL APPEAR ON THE SECTION OF THE STACKSPOT PORTAL.
+
+******************************************
+-->
 ## Action name
 
-Write concisely describing your Action content.
-
-Example:
-> This Action shows you how to fill out information to use Actions on the StackSpot platform. 
+<!-- Write concisely describing your Action. -->
 
 ## Requirements
 
-- Describe in a list all the items and necessary action before running this Action
+<!-- 
+[This is a guideline; delete this content and write your information outside this markup. <!-- ]
 
-Example:
-1. Install the dependencies 
-2. Create the configuration file 
-3. Create the **template** folder
+- Describe the requirements that the user needs to know before using the Action.
+-->
 
 ## Usage
+
+<!-- 
+[This is a guideline; delete this content and write your information outside this markup. <!-- ]
 
 Add the steps for the user to use your Action:
 
@@ -32,9 +37,12 @@ On your application’s folder, run the **action-doc-template** action and follo
 `
 stk run action /Users/Home/action-doc-template
 `
-
+-->
 
 ## Release Notes
+
+<!-- 
+[This is a guideline; delete this content and write your information outside this markup. <!-- ]
 
 This section is only necessary if you publish a new Action version. Add what was changed, fixed, and the new features. 
 
@@ -43,3 +51,4 @@ Example:
 
 #### Features
 Added new templates
+-->
