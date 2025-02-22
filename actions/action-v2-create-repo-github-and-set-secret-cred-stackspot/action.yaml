@@ -4,7 +4,7 @@ metadata:
   name: action-v2-create-repo-github-and-set-secret-cred-stackspot
   display-name: action-v2-create-repo-github-and-set-secret-cred-stackspot
   description: Action to create github repository With Secrets
-  version: 1.0.0
+  version: 1.0.1
 spec:
   type: python
   docs:

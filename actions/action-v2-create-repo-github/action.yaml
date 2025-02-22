@@ -4,13 +4,25 @@ metadata:
   name: action-v2-create-repo-github
   display-name: action-v2-create-repo-github
   description: Action to create github repository
-  version: 1.0.0
+  version: 2.0.0
 spec:
   type: python
   docs:
     pt-br: docs/pt_br/doc.md
     en-us: docs/en_us/doc.md
   inputs:
+    - label: Token
+      name: token
+      type: text
+    - label: Org
+      name: org
+      type: text
+    - label: Repo
+      name: repo
+      type: text
+    - label: Description
+      name: description
+      type: text
     - label: Visibility
       name: visibility
       type: text

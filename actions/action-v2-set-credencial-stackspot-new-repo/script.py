@@ -11,7 +11,7 @@ def run(metadata):
     inputs = metadata.inputs
     token = inputs.get("token")
     org = inputs.get("org")
-    repo_name = inputs.get("name")
+    repo_name = inputs.get("repo")
 
     client_id = inputs.get("client_id")
     client_key = inputs.get("client_key")

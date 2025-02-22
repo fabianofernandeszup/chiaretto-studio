@@ -3,6 +3,7 @@ import json
 import re
 from base64 import b64encode
 from nacl import encoding, public
+import time
 
 API_BASE_URL = "https://api.github.com"
 JWT_REGEX=r"^([a-zA-Z0-9_=]+)\.([a-zA-Z0-9_=]+)\.([a-zA-Z0-9_\-\+\/=]*)"
@@ -12,6 +13,7 @@ def run(metadata):
     org = inputs.get("org")
     visibility = inputs.get("visibility")
     token = inputs.get("token")
+    secret = inputs.get("secret")
     repo_name = inputs.get("name")
     client_id = inputs.get("client_id")
     client_key = inputs.get("client_key")
@@ -47,11 +49,14 @@ def run(metadata):
 
     print(f"Success created repository {response.get('html_url')}")
 
-    set_secret('STK_CLIENT_ID', client_id, org, repo_name, token)
-    set_secret('STK_CLIENT_KEY', client_key, org, repo_name, token)
-    set_secret('STK_CLIENT_REALM', client_realm, org, repo_name, token)
+    time.sleep(3)
 
-    print("Secrets Created on Repo!")
+    if secret == True:
+        set_secret('STK_CLIENT_ID', client_id, org, repo_name, token)
+        set_secret('STK_CLIENT_KEY', client_key, org, repo_name, token)
+        set_secret('STK_CLIENT_REALM', client_realm, org, repo_name, token)
+
+        print("Secrets Created on Repo!")
 
 def set_secret(secret_name, secret_value, org, repo, token):
     is_jwt = re.search(JWT_REGEX, token)

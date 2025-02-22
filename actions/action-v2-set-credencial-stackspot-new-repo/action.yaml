@@ -4,7 +4,7 @@ metadata:
   name: action-v2-set-credencial-stackspot-new-repo
   display-name: action-v2-set-credencial-stackspot-new-repo
   description: Set credential stackspot as secret on repository
-  version: 0.0.1
+  version: 1.0.1
 spec:
   type: python
   docs:

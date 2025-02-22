@@ -28,7 +28,7 @@ def run(metadata):
         visibility = "private"
         
     data = {
-        "name": inputs.get("name"),
+        "name": inputs.get("repo"),
         "description": inputs.get('description'),
         "private": private,
         "visibility": visibility,
