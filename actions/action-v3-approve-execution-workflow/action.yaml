@@ -4,7 +4,7 @@ metadata:
   name: action-v3-approve-execution-workflow
   display-name: action-v3-approve-execution-workflow
   description: Descreva sua action explicando o propósito.
-  version: 0.0.1
+  version: 1.0.0
 spec:
   type: python
   docs:
@@ -12,6 +12,9 @@ spec:
     en-us: docs/en-us/docs.md
   repository: git@github.com:fabianofernandeszup/chiaretto-studio.git
   inputs:
+    - label: Execution ID
+      name: execution_id
+      type: text
     - label: Job ID
       name: job_id
       type: text
