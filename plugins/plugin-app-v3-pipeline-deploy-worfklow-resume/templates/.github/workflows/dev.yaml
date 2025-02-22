@@ -1,0 +1,70 @@
+name: Dev
+on:
+  push:
+    branches: [dev]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  DEPLOY_DEV_AFTER_CREATE:
+    runs-on: ubuntu-latest
+    outputs:
+      EXECUTION_ID: ${{ steps.extract.outputs.EXECUTION_ID }}
+      JOB_ID: ${{ steps.extract.outputs.JOB_ID }}
+    steps:
+      - name: Verificar Execution ID and Job ID
+        id: extract
+        continue-on-error: true
+        run: |
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          EXECUTION_ID=$(echo "$COMMIT_MSG" | grep -oP 'Execution_id:\K[a-zA-Z0-9]+')
+          JOB_ID=$(echo "$COMMIT_MSG" | grep -oP 'Job_id:\K[a-zA-Z0-9-_]+')
+          if [ -z "$EXECUTION_ID" ]; then
+            echo "::error::Execution_id não encontrado ou inválido!"
+          else
+            echo "EXECUTION_ID=${EXECUTION_ID}" >> $GITHUB_OUTPUT
+          fi
+          if [ -z "$JOB_ID" ]; then
+            echo "::error::Job_id não encontrado ou inválido!"
+          else
+            echo "JOB_ID=${JOB_ID}" >> $GITHUB_OUTPUT
+          fi
+      - name: Check Execution ID and Job ID
+        run: |
+          echo "🆔 Execution ID: ${{ steps.extract.outputs.EXECUTION_ID }}"
+          echo "🆔 Job ID: ${{ steps.extract.outputs.JOB_ID }}"
+
+      - uses: stack-spot/cli-github-action-run-command@v1.0.0
+        name: Approve Job Suspend
+        if: "${{ steps.extract.outputs.EXECUTION_ID != '' }}"
+        with:
+          client_id: ${{ secrets.STK_CLIENT_ID }}
+          client_key: ${{ secrets.STK_CLIENT_KEY }}
+          realm: ${{ secrets.STK_CLIENT_REALM }}
+          command_stk: "run action chiaretto-studio/action-v3-approve-execution-workflow --execution_id ${{ steps.extract.outputs.EXECUTION_ID }} --job_id ${{ steps.extract.outputs.JOB_ID }}"
+
+      - uses: stack-spot/cli-github-action-run-command@v1.0.0
+        name: Start Deploy Worklfow
+        if: "${{ steps.extract.outputs.EXECUTION_ID != '' }}"
+        with:
+          client_id: ${{ secrets.STK_CLIENT_ID }}
+          client_key: ${{ secrets.STK_CLIENT_KEY }}
+          realm: ${{ secrets.STK_CLIENT_REALM }}
+          command_stk: "resume workflow ${{ steps.extract.outputs.EXECUTION_ID }}"
+
+  DEPLOY_DEV_ON_MERGE:
+    runs-on: ubuntu-latest
+    if: ${{ needs.DEPLOY_DEV_AFTER_CREATE.outputs.EXECUTION_ID == '' }}
+    needs:
+      - DEPLOY_DEV_AFTER_CREATE
+    steps:
+      - uses: stack-spot/cli-github-action-run-command@v1.0.0
+        name: Start Deploy Worklfow
+        with:
+          client_id: ${{ secrets.STK_CLIENT_ID }}
+          client_key: ${{ secrets.STK_CLIENT_KEY }}
+          realm: ${{ secrets.STK_CLIENT_REALM }}
+          command_stk: "--version"
+

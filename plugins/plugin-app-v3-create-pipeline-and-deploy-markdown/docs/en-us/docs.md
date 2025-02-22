@@ -1,42 +1,92 @@
-<!-- 
-******************************************
+# Fluxo de Deploy com GitFlow
 
-- THIS IS AN EXAMPLE OF HOW TO FILL OUT YOUR DOCUMENTATION OF CONTENT.
+Este documento explica o fluxo de deploy de um projeto seguindo o **GitFlow**, uma estratégia de gerenciamento de branches que organiza o desenvolvimento em diferentes estágios.
 
-- FILL OUT THE TEMPLATE BELOW WITH YOUR INFORMATION SO OTHER PEOPLE CAN USE IT. THIS DOCUMENTATION WILL APPEAR ON THE SECTION OF THE STACKSPOT PORTAL.
+---
 
-******************************************
--->
-## Plugin Name
+## 📋 Visão Geral do GitFlow
 
-<!-- Write concisely describing your Plugin. -->
+O GitFlow define branches principais e auxiliares para organizar o ciclo de vida do desenvolvimento:
 
-## Requirements
+| Branch          | Descrição                                                                 |
+|-----------------|---------------------------------------------------------------------------|
+| `main`/`master` | Representa o código em produção (versões estáveis).                       |
+| `develop`       | Base para integração de novas funcionalidades (próxima release).          |
+| `feature/*`     | Branches para desenvolver novas funcionalidades.                          |
+| `release/*`     | Branches para preparação de uma nova versão (testes finais).              |
+| `hotfix/*`      | Branches para correções críticas em produção (urgentes).                  |
 
-<!-- 
-[This is a guideline; delete this content and write your information outside this markup. <!-- ]
+---
 
-- Describe the requirements that the user needs to know before using the Plugin.
--->
+## 🚀 Fluxo de Deploy
 
-## Usage
+### 1. **Desenvolvimento (Ambiente de Desenvolvimento)**
+- **Branch:** `develop`
+- **Processo:**
+  - Os desenvolvedores criam branches `feature/*` a partir de `develop`.
+  - Após conclusão da feature, fazem merge em `develop` via Pull Request (PR).
+  - O ambiente de desenvolvimento é atualizado automaticamente a partir de `develop` (via CI/CD).
 
-<!-- 
-[This is a guideline; delete this content and write your information outside this markup. <!-- ]
+### 2. **Preparação para Release (Ambiente de Staging)**
+- **Branch:** `release/*` (ex: `release/v1.2.0`)
+- **Processo:**
+  - Crie uma branch `release/*` a partir de `develop`.
+  - Testes finais são realizados no ambiente de staging (QA, testes de integração, etc.).
+  - Correções são feitas diretamente na branch `release/*`.
+  - Após aprovação, faça merge da `release/*` em `main` e `develop`.
 
-Provide instructions on how to use your Plugin, including: 
+### 3. **Produção (Ambiente de Produção)**
+- **Branch:** `main`/`master`
+- **Processo:**
+  - Após merge da `release/*` em `main`, gere uma tag semântica (ex: `v1.2.0`).
+  - O deploy em produção é acionado a partir da tag ou da branch `main` (via CI/CD).
+  - **Observação:** Apenas código em `main` é implantado em produção.
 
-- What are the input parameters/inputs?   
-- Which methods to use?
-- What are the resources?
-- What is the file structure of the Plugin directory?
-- And if necessary, add the dependencies of your Plugin.
--->
+### 4. **Hotfixes (Correções Emergenciais)**
+- **Branch:** `hotfix/*` (ex: `hotfix/login-bug`)
+- **Processo:**
+  - Crie uma branch `hotfix/*` a partir de `main`.
+  - Corrija o bug e faça merge em `main` e `develop`.
+  - Gere uma nova tag (ex: `v1.2.1`) para deploy em produção.
 
-## Release Notes
+---
 
-<!-- 
-[This is a guideline; delete this content and write your information outside this markup. <!-- ]
+## 📈 Diagrama do Fluxo
 
-This section is only necessary if you publish a new Plugin version. Add what you modified, resolved issues, or latest enhancements.
--->
+```mermaid
+graph LR
+  subgraph Features
+    A[feature/novo-componente] --> B(merge em develop)
+  end
+
+  subgraph Release
+    C[release/v1.2.0] --> D(Testes em staging)
+    D --> E(merge em main e develop)
+  end
+
+  subgraph Hotfix
+    F[hotfix/login-bug] --> G(merge em main e develop)
+  end
+
+  main[(main)] --> H[Deploy em produção]
+  develop --> I[Deploy em desenvolvimento]
+```
+
+## 🛠️ Exemplo de Cenário
+- Nova Funcionalidade:
+  - Branch: feature/user-auth (criada a partir de develop).
+  - Merge em develop após revisão.
+  - CI/CD atualiza o ambiente de desenvolvimento.
+
+- Preparação para Release:
+  - Branch release/v1.3.0 é criada a partir de develop.
+  - Testes em staging: correções são feitas na release/v1.3.0.
+  - Merge em main (tag v1.3.0) e develop.
+
+- Deploy em Produção:
+  - CI/CD detecta a tag v1.3.0 em main e implanta em produção.
+ 
+- Hotfix Crítico:
+  - Bug em produção: cria-se hotfix/auth-error.
+  - Correção é feita e merge em main (tag v1.3.1) e develop.
+  - Deploy imediato em produção.

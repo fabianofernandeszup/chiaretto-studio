@@ -1,42 +1,72 @@
-<!-- 
-******************************************
+# Fluxo de Deploy com GitFlow
 
-- ESTE É APENAS UM EXEMPLO DE COMO PREENCHER A DOCUMENTAÇÃO DO SEU CONTEUDO. 
+Este documento explica o fluxo de deploy de um projeto seguindo o **GitFlow**, uma estratégia de gerenciamento de branches que organiza o desenvolvimento em diferentes estágios.
 
-- PREENCHA O TEMPLATE COM AS INFORMAÇÕES DO SEU CONTEUDO PARA QUE OUTROS USUÁRIO CONSIGAM UTILIZÁ-LO. ESSA DOCUMENTAÇÃO SERÁ EXPOSTA NA PÁGINA DO CONTEUDO NO PORTAL DA STACKSPOT. 
+---
 
-******************************************
--->
-## Nome Plugin
+## 📋 Visão Geral do GitFlow
 
-<!-- Escreva uma descrição clara e breve sobre o seu Plugin. -->
+O GitFlow define branches principais e auxiliares para organizar o ciclo de vida do desenvolvimento:
 
-## Pré-requisitos
+| Branch          | Descrição                                                                 |
+|-----------------|---------------------------------------------------------------------------|
+| `main`/`master` | Representa o código em produção (versões estáveis).                       |
+| `develop`       | Base para integração de novas funcionalidades (próxima release).          |
+| `feature/*`     | Branches para desenvolver novas funcionalidades.                          |
+| `release/*`     | Branches para preparação de uma nova versão (testes finais).              |
+| `hotfix/*`      | Branches para correções críticas em produção (urgentes).                  |
 
-<!-- 
-[Isto é uma orientação, apague essa o conteúdo e escreva suas informações fora desta marcação <!-- ]
+---
 
-- Descreva quais os requisitos que o usuário precisa saber antes de usar o Plugin.
--->
+## 🚀 Fluxo de Deploy
 
-## Uso
+### 1. **Desenvolvimento (Ambiente de Desenvolvimento)**
+- **Branch:** `develop`
+- **Processo:**
+  - Os desenvolvedores criam branches `feature/*` a partir de `develop`.
+  - Após conclusão da feature, fazem merge em `develop` via Pull Request (PR).
+  - O ambiente de desenvolvimento é atualizado automaticamente a partir de `develop` (via CI/CD).
 
-<!-- 
-[Isto é uma orientação, apague essa o conteúdo e escreva suas informações fora desta marcação <!-- ]
+### 2. **Preparação para Release (Ambiente de Staging)**
+- **Branch:** `release/*` (ex: `release/v1.2.0`)
+- **Processo:**
+  - Crie uma branch `release/*` a partir de `develop`.
+  - Testes finais são realizados no ambiente de staging (QA, testes de integração, etc.).
+  - Correções são feitas diretamente na branch `release/*`.
+  - Após aprovação, faça merge da `release/*` em `main` e `develop`.
 
-Forneça as etapas de uso do seu Plugin, incluindo:
+### 3. **Produção (Ambiente de Produção)**
+- **Branch:** `main`/`master`
+- **Processo:**
+  - Após merge da `release/*` em `main`, gere uma tag semântica (ex: `v1.2.0`).
+  - O deploy em produção é acionado a partir da tag ou da branch `main` (via CI/CD).
+  - **Observação:** Apenas código em `main` é implantado em produção.
 
-- Quais os parâmetros de entradas/inputs
-- Quais os métodos usar
-- Quais os recursos
-- Qual a estrutura de arquivos do diretório do Plugin.
-- E se necessário, adicione as dependências do seu Plugin.
--->
+### 4. **Hotfixes (Correções Emergenciais)**
+- **Branch:** `hotfix/*` (ex: `hotfix/login-bug`)
+- **Processo:**
+  - Crie uma branch `hotfix/*` a partir de `main`.
+  - Corrija o bug e faça merge em `main` e `develop`.
+  - Gere uma nova tag (ex: `v1.2.1`) para deploy em produção.
 
-## Release Notes
+---
 
-<!-- 
-[Isto é uma orientação, apague essa o conteúdo e escreva suas informações fora desta marcação <!-- ]
+## 📈 Diagrama do Fluxo
 
-Esta seção só é necessária se você publicar uma nova versão do Plugin. Apenas adicione o que você modificou, problemas que foram resolvidos ou novos incrementos. 
--->
+```mermaid
+graph LR
+  subgraph Features
+    A[feature/novo-componente] --> B(merge em develop)
+  end
+
+  subgraph Release
+    C[release/v1.2.0] --> D(Testes em staging)
+    D --> E(merge em main e develop)
+  end
+
+  subgraph Hotfix
+    F[hotfix/login-bug] --> G(merge em main e develop)
+  end
+
+  main[(main)] --> H[Deploy em produção]
+  develop --> I[Deploy em desenvolvimento]
