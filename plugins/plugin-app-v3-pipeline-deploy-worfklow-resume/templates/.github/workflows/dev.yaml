@@ -1,4 +1,4 @@
-name: Dev
+{%raw%}name: Dev
 on:
   push:
     branches: [dev]
@@ -67,4 +67,4 @@ jobs:
           client_key: ${{ secrets.STK_CLIENT_KEY }}
           realm: ${{ secrets.STK_CLIENT_REALM }}
           command_stk: "--version"
-
+{%endraw%}

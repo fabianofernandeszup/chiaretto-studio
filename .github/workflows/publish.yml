@@ -13,10 +13,13 @@ jobs:
     environment: 'prd-eng'
     runs-on: ubuntu-20.04
     outputs:
+      has-workflows: ${{ steps.files.outputs.has-workflows }}
+      dirs-workflows: ${{ steps.files.outputs.dirs-workflows }}
       has-plugins: ${{ steps.files.outputs.has-plugins }}
       dirs-plugins: ${{ steps.files.outputs.dirs-plugins }}
       has-actions: ${{ steps.files.outputs.has-actions }}
       dirs-actions: ${{ steps.files.outputs.dirs-actions }}
+
     steps:
       - uses: actions/checkout@v3.5.3
 
@@ -29,9 +32,10 @@ jobs:
             content:
               - './actions/**'
               - './plugins/**'
+              - './workflows/**'
               - '.github/workflows/**'
 
-      - name: Check Plugins and Actions
+      - name: Check Workflows, Plugins and Actions
         id: files
         run: |
           arrAllFilesChanged=(${{ steps.filter_shell.outputs.content_files }})
@@ -49,9 +53,14 @@ jobs:
           readarray -t arrAllDirs < <(printf '%s\n' "${arrAllDirs[@]}" | sort -u)
 
           ###### Publish #########
+          arrWorkflowsDir=()
           arrPluginsDir=()
           arrActionsDir=()
           for i in ${arrAllDirs[@]}; do
+            if [[ -f "${{ github.workspace }}/${i}/workflow.yaml" ]]; then
+              arrWorkflowsDir=(${arrWorkflowsDir[@]} "${i}")
+              echo "has-workflows=true" >> "$GITHUB_OUTPUT"
+            fi
             if [[ -f "${{ github.workspace }}/${i}/plugin.yaml" ]]; then
               arrPluginsDir=(${arrPluginsDir[@]} "${i}")
               echo "has-plugins=true" >> "$GITHUB_OUTPUT"
@@ -62,11 +71,12 @@ jobs:
             fi
           done
 
+          echo "dirs-workflows=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${arrWorkflowsDir[@]}")" >> "$GITHUB_OUTPUT"
           echo "dirs-plugins=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${arrPluginsDir[@]}")" >> "$GITHUB_OUTPUT"
           echo "dirs-actions=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${arrActionsDir[@]}")" >> "$GITHUB_OUTPUT"
 
   install_stk:
-    if: needs.check_changes.outputs.has-plugins == 'true' || needs.check_changes.outputs.has-actions == 'true'
+    if: needs.check_changes.outputs.has-workflows == 'true' || needs.check_changes.outputs.has-plugins == 'true' || needs.check_changes.outputs.has-actions == 'true'
     runs-on: ubuntu-latest
     environment: 'prd-eng'
     needs: check_changes
@@ -143,8 +153,34 @@ jobs:
           key: ${{ github.run_id }}-stk
 
       - run: |
-          echo "Plugin ${{ github.workspace }}/${{ matrix.dir }}"
+          echo "Action ${{ github.workspace }}/${{ matrix.dir }}"
           cd ${{ github.workspace }}/${{ matrix.dir }}
           ~/.stk/bin/stk publish action --studio $STK_STUDIO
         env:
           STK_STUDIO: ${{ vars.stk_studio }}
+
+  publish_workflows:
+    if: needs.check_changes.outputs.has-workflows == 'true'
+    runs-on: 'engineering-runners-prd'
+    environment: 'prd-eng'
+    needs:
+      - install_stk
+      - check_changes
+    strategy:
+      matrix:
+        dir: ${{ fromJson(needs.check_changes.outputs.dirs-workflows) }}
+    steps:
+      - uses: actions/checkout@v3.5.3
+
+      - name: Restore STK CLI
+        uses: actions/cache/restore@v3
+        with:
+          path: ~/.stk
+          key: ${{ github.run_id }}-stk
+
+      - run: |
+          echo "Workflow ${{ github.workspace }}/${{ matrix.dir }}"
+          cd ${{ github.workspace }}/${{ matrix.dir }}
+          ~/.stk/bin/stk publish workflow --studio $STK_STUDIO
+        env:
+          STK_STUDIO: 'stackspot-core'

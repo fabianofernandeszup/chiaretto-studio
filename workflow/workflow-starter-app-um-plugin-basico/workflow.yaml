@@ -4,7 +4,7 @@ metadata:
   name: workflow-starter-app-um-plugin-basico
   display-name: workflow-starter-app-um-plugin-basico
   description: Workflow Starter com um plugin de app basico
-  version: 0.0.1
+  version: 1.0.0
 spec:
   type: starter
   label: Workflow Starter com um plugin de app basico
@@ -39,7 +39,7 @@ spec:
       steps:
         - id: plugin_basico
           label: Exemplo de passo que aplica um plugin basico
-          name: cli-studio-eng/plugin-app-v3-basico@0.0.1
+          name: chiaretto-studio/plugin-app-v3-basico@0.0.1
           type: plugin
           inputs:
             resource: "{{ inputs.resource }}"

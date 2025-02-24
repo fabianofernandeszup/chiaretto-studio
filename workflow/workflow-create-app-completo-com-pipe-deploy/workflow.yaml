@@ -1,0 +1,155 @@
+schema-version: v1
+kind: workflow
+metadata:
+  name: workflow-create-app-completo-com-pipe-deploy
+  display-name: Workflow Create App Completo com Pipe Deploy
+  description: Workflow que cria um app e configura pipe de deploy
+  version: 2.0.0
+spec:
+  type: create
+  label: Workflow Create App Completo com Pipe Deploy
+  targets:
+    - app
+  docs:
+    en-us: docs/en_us/docs.md
+    pt-br: docs/pt_br/docs.md
+  inputs:
+    - name: client_id
+      label: Client id
+      type: password
+
+    - name: client_key
+      label: Client key
+      type: password
+
+    - name: client_realm
+      label: Client realm
+      type: password
+
+    - name: git_token
+      label: Git token
+      type: password
+
+    - name: org
+      label: Git Org
+      type: text
+  computed-inputs:
+    workdir_repo: "."
+    repo_url: "https://github.com/{{ inputs.org }}/{{ var.STK_PROJECT_NAME }}"
+  jobs:
+    - id: job_checkout_repo
+      label: Checkout Repo
+      steps:
+        - id: git_setup
+          label: Git Setup
+          type: run
+          script: |
+            git config --global user.email "account-email";
+            git config --global user.name "account-email";
+            git config --global pull.rebase true;
+
+        - id: create_repo
+          label: Create Repo and Set Stk Credential
+          name: chiaretto-studio/action-v2-create-repo-github-and-set-secret-cred-stackspot@1
+          type: action
+          inputs:
+            token: "{{ inputs.git_token }}"
+            org: "{{ inputs.org }}"
+            name: "{{ var.STK_PROJECT_NAME }}"
+            visibility: "private"
+            secret: true
+            client_id: "{{ inputs.client_id }}"
+            client_key: "{{ inputs.client_key }}"
+            client_realm:  "{{ inputs.client_realm }}"
+
+        - id: clone_repo
+          label: Git clone
+          name: stackspot-core/github-clone-repository@1
+          type: action
+          inputs:
+            repository_path: "{{ repo_url }}"
+            git_token: "{{ inputs.git_token }}"
+            workdir: "{{ workdir_repo }}"
+
+        - id: create_new_branch
+          label: Create Dev Branch
+          type: run
+          workdir: "{{ workdir_repo }}"
+          script: "git checkout -b dev"
+
+    - id: job_create_app
+      label: Create App
+      depends-on:
+        - job_checkout_repo
+      steps:
+        - id: step_workflow_starter
+          name: chiaretto-studio/workflow-starter-app-um-plugin-basico@1
+          type: workflow
+          workdir: "{{ workdir_repo }}"
+          inputs:
+            resource: "Product"
+            method: "GET"
+
+    - id: job_add_pipeline
+      depends-on:
+        - job_create_app
+      label: Add Pipeline
+      steps:
+        - id: plugin_pipeline
+          label: Aplica plugin de pipeline
+          name: chiaretto-studio/plugin-app-v3-pipeline-deploy-worfklow-resume@1
+          type: plugin
+          workdir: "{{ workdir_repo }}"
+
+    - id: job_commit_and_push
+      depends-on:
+        - job_add_pipeline
+      label: Commit and Push to dev
+      steps:
+        - id: commit_and_push
+          label: Commit And Push
+          type: run
+          workdir: "{{ workdir_repo }}"
+          script: |
+            git add .
+            git commit -m "First Commit StackSpot (Execution_id:{{ var.STK_WORKFLOW_EXECUTION_ID }},Job_id:job_suspend_dev_deploy)"
+            git push origin dev
+
+    - id: job_suspend_dev_deploy
+      depends-on:
+        - job_commit_and_push
+      label: Waiting Dev Deploy
+      steps:
+        - id: step_suspend_dev_deploy
+          label: Waiting Dev Deploy Approve
+          type: suspend
+
+    - id: job_build_app
+      label: Build App
+      depends-on:
+        - job_suspend_dev_deploy
+      steps:
+        - id: build_app
+          label: Build
+          type: run
+          script: "echo 'build app'"
+
+    - id: job_upload_to_ecr
+      label: Upload Image to ECR
+      depends-on:
+        - job_build_app
+      steps:
+        - id: upload_image
+          label: Upload Image
+          type: run
+          script: "echo 'upload image'"
+
+    - id: job_deploy
+      label: Deploy to Dev Env
+      depends-on:
+        - job_upload_to_ecr
+      steps:
+        - id: deploy
+          label: Deploy to DEv
+          type: run
+          script: "echo 'deploy to dev'"
