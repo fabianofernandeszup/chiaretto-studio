@@ -40,18 +40,18 @@ jobs:
         name: Approve Job Suspend
         if: "${{ steps.extract.outputs.EXECUTION_ID != '' }}"
         with:
-          client_id: ${{ secrets.STK_CLIENT_ID }}
-          client_key: ${{ secrets.STK_CLIENT_KEY }}
-          realm: ${{ secrets.STK_CLIENT_REALM }}
+          client_id: ${{ secrets.ORG_STK_CLIENT_ID }}
+          client_key: ${{ secrets.ORG_STK_CLIENT_KEY }}
+          realm: ${{ secrets.ORG_STK_CLIENT_REALM }}
           command_stk: "run action chiaretto-studio/action-v3-approve-execution-workflow --execution_id ${{ steps.extract.outputs.EXECUTION_ID }} --job_id ${{ steps.extract.outputs.JOB_ID }}"
 
       - uses: stack-spot/cli-github-action-run-command@v1.0.0
         name: Start Deploy Worklfow
         if: "${{ steps.extract.outputs.EXECUTION_ID != '' }}"
         with:
-          client_id: ${{ secrets.STK_CLIENT_ID }}
-          client_key: ${{ secrets.STK_CLIENT_KEY }}
-          realm: ${{ secrets.STK_CLIENT_REALM }}
+          client_id: ${{ secrets.ORG_STK_CLIENT_ID }}
+          client_key: ${{ secrets.ORG_STK_CLIENT_KEY }}
+          realm: ${{ secrets.ORG_STK_CLIENT_REALM }}
           command_stk: "resume workflow ${{ steps.extract.outputs.EXECUTION_ID }}"
 
   DEPLOY_DEV_ON_MERGE:

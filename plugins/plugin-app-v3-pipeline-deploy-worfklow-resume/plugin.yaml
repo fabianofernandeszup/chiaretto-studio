@@ -4,7 +4,7 @@ metadata:
   name: plugin-app-v3-pipeline-deploy-worfklow-resume
   display-name: plugin-app-v3-pipeline-deploy-worfklow-resume
   description: Descreva seu plugin explicando o propósito.
-  version: 1.0.1
+  version: 1.0.2
 spec:
   type: app
   compatibility:
