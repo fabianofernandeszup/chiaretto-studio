@@ -4,7 +4,7 @@ metadata:
   name: action-python-v3-novos-inputs
   display-name: action-python-v3-novos-inputs
   description: Descreva sua action explicando o propósito.
-  version: 0.0.1
+  version: 0.0.2
 spec:
   type: python
   docs:
