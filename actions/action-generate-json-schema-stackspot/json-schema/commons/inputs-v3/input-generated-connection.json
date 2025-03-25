@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "required": [
+    "label",
+    "name",
+    "type",
+    "outputs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["generated-connection"]
+    },
+    "connection-interface-type": {
+      "type": "string"
+    },
+    "help": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "name": {
+      "$ref": "classpath:json-schema/commons/inputs-name.json"
+    },
+    "description": {
+      "type": "string"
+    },
+    "condition": {
+      "$ref": "classpath:json-schema/commons/inputs-condition.json"
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "classpath:json-schema/commons/inputs-outputs.json"
+      },
+      "uniqueItems": true
+    }
+  }
+}

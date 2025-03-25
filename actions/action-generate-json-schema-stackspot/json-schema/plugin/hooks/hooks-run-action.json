@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "required": [
+    "type",
+    "trigger",
+    "name"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "run-action"
+      ]
+    },
+    "trigger": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^([a-z0-9]+(?:-[a-z0-9]+)*)\\/([a-z0-9]+(?:-[a-z0-9]+)*)$"
+    },
+    "inputs": {
+      "type": "object"
+    },
+    "env": {
+      "type": "string"
+    },
+    "connections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "alias",
+          "selected"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "alias": {
+            "type": "string",
+            "pattern": "((^[a-z\\d]{2,})(-[a-z\\d]+)*$)"
+          },
+          "selected": {
+            "type": "string",
+            "pattern": "((^[a-z\\d]{2,})(-[a-z\\d]+)*$)"
+          }
+        }
+      }
+    },
+    "condition": {
+      "$ref": "classpath:json-schema/plugin/hooks/commons/hooks-condition.json"
+    }
+  }
+}

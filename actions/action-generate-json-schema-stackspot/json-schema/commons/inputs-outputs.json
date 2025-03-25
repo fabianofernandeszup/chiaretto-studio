@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "from": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "to": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    }
+  },
+  "required": ["from", "to"],
+  "additionalProperties": false
+}

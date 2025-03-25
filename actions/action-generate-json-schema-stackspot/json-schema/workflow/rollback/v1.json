@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "required": ["schema-version", "kind", "metadata", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "schema-version": {"type": "string", "enum": ["v1"]},
+    "kind": {"type": "string", "enum": ["workflow"]},
+    "metadata": {"$ref": "classpath:json-schema/commons/metadata.json"},
+    "spec": {
+      "type": "object",
+      "required": ["type", "jobs", "docs", "targets"],
+      "additionalProperties": false,
+      "properties": {
+        "label": {"type": "string"},
+        "repository": {"type": "string"},
+        "type": {"type": "string", "enum": ["rollback"]},
+        "docs": {"$ref": "classpath:json-schema/commons/docs.json"},
+        "targets": {"$ref":  "classpath:json-schema/workflow/commons/targets.json"},
+        "inputs": {"$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/workflow-inputs.json"},
+        "computed-inputs": {"$ref": "classpath:json-schema/workflow/commons/map-string-to-string.json"},
+        "outputs": {"$ref": "classpath:json-schema/commons/outputs.json"},
+        "jobs": {"$ref": "classpath:json-schema/workflow/commons/workflow-jobs.json"}
+      }
+    }
+  }
+}

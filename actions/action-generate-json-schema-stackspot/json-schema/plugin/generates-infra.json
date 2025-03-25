@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "connections": {
+      "$ref": "classpath:json-schema/plugin/connections.json"
+    },
+    "links": {
+      "$ref": "classpath:json-schema/plugin/links.json"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "required": [
+    "name",
+    "label",
+    "type",
+    "id"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "name": {"$ref": "classpath:json-schema/workflow/commons/name.json"},
+    "id": {"$ref": "classpath:json-schema/workflow/commons/id.json"},
+    "label": {"type": "string"},
+    "type": {"type": "string", "enum": ["action"]},
+    "when": {"type": "string"},
+    "inputs": {"type": "object"},
+    "workdir": {"type":  "string"},
+    "generated-connections": {"$ref": "classpath:json-schema/workflow/commons/map-string-to-string.json"},
+    "outputs": {"$ref": "classpath:json-schema/workflow/commons/map-string-to-string.json"},
+    "strategy":  {"$ref": "classpath:json-schema/workflow/commons/strategy.json"}
+  }
+}

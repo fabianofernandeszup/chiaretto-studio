@@ -1,0 +1,57 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "code-transformation",
+          "edit",
+          "edit-json",
+          "edit-xml",
+          "edit-yaml",
+          "render-templates",
+          "run-action",
+          "run-script",
+          "run"
+        ]
+      }
+    },
+    "required": ["type"],
+    "if": {"properties": { "type": { "const": "code-transformation" } }},
+    "then": { "$ref": "classpath:json-schema/plugin/hooks/hooks-code-transformation.json" },
+    "else": {
+      "if": {"properties": { "type": { "const": "edit" } }},
+      "then": { "$ref": "classpath:json-schema/plugin/hooks/hooks-edit.json" },
+      "else": {
+        "if": {"properties": { "type": { "const": "edit-json" } }},
+        "then": { "$ref": "classpath:json-schema/plugin/hooks/hooks-edit-json.json" },
+        "else": {
+          "if": {"properties": { "type": { "const": "edit-xml" } }},
+          "then": { "$ref": "classpath:json-schema/plugin/hooks/hooks-edit-xml.json" },
+          "else": {
+            "if": {"properties": { "type": { "const": "edit-yaml" } }},
+            "then": { "$ref": "classpath:json-schema/plugin/hooks/hooks-edit-yaml.json" },
+            "else": {
+              "if": {"properties": { "type": { "const": "render-templates" } }},
+              "then": { "$ref": "classpath:json-schema/plugin/hooks/hooks-render-templates.json" },
+              "else": {
+                "if": {"properties": { "type": { "const": "run" } }},
+                "then": { "$ref": "classpath:json-schema/plugin/hooks/hooks-run.json" },
+                "else": {
+                  "if": {"properties": { "type": { "const": "run-action" } }},
+                  "then": { "$ref": "classpath:json-schema/plugin/hooks/hooks-run-action.json" },
+                  "else": {
+                    "if": {"properties": { "type": { "const": "run-script" } }},
+                    "then": { "$ref": "classpath:json-schema/plugin/hooks/hooks-run-script.json" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

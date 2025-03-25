@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "required": [
+    "label",
+    "type"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["text"]
+    },
+    "pattern": {
+      "type": "string"
+    },
+    "default": {
+      "type": "string"
+    },
+    "help": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "condition": {
+      "$ref": "classpath:json-schema/commons/inputs-condition.json"
+    }
+  }
+}

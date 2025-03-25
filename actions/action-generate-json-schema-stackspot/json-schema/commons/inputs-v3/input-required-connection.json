@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "required": [
+    "label",
+    "name",
+    "type",
+    "connection-interface-type"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["required-connection"]
+    },
+    "connection-interface-type": {
+      "type": "string"
+    },
+    "global": {
+      "type": "boolean"
+    },
+    "help": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "name": {
+      "$ref": "classpath:json-schema/commons/inputs-name.json"
+    },
+    "description": {
+      "type": "string"
+    },
+    "condition": {
+      "$ref": "classpath:json-schema/commons/inputs-condition.json"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "required": [
+    "type",
+    "trigger",
+    "path",
+    "changes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "edit-xml"
+      ]
+    },
+    "trigger": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "indent": {
+      "type": "integer"
+    },
+    "encoding": {
+      "type": "string"
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "condition": {
+      "$ref": "classpath:json-schema/plugin/hooks/commons/hooks-condition.json"
+    }
+  }
+}

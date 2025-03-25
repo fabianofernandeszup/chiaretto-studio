@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "required": [
+    "label",
+    "name",
+    "type"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["bool"]
+    },
+    "default": {
+      "type": "boolean"
+    },
+    "global": {
+      "type": "boolean"
+    },
+    "help": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "name": {
+      "$ref": "classpath:json-schema/commons/inputs-name.json"
+    },
+    "description": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "condition": {
+      "$ref": "classpath:json-schema/commons/inputs-condition.json"
+    }
+  }
+}

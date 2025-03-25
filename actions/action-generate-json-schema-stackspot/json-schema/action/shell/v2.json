@@ -1,0 +1,82 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema-version": {
+      "type": "string",
+      "enum": [
+        "v2"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "action"
+      ]
+    },
+    "metadata": {
+      "$ref": "classpath:json-schema/commons/metadata.json"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "shell"
+          ]
+        },
+        "justification": {
+          "type": "string"
+        },
+        "about": {
+          "type": "string"
+        },
+        "implementation": {
+          "type": "string"
+        },
+        "requirements": {
+          "type": "string"
+        },
+        "release-notes": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "string"
+        },
+        "docs": {
+          "$ref": "classpath:json-schema/commons/docs.json"
+        },
+        "repository": {
+          "type": "string"
+        },
+        "requires": {
+          "$ref": "classpath:json-schema/commons/requires-infra.json"
+        },
+        "inputs": {
+          "$ref": "classpath:json-schema/commons/inputs-v2.json"
+        },
+        "shell": {
+          "$ref": "classpath:json-schema/action/shell/shell.json"
+        },
+        "global-computed-inputs": {
+          "type": "object"
+        },
+        "computed-inputs": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "type",
+        "shell"
+      ]
+    }
+  },
+  "required": [
+    "schema-version",
+    "kind",
+    "metadata",
+    "spec"
+  ]
+}

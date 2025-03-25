@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema-version": {
+      "type": "string",
+      "enum": [
+        "v3"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "action"
+      ]
+    },
+    "metadata": {
+      "$ref": "classpath:json-schema/commons/metadata.json"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "shell"
+          ]
+        },
+        "justification": {
+          "type": "string"
+        },
+        "docs": {
+          "$ref": "classpath:json-schema/commons/docs.json"
+        },
+        "repository": {
+          "type": "string"
+        },
+        "inputs": {
+          "$ref": "classpath:json-schema/commons/inputs-v3.json"
+        },
+        "shell": {
+          "$ref": "classpath:json-schema/action/shell/shell.json"
+        },
+        "global-computed-inputs": {
+          "type": "object"
+        },
+        "computed-inputs": {
+          "type": "object"
+        },
+        "requires": {
+          "$ref": "classpath:json-schema/action/requires-v3.json"
+        },
+        "outputs": {
+          "$ref": "classpath:json-schema/commons/outputs.json"
+        }
+      },
+      "required": [
+        "type",
+        "shell",
+        "docs"
+      ]
+    }
+  },
+  "required": [
+    "schema-version",
+    "kind",
+    "metadata",
+    "spec"
+  ]
+}

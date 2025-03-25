@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "minProperties": 1,
+  "additionalProperties": false,
+  "properties": {
+    "en-us": {
+      "type": "string",
+      "pattern": "^([a-zA-Z0-9-_.]+[\\\\\\/])*([a-zA-Z0-9-_.]+\\.md)$"
+    },
+    "pt-br": {
+      "type": "string",
+      "pattern": "^([a-zA-Z0-9-_.]+[\\\\\\/])*([a-zA-Z0-9-_.]+\\.md)$"
+    }
+  }
+}

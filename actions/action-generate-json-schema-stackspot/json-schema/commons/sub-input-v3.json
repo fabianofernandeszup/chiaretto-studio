@@ -1,0 +1,106 @@
+{
+  "type": "object",
+  "required": [
+    "label",
+    "type"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "label": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "text",
+        "int",
+        "required-connection",
+        "object"
+      ]
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "pattern": {
+      "type": "string"
+    },
+    "help": {
+      "type": "string"
+    },
+    "global": {
+      "type": "boolean"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "default": {
+      "type": [
+        "string",
+        "array",
+        "integer",
+        "object",
+        "boolean"
+      ]
+    },
+    "external-items": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": ["source", "value"],
+      "additionalProperties": false
+    },
+    "condition": {
+      "type": "object",
+      "required": [
+        "variable",
+        "operator",
+        "value"
+      ],
+      "properties": {
+        "variable": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "value": {
+          "type": [
+            "string",
+            "array",
+            "integer",
+            "object",
+            "boolean"
+          ]
+        }
+      }
+    },
+    "connection-interface-type": {
+      "type": "string"
+    },
+    "add-question": {
+      "type": "string"
+    },
+    "input": {
+      "$ref": "classpath:json-schema/commons/sub-input-v3.json"
+    },
+    "inputs": {
+      "$ref": "classpath:json-schema/commons/inputs-v3.json"
+    }
+  }
+}

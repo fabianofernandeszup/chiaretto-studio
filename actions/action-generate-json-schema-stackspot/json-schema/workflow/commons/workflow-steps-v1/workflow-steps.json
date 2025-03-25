@@ -1,0 +1,38 @@
+{
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "action",
+          "plugin",
+          "workflow",
+          "suspend",
+          "run"
+        ]
+      }
+    },
+    "required": ["type"],
+    "if": {"properties": { "type": { "const": "action" } }},
+    "then": { "$ref": "classpath:json-schema/workflow/commons/workflow-steps-v1/workflow-step-action.json" },
+    "else": {
+      "if": {"properties": { "type": { "const": "plugin" } }},
+      "then": { "$ref": "classpath:json-schema/workflow/commons/workflow-steps-v1/workflow-step-plugin.json" },
+      "else": {
+        "if": {"properties": { "type": { "const": "workflow" } }},
+        "then": { "$ref": "classpath:json-schema/workflow/commons/workflow-steps-v1/workflow-step-workflow.json" },
+        "else": {
+          "if": {"properties": { "type": { "const": "suspend" }}},
+          "then": { "$ref": "classpath:json-schema/workflow/commons/workflow-steps-v1/workflow-step-suspend.json" },
+          "else": {
+            "if": {"properties": { "type": { "const": "run" }}},
+            "then": { "$ref": "classpath:json-schema/workflow/commons/workflow-steps-v1/workflow-step-run.json" }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "environment"
+  ],
+  "properties": {
+    "environment": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "terraform-1-5",
+          "terraform-1-4",
+          "terraform-1-3",
+          "aws-cli-2",
+          "git-2"
+        ]
+      }
+    }
+  }
+}

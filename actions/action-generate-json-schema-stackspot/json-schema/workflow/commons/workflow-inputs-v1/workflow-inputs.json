@@ -1,0 +1,139 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "bool",
+          "generated-connection",
+          "int",
+          "list",
+          "multiselect",
+          "object",
+          "password",
+          "required-connection",
+          "select",
+          "text",
+          "textarea"
+        ]
+      }
+    },
+    "required": ["type"],
+    "if": {"properties": { "type": { "const": "bool" } }},
+    "then": { "$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/input-bool.json" },
+    "else": {
+      "if": {"properties": { "type": { "const": "generated-connection" } }},
+      "then": { "$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/input-generated-connection.json" },
+      "else": {
+        "if": {
+          "properties": {
+            "type": {
+              "const": "int"
+            }
+          }
+        },
+        "then": {
+          "$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/input-int.json"
+        },
+        "else": {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "list"
+              }
+            }
+          },
+          "then": {
+            "$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/input-list.json"
+          },
+          "else": {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "multiselect"
+                }
+              }
+            },
+            "then": {
+              "$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/input-multiselect.json"
+            },
+            "else": {
+              "if": {
+                "properties": {
+                  "type": {
+                    "const": "object"
+                  }
+                }
+              },
+              "then": {
+                "$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/input-object.json"
+              },
+              "else": {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "password"
+                    }
+                  }
+                },
+                "then": {
+                  "$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/input-password.json"
+                },
+                "else": {
+                  "if": {
+                    "properties": {
+                      "type": {
+                        "const": "required-connection"
+                      }
+                    }
+                  },
+                  "then": {
+                    "$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/input-required-connection.json"
+                  },
+                  "else": {
+                    "if": {
+                      "properties": {
+                        "type": {
+                          "const": "select"
+                        }
+                      }
+                    },
+                    "then": {
+                      "$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/input-select.json"
+                    },
+                    "else": {
+                      "if": {
+                        "properties": {
+                          "type": {
+                            "const": "text"
+                          }
+                        }
+                      },
+                      "then": {
+                        "$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/input-text.json"
+                      },
+                      "else": {
+                        "if": {
+                          "properties": {
+                            "type": {
+                              "const": "textarea"
+                            }
+                          }
+                        },
+                        "then": {
+                          "$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/input-textarea.json"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "properties": {
+    "schema-version": {
+      "type": "string",
+      "enum": [
+        "v3"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "action"
+      ]
+    },
+    "metadata": {
+      "$ref": "classpath:json-schema/commons/metadata.json"
+    },
+    "spec": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "python"
+          ]
+        },
+        "justification": {
+          "type": "string"
+        },
+        "repository": {
+          "type": "string"
+        },
+        "docs": {
+          "$ref": "classpath:json-schema/commons/docs.json"
+        },
+        "inputs": {
+          "$ref": "classpath:json-schema/commons/inputs-v3.json"
+        },
+        "python": {
+          "$ref": "classpath:json-schema/action/python/python.json"
+        },
+        "global-computed-inputs": {
+          "type": "object"
+        },
+        "computed-inputs": {
+          "type": "object"
+        },
+        "requires": {
+          "$ref": "classpath:json-schema/action/requires-v3.json"
+        },
+        "outputs": {
+          "$ref": "classpath:json-schema/commons/outputs.json"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "python",
+        "docs"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema-version",
+    "kind",
+    "metadata",
+    "spec"
+  ]
+}

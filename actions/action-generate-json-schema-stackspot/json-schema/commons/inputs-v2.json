@@ -1,0 +1,104 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "label",
+      "name",
+      "type"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "label": {
+        "type": "string"
+      },
+      "name": {
+        "$ref": "classpath:json-schema/commons/inputs-name.json"
+      },
+      "description": {
+        "type": "string"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "text",
+          "bool",
+          "int",
+          "password",
+          "multiselect",
+          "select",
+          "textarea"
+        ]
+      },
+      "required": {
+        "type": "boolean"
+      },
+      "pattern": {
+        "type": "string"
+      },
+      "help": {
+        "type": "string"
+      },
+      "global": {
+        "type": "boolean"
+      },
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      },
+      "default": {
+        "type": [
+          "string",
+          "array",
+          "integer",
+          "object",
+          "boolean"
+        ]
+      },
+      "external-items": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": ["source", "value"],
+        "additionalProperties": false
+      },
+      "condition": {
+        "type": "object",
+        "required": [
+          "variable",
+          "operator",
+          "value"
+        ],
+        "properties": {
+          "variable": {
+            "type": "string"
+          },
+          "operator": {
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "string",
+              "array",
+              "integer",
+              "object",
+              "boolean"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

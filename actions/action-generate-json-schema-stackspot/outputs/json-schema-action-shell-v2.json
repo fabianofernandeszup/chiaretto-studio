@@ -1,0 +1,322 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema-version": {
+      "type": "string",
+      "enum": [
+        "v2"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "action"
+      ]
+    },
+    "metadata": {
+      "$ref": "#/$defs/commons_metadata"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "shell"
+          ]
+        },
+        "justification": {
+          "type": "string"
+        },
+        "about": {
+          "type": "string"
+        },
+        "implementation": {
+          "type": "string"
+        },
+        "requirements": {
+          "type": "string"
+        },
+        "release-notes": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "string"
+        },
+        "docs": {
+          "$ref": "#/$defs/commons_docs"
+        },
+        "repository": {
+          "type": "string"
+        },
+        "requires": {
+          "$ref": "#/$defs/commons_requires_infra"
+        },
+        "inputs": {
+          "$ref": "#/$defs/commons_inputs_v2"
+        },
+        "shell": {
+          "$ref": "#/$defs/action_shell_shell"
+        },
+        "global-computed-inputs": {
+          "type": "object"
+        },
+        "computed-inputs": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "type",
+        "shell"
+      ]
+    }
+  },
+  "required": [
+    "schema-version",
+    "kind",
+    "metadata",
+    "spec"
+  ],
+  "$defs": {
+    "commons_metadata": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "display-name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "picture": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "display-name",
+        "description",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "commons_docs": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "en-us": {
+          "type": "string",
+          "pattern": "^([a-zA-Z0-9-_.]+[\\\\\\/])*([a-zA-Z0-9-_.]+\\.md)$"
+        },
+        "pt-br": {
+          "type": "string",
+          "pattern": "^([a-zA-Z0-9-_.]+[\\\\\\/])*([a-zA-Z0-9-_.]+\\.md)$"
+        }
+      }
+    },
+    "commons_requires_infra": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "connections": {
+          "$ref": "#/$defs/commons_requires_connections"
+        }
+      }
+    },
+    "commons_inputs_v2": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "name",
+          "type"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "name": {
+            "$ref": "#/$defs/commons_inputs_name"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "bool",
+              "int",
+              "password",
+              "multiselect",
+              "select",
+              "textarea"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "pattern": {
+            "type": "string"
+          },
+          "help": {
+            "type": "string"
+          },
+          "global": {
+            "type": "boolean"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "default": {
+            "type": [
+              "string",
+              "array",
+              "integer",
+              "object",
+              "boolean"
+            ]
+          },
+          "external-items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "condition": {
+            "type": "object",
+            "required": [
+              "variable",
+              "operator",
+              "value"
+            ],
+            "properties": {
+              "variable": {
+                "type": "string"
+              },
+              "operator": {
+                "type": "string"
+              },
+              "value": {
+                "type": [
+                  "string",
+                  "array",
+                  "integer",
+                  "object",
+                  "boolean"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "action_shell_shell": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "workdir": {
+          "type": "string"
+        },
+        "requirements-check": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "check-command": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "windows": {
+                    "type": "string"
+                  },
+                  "linux": {
+                    "type": "string"
+                  },
+                  "mac": {
+                    "type": "string"
+                  }
+                }
+              },
+              "info": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "script": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "windows": {
+              "type": "string"
+            },
+            "linux": {
+              "type": "string"
+            },
+            "mac": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "script"
+      ]
+    },
+    "commons_requires_connections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "alias"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "alias": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "commons_inputs_name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    }
+  }
+}

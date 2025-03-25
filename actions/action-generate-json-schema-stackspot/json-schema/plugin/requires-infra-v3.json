@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "variables": {
+      "$ref": "classpath:json-schema/commons/requires-variables.json"
+    }
+  }
+}

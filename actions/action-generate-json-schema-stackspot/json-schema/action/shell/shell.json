@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "workdir": {
+      "type": "string"
+    },
+    "requirements-check": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "check-command": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "windows": {
+                "type": "string"
+              },
+              "linux": {
+                "type": "string"
+              },
+              "mac": {
+                "type": "string"
+              }
+            }
+          },
+          "info": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "script": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "windows": {
+          "type": "string"
+        },
+        "linux": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "script"
+  ]
+}

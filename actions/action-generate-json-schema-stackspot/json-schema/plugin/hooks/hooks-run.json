@@ -1,0 +1,75 @@
+{
+  "type": "object",
+  "required": [
+    "type",
+    "trigger"
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "commands"
+      ]
+    },
+    {
+      "anyOf": [
+        {
+          "required": [
+            "linux"
+          ]
+        },
+        {
+          "required": [
+            "windows"
+          ]
+        },
+        {
+          "required": [
+            "mac"
+          ]
+        }
+      ]
+    }
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "run"
+      ]
+    },
+    "trigger": {
+      "type": "string"
+    },
+    "working-dir": {
+      "type": "string"
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "linux": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "windows": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mac": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "condition": {
+      "$ref": "classpath:json-schema/plugin/hooks/commons/hooks-condition.json"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "required": [
+    "type",
+    "trigger",
+    "engine-version",
+    "language",
+    "trans-pattern-path",
+    "source-path"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "code-transformation"
+      ]
+    },
+    "trigger": {
+      "type": "string"
+    },
+    "engine-version": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "trans-pattern-path": {
+      "type": "string"
+    },
+    "source-path": {
+      "type": "string"
+    },
+    "condition": {
+      "$ref": "classpath:json-schema/plugin/hooks/commons/hooks-condition.json"
+    }
+  }
+}

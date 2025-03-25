@@ -1,0 +1,521 @@
+{
+  "type": "object",
+  "properties": {
+    "schema-version": {
+      "type": "string",
+      "enum": [
+        "v2"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "plugin"
+      ]
+    },
+    "metadata": {
+      "$ref": "#/$defs/commons_metadata"
+    },
+    "spec": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "infra"
+          ]
+        },
+        "single-use": {
+          "type": "boolean"
+        },
+        "stk-projects-only": {
+          "type": "boolean"
+        },
+        "app-allowed": {
+          "type": "boolean"
+        },
+        "justification": {
+          "type": "string"
+        },
+        "about": {
+          "type": "string"
+        },
+        "implementation": {
+          "type": "string"
+        },
+        "requirements": {
+          "type": "string"
+        },
+        "release-notes": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "string"
+        },
+        "docs": {
+          "$ref": "#/$defs/commons_docs"
+        },
+        "inputs": {
+          "$ref": "#/$defs/commons_inputs_v2"
+        },
+        "inputs-envs": {
+          "$ref": "#/$defs/plugin_inputs_envs"
+        },
+        "compatibility": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "technologies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "repository": {
+          "type": "string"
+        },
+        "runtime": {
+          "$ref": "#/$defs/plugin_runtime"
+        },
+        "generates": {
+          "$ref": "#/$defs/plugin_generates_infra"
+        },
+        "requires": {
+          "$ref": "#/$defs/commons_requires_infra"
+        },
+        "hooks": {
+          "$ref": "#/$defs/plugin_hooks_v2"
+        },
+        "global-computed-inputs": {
+          "type": "object"
+        },
+        "computed-inputs": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "type",
+        "runtime"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema-version",
+    "kind",
+    "metadata",
+    "spec"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "commons_metadata": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "display-name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "picture": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "display-name",
+        "description",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "commons_docs": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "en-us": {
+          "type": "string",
+          "pattern": "^([a-zA-Z0-9-_.]+[\\\\\\/])*([a-zA-Z0-9-_.]+\\.md)$"
+        },
+        "pt-br": {
+          "type": "string",
+          "pattern": "^([a-zA-Z0-9-_.]+[\\\\\\/])*([a-zA-Z0-9-_.]+\\.md)$"
+        }
+      }
+    },
+    "commons_inputs_v2": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "name",
+          "type"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "name": {
+            "$ref": "#/$defs/commons_inputs_name"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "bool",
+              "int",
+              "password",
+              "multiselect",
+              "select",
+              "textarea"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "pattern": {
+            "type": "string"
+          },
+          "help": {
+            "type": "string"
+          },
+          "global": {
+            "type": "boolean"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "default": {
+            "type": [
+              "string",
+              "array",
+              "integer",
+              "object",
+              "boolean"
+            ]
+          },
+          "external-items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "condition": {
+            "type": "object",
+            "required": [
+              "variable",
+              "operator",
+              "value"
+            ],
+            "properties": {
+              "variable": {
+                "type": "string"
+              },
+              "operator": {
+                "type": "string"
+              },
+              "value": {
+                "type": [
+                  "string",
+                  "array",
+                  "integer",
+                  "object",
+                  "boolean"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "plugin_inputs_envs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "name",
+          "type"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "bool",
+              "int",
+              "password",
+              "multiselect",
+              "select"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "pattern": {
+            "type": "string"
+          },
+          "help": {
+            "type": "string"
+          },
+          "global": {
+            "type": "boolean"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "default": {
+            "type": [
+              "string",
+              "array",
+              "integer",
+              "object",
+              "boolean"
+            ]
+          },
+          "external-items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "condition": {
+            "type": "object",
+            "required": [
+              "variable",
+              "operator",
+              "value"
+            ],
+            "properties": {
+              "variable": {
+                "type": "string"
+              },
+              "operator": {
+                "type": "string"
+              },
+              "value": {
+                "type": [
+                  "string",
+                  "array",
+                  "integer",
+                  "object",
+                  "boolean"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "plugin_runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "environment"
+      ],
+      "properties": {
+        "environment": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "terraform-1-5",
+              "terraform-1-4",
+              "terraform-1-3",
+              "aws-cli-2",
+              "git-2"
+            ]
+          }
+        }
+      }
+    },
+    "plugin_generates_infra": {
+      "type": "object",
+      "properties": {
+        "connections": {
+          "$ref": "#/$defs/plugin_connections"
+        },
+        "links": {
+          "$ref": "#/$defs/plugin_links"
+        }
+      },
+      "additionalProperties": false
+    },
+    "commons_requires_infra": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "connections": {
+          "$ref": "#/$defs/commons_requires_connections"
+        }
+      }
+    },
+    "plugin_hooks_v2": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "trigger": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "commons_inputs_name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "plugin_connections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "alias"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "outputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "from",
+                "to"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "plugin_links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "url",
+          "type"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "static",
+              "dynamic"
+            ]
+          },
+          "picture": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "commons_requires_connections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "alias"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "alias": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

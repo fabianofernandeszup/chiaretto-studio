@@ -1,0 +1,37 @@
+schema-version: v2
+kind: plugin
+metadata:
+  name: plugin-app-v2-basico
+  display-name: plugin-app-v2-basico
+  description: Describe your plugin explaining its purpose
+  version: 1.0.0
+  picture: plugin.png
+spec:
+  type: app
+  docs:
+    pt-br: docs/pt-br/doc.md
+    en-us: docs/en-us/doc.md
+  compatibility:
+    - python
+  technologies:
+    - Api
+  inputs:
+    - label: Type name of your resource
+      name: resource
+      type: text
+      required: true
+      default: Client
+      pattern: ([A-Z][a-z]+)+
+      help: 'Inform your resource name (e.g.: Client)'
+    - label: Choose http method of new endpoint
+      name: method
+      type: select
+      items:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      default: GET
+      required: true
+      help: 'Inform the method of the endpoint (e.g.: post or delete)'

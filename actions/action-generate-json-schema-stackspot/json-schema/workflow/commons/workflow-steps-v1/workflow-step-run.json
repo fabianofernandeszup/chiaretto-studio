@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "required": [
+    "script",
+    "label",
+    "type",
+    "id"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"$ref": "classpath:json-schema/workflow/commons/id.json"},
+    "label": {"type": "string"},
+    "type": {"type": "string", "enum": ["run"]},
+    "when": {"type": "string"},
+    "script": {"type": "string"},
+    "workdir": {"type":  "string"},
+    "strategy":  {"$ref": "classpath:json-schema/workflow/commons/strategy.json"}
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "required": [
+    "type",
+    "trigger",
+    "script"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["run-script"]
+    },
+    "trigger": {
+      "type": "string"
+    },
+    "script": {
+      "type": "string"
+    },
+    "condition": {
+      "$ref": "classpath:json-schema/plugin/hooks/commons/hooks-condition.json"
+    }
+  }}

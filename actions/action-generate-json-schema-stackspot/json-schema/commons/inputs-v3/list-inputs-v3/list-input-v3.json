@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "int",
+        "object",
+        "required-connection",
+        "text",
+        "textarea"
+      ]
+    }
+  },
+  "required": ["type"],
+  "if": {"properties": { "type": { "const": "int" } }},
+  "then": { "$ref": "classpath:json-schema/commons/inputs-v3/list-inputs-v3/input-int.json" },
+  "else": {
+    "if": {"properties": { "type": { "const": "object" } }},
+    "then": { "$ref": "classpath:json-schema/commons/inputs-v3/list-inputs-v3/input-object.json" },
+    "else": {
+      "if": {"properties": { "type": { "const": "required-connection" } }},
+      "then": { "$ref": "classpath:json-schema/commons/inputs-v3/list-inputs-v3/input-required-connection.json" },
+      "else": {
+        "if": {"properties": { "type": { "const": "text" } }},
+        "then": { "$ref": "classpath:json-schema/commons/inputs-v3/list-inputs-v3/input-text.json" },
+        "else": {
+          "if": {"properties": { "type": { "const": "textarea" } }},
+          "then": { "$ref": "classpath:json-schema/commons/inputs-v3/list-inputs-v3/input-textarea.json" }
+        }
+      }
+    }
+  }
+}

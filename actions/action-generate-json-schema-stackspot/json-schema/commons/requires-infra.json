@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "connections": {
+      "$ref": "classpath:json-schema/commons/requires-connections.json"
+    }
+  }
+}

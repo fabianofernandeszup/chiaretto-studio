@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "required": [
+    "variable",
+    "operator",
+    "value"
+  ],
+  "properties": {
+    "variable": {
+      "type": "string"
+    },
+    "operator": {
+      "type": "string"
+    },
+    "value": {
+      "type": [
+        "string",
+        "array",
+        "integer",
+        "object",
+        "boolean"
+      ]
+    }
+  }
+}

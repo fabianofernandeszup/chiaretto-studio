@@ -1,0 +1,48 @@
+{
+  "type": "object",
+  "required": [
+    "label",
+    "name",
+    "type"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["multiselect"]
+    },
+    "default": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "items": {
+      "$ref": "classpath:json-schema/commons/inputs-items.json"
+    },
+    "external-items": {
+      "$ref": "classpath:json-schema/commons/inputs-external-items.json"
+    },
+    "help": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "name": {
+      "$ref": "classpath:json-schema/commons/inputs-name.json"
+    },
+    "description": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "condition": {
+      "$ref": "classpath:json-schema/commons/inputs-condition.json"
+    },
+    "scope": {
+      "$ref": "classpath:json-schema/workflow/commons/workflow-inputs-v1/inputs-scope.json"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "workdir": {
+      "type": "string"
+    },
+    "script": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "script"
+  ]
+}

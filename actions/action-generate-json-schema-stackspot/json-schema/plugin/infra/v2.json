@@ -1,0 +1,112 @@
+{
+  "type": "object",
+  "properties": {
+    "schema-version": {
+      "type": "string",
+      "enum": [
+        "v2"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "plugin"
+      ]
+    },
+    "metadata": {
+      "$ref": "classpath:json-schema/commons/metadata.json"
+    },
+    "spec": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "infra"
+          ]
+        },
+        "single-use": {
+          "type": "boolean"
+        },
+        "stk-projects-only": {
+          "type": "boolean"
+        },
+        "app-allowed": {
+          "type": "boolean"
+        },
+        "justification": {
+          "type": "string"
+        },
+        "about": {
+          "type": "string"
+        },
+        "implementation": {
+          "type": "string"
+        },
+        "requirements": {
+          "type": "string"
+        },
+        "release-notes": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "string"
+        },
+        "docs": {
+          "$ref": "classpath:json-schema/commons/docs.json"
+        },
+        "inputs": {
+          "$ref": "classpath:json-schema/commons/inputs-v2.json"
+        },
+        "inputs-envs": {
+          "$ref": "classpath:json-schema/plugin/inputs-envs.json"
+        },
+        "compatibility": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "technologies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "repository": {
+          "type": "string"
+        },
+        "runtime": {
+          "$ref": "classpath:json-schema/plugin/runtime.json"
+        },
+        "generates": {
+          "$ref": "classpath:json-schema/plugin/generates-infra.json"
+        },
+        "requires": {
+          "$ref": "classpath:json-schema/commons/requires-infra.json"
+        },
+        "hooks": {
+          "$ref": "classpath:json-schema/plugin/hooks-v2.json"
+        },
+        "global-computed-inputs": {
+          "type": "object"
+        },
+        "computed-inputs": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "type",
+        "runtime"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema-version",
+    "kind",
+    "metadata",
+    "spec"
+  ],
+  "additionalProperties": false
+}

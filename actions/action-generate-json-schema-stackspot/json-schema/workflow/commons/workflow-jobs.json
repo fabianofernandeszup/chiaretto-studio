@@ -1,0 +1,16 @@
+{
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "required": ["label", "steps", "id"],
+    "additionalProperties": false,
+    "properties": {
+      "id": {"$ref": "classpath:json-schema/workflow/commons/id.json"},
+      "label": {"type": "string"},
+      "steps": {"$ref": "classpath:json-schema/workflow/commons/workflow-steps-v1/workflow-steps.json"},
+      "depends-on": {"type": "array", "items": {"$ref": "classpath:json-schema/workflow/commons/id.json"}},
+      "when": {"type": "string"}
+    }
+  }
+}

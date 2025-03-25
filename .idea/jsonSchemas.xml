@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JsonSchemaMappingsProjectConfiguration">
+    <state>
+      <map>
+        <entry key="json-schema-plugin-app-v2">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="json-schema-plugin-app-v2" />
+              <option name="relativePathToSchema" value="../stackspot-edp-schemas/schemas/json-schema-plugin-app-v2.json" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="pattern" value="true" />
+                    <option name="path" value="plugin.yaml" />
+                    <option name="mappingKind" value="Pattern" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="json-schema-plugin-app-v3">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="json-schema-plugin-app-v3" />
+              <option name="relativePathToSchema" value="../stackspot-edp-schemas/schemas/json-schema-plugin-app-v3.json" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="pattern" value="true" />
+                    <option name="path" value="plugin.yaml" />
+                    <option name="mappingKind" value="Pattern" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+      </map>
+    </state>
+  </component>
+</project>

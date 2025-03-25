@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "required": [
+    "type",
+    "trigger",
+    "path"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "render-templates"
+      ]
+    },
+    "trigger": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "condition": {
+      "$ref": "classpath:json-schema/plugin/hooks/commons/hooks-condition.json"
+    }
+  }
+}

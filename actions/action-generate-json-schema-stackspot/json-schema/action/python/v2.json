@@ -1,0 +1,82 @@
+{
+  "type": "object",
+  "properties": {
+    "schema-version": {
+      "type": "string",
+      "enum": [
+        "v2"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "action"
+      ]
+    },
+    "metadata": {
+      "$ref": "classpath:json-schema/commons/metadata.json"
+    },
+    "spec": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "python"
+          ]
+        },
+        "justification": {
+          "type": "string"
+        },
+        "about": {
+          "type": "string"
+        },
+        "implementation": {
+          "type": "string"
+        },
+        "requirements": {
+          "type": "string"
+        },
+        "release-notes": {
+          "type": "string"
+        },
+        "repository": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "string"
+        },
+        "docs": {
+          "$ref": "classpath:json-schema/commons/docs.json"
+        },
+        "requires": {
+          "$ref": "classpath:json-schema/commons/requires-infra.json"
+        },
+        "inputs": {
+          "$ref": "classpath:json-schema/commons/inputs-v2.json"
+        },
+        "python": {
+          "$ref": "classpath:json-schema/action/python/python.json"
+        },
+        "global-computed-inputs": {
+          "type": "object"
+        },
+        "computed-inputs": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "python"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema-version",
+    "kind",
+    "metadata",
+    "spec"
+  ]
+}

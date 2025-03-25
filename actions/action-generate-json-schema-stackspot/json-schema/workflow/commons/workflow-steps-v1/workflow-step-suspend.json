@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "required": [
+    "label",
+    "type",
+    "id"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"$ref": "classpath:json-schema/workflow/commons/id.json"},
+    "type": {"type": "string", "enum": ["suspend"]},
+    "label": {"type": "string"},
+    "detail": {"type": "string"},
+    "when": {"type": "string"},
+    "check-role": {"type": "boolean"}
+  }
+}
