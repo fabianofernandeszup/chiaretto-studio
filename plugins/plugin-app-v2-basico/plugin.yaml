@@ -18,14 +18,14 @@ spec:
   inputs:
     - label: Type name of your resource
       name: resource
-      type: text
+      type: select
       required: true
       default: Client
       pattern: ([A-Z][a-z]+)+
       help: 'Inform your resource name (e.g.: Client)'
     - label: Choose http method of new endpoint
       name: method
-      type: select
+      type: text
       items:
         - GET
         - POST

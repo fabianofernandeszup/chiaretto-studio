@@ -34,5 +34,5 @@ spec:
   inputs:
     - label: Topic Name
       name: topic_name
-      type: text
+      type: generated-connection
       required: true

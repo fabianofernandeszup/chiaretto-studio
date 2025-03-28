@@ -4,7 +4,7 @@ metadata:
   name: workflow-create-app-completo-com-pipe-deploy
   display-name: Workflow Create App Completo com Pipe Deploy
   description: Workflow que cria um app e configura pipe de deploy
-  version: 4.0.0
+  version: 4.0.1
 spec:
   type: create
   label: Workflow Create App Completo com Pipe Deploy
@@ -44,7 +44,7 @@ spec:
             token: "{{ inputs.git_token }}"
             org: "{{ inputs.org }}"
             name: "{{ var.STK_PROJECT_NAME }}"
-            visibility: "private"
+            visibility: "public"
             secret: false
 
         - id: clone_repo
