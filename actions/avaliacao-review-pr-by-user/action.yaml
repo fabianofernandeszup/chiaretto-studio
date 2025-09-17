@@ -1,0 +1,23 @@
+schema-version: v3
+kind: action
+metadata:
+  name: avaliacao-review-pr-by-user
+  display-name: avaliacao-review-pr-by-user
+  description: Describe your action explaining its purpose.
+  version: 0.0.1
+spec:
+  type: python
+  docs:
+    pt-br: docs/pt-br/docs.md
+    en-us: docs/en-us/docs.md
+  repository: git@github.com:fabianofernandeszup/chiaretto-studio.git
+  inputs:
+    - label: What is your name?
+      name: user_name
+      type: text
+      required: false
+      pattern: '^[A-Za-z]+(?:\s[A-Za-z]+)*$'
+      help: 'Inform your name'
+  python:
+    workdir: .
+    script: script.py
