@@ -3,8 +3,8 @@ kind: action
 metadata:
   name: avaliacao-review-pr-by-user
   display-name: avaliacao-review-pr-by-user
-  description: Describe your action explaining its purpose.
-  version: 0.0.1
+  description: Avaliação de Revisão de PR por IA por usuário
+  version: 1.0.0
 spec:
   type: python
   docs:
